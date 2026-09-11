@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "mode": "independent-output",
+  "source": "results\\e0\\none",
+  "definition": "key prior times product of global honest one-coordinate marginals",
+  "derived_features": [
+    "pk",
+    "t_norm2",
+    "t_histogram",
+    "t_autocorrelation"
+  ]
+}

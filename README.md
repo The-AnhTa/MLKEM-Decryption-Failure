@@ -42,6 +42,19 @@ python python/analyze.py results/e0/none --feature pk `
 when combined with `--sample-keys`). Such output is not a probability experiment
 and must not be reported as a scientific result.
 
+The complete E0 observable/ablation study, including exact ciphertext dynamic
+programs and the combined matrix, is run by:
+
+```powershell
+./scripts/run-e0.ps1
+```
+
+Results are intentionally version-controlled under `results/e0/`.
+The baseline `(pk,c)` law is stored losslessly as `pk_ciphertext.csv.gz` because
+the uncompressed CSV exceeds GitHub's ordinary per-file limit. The much larger
+no-compression `(pk,c)` table is streamed into its exact summary and then removed;
+it can be reproduced with `run-e0.ps1`.
+
 ## Parameter ladder
 
 Presets `e0` through `e5` are available with `--list-presets`. E0 and E1 can be

@@ -22,7 +22,8 @@ struct ExperimentResult {
 };
 
 ExperimentResult enumerate_bruteforce(const Params& p, bool ciphertext_features = true);
-ExperimentResult enumerate_ciphertext_dp(const Params& p, std::size_t max_outer_states = 0);
+ExperimentResult enumerate_ciphertext_dp(const Params& p, Ablation mode = Ablation::None,
+                                         std::size_t max_outer_states = 0);
 ExperimentResult enumerate_optimized_pk(const Params& p, Ablation mode = Ablation::None,
                                         std::size_t max_outer_states = 0);
 ExperimentResult enumerate_sampled_keys(const Params& p, std::size_t key_count,

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "parameters": "n2-k1-q17-e1_1-d3_2",
+  "mode": "no-compression",
+  "laws": {
+    "ciphertext": {"N": "1212153856", "E": "2219520", "cells": 83424},
+    "global": {"N": "1212153856", "E": "2219520", "cells": 1},
+    "pk_ciphertext": {"N": "1212153856", "E": "2219520", "cells": 61887204}
+  },
+  "run": {
+    "enumeration": "global-ciphertext-dp"
+  }
+}

@@ -140,9 +140,11 @@ ExperimentResult enumerate_bruteforce(const Params& p, bool ciphertext_features)
     return result;
 }
 
-ExperimentResult enumerate_ciphertext_dp(const Params& p, std::size_t max_outer_states) {
+ExperimentResult enumerate_ciphertext_dp(const Params& p, Ablation mode, std::size_t max_outer_states) {
     p.validate();
     if (p.k != 1) throw std::invalid_argument("ciphertext DP global enumerator currently supports k=1");
+    if (mode == Ablation::IndependentCompression)
+        throw std::invalid_argument("ciphertext observables are not defined for independent-compression mode");
     ExperimentResult result;
     result.metadata["enumeration"] = max_outer_states ? "deterministic-prefix-ciphertext-dp" : "global-ciphertext-dp";
     if (max_outer_states) result.metadata["max_outer_states"] = std::to_string(max_outer_states);
@@ -164,8 +166,13 @@ ExperimentResult enumerate_ciphertext_dp(const Params& p, std::size_t max_outer_
                 const ModuleVector y{yw.value}, e1{e1w.value};
                 const auto raw_u = transpose_mat_vec(a, y, e1, p.q);
                 Ciphertext base_c;
-                for (const auto& poly : raw_u) base_c.u.push_back(compress_poly(poly, p.du, p.q));
-                const auto uhat = ModuleVector{decompress_poly(base_c.u[0], p.du, p.q)};
+                if (mode == Ablation::None) {
+                    for (const auto& poly : raw_u) base_c.u.push_back(compress_poly(poly, p.du, p.q));
+                } else {
+                    base_c.u = raw_u;
+                }
+                const auto uhat = mode == Ablation::None
+                    ? ModuleVector{decompress_poly(base_c.u[0], p.du, p.q)} : base_c.u;
                 const Poly h = dot(s, uhat, p.q);
                 const Poly ty = dot(t, y, p.q);
                 using State = std::pair<std::vector<int>, bool>;
@@ -175,8 +182,10 @@ ExperimentResult enumerate_ciphertext_dp(const Params& p, std::size_t max_outer_
                     for (const auto& [state, state_weight] : dp)
                         for (const auto& [e2, e2weight] : e2coeff) for (int bit = 0; bit <= 1; ++bit) {
                             const int raw_v = mod_q(ty[i] + e2 + decompress_coeff(bit, 1, p.q), p.q);
-                            const int vc = compress_coeff(raw_v, p.dv, p.q);
-                            const int w = mod_q(decompress_coeff(vc, p.dv, p.q) - h[i], p.q);
+                            const int vc = mode == Ablation::None ? compress_coeff(raw_v, p.dv, p.q) : raw_v;
+                            const int reconstructed_v = mode == Ablation::None
+                                ? decompress_coeff(vc, p.dv, p.q) : vc;
+                            const int w = mod_q(reconstructed_v - h[i], p.q);
                             const bool failed = state.second || compress_coeff(w, 1, p.q) != bit;
                             auto symbols = state.first;
                             symbols.push_back(vc);
@@ -194,7 +203,8 @@ ExperimentResult enumerate_ciphertext_dp(const Params& p, std::size_t max_outer_
                     result.laws["global"].add("all", scaled, failed);
                     result.laws["ciphertext"].add(feature_ciphertext(c), scaled, failed);
                     result.laws["pk_ciphertext"].add(feature_pk_ciphertext(a, t, c), scaled, failed);
-                    result.laws["ciphertext_symbols"].add(feature_ciphertext_symbols(c, p.du, p.dv), scaled, failed);
+                    if (mode == Ablation::None)
+                        result.laws["ciphertext_symbols"].add(feature_ciphertext_symbols(c, p.du, p.dv), scaled, failed);
                 }
             }
         }

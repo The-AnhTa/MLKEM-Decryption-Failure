@@ -110,6 +110,15 @@ void test_ciphertext_dp_matches_reference() {
     }
 }
 
+void test_no_compression_ciphertext_dp() {
+    const toy::Params tiny{1, 1, 5, 1, 1, 2, 1};
+    const auto pk = toy::enumerate_optimized_pk(tiny, toy::Ablation::NoCompression);
+    const auto dp = toy::enumerate_ciphertext_dp(tiny, toy::Ablation::NoCompression);
+    require(pk.laws.at("global").total() == dp.laws.at("global").total(), "raw ciphertext DP total");
+    require(pk.laws.at("global").failures() == dp.laws.at("global").failures(), "raw ciphertext DP failures");
+    require(dp.laws.find("ciphertext_symbols") == dp.laws.end(), "compressed-symbol feature absent without compression");
+}
+
 void test_sampled_key_reproducibility() {
     const toy::Params p{2, 2, 17, 1, 1, 3, 2};
     const auto a = toy::enumerate_sampled_keys(p, 2, 12345, toy::Ablation::None, 20);
@@ -152,6 +161,7 @@ int main() {
         test_pke_and_margin();
         test_reference_matches_optimized();
         test_ciphertext_dp_matches_reference();
+        test_no_compression_ciphertext_dp();
         test_sampled_key_reproducibility();
         test_ablation_mass();
         test_universal_bound();

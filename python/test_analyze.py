@@ -6,9 +6,19 @@ from fractions import Fraction
 from pathlib import Path
 
 import analyze
+import summarize_matrix
 
 
 class AnalysisTests(unittest.TestCase):
+    def test_synthetic_modes_do_not_reuse_ciphertext_results(self):
+        root = Path("results/e0")
+        self.assertEqual(summarize_matrix.analysis_directory(root, "none", "ciphertext"),
+                         root / "ciphertext-none")
+        self.assertEqual(summarize_matrix.analysis_directory(root, "no-compression", "ciphertext"),
+                         root / "ciphertext-no-compression")
+        self.assertEqual(summarize_matrix.analysis_directory(root, "independent-compression", "ciphertext"),
+                         root / "undefined-ciphertext-observable")
+
     def test_metrics_and_universal_bound(self):
         rows = [("a", 80, 8), ("b", 20, 12)]
         total, failures, d2, dinf, frontier = analyze.metrics(rows)
@@ -38,6 +48,22 @@ class AnalysisTests(unittest.TestCase):
             _, _, d2, dinf, _ = analyze.metrics(rows)
             self.assertAlmostEqual(d2, 0.0)
             self.assertAlmostEqual(dinf, 0.0)
+
+    def test_streaming_summary_matches_in_memory(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "law.csv"
+            with path.open("w", newline="") as handle:
+                writer = csv.writer(handle)
+                writer.writerow(["feature_id", "feature_value", "Nz", "Ez"])
+                writer.writerow(["x", "a", 80, 8])
+                writer.writerow(["x", "b", 20, 12])
+            rows = analyze.load_law(path)
+            total, failures, d2, dinf, _ = analyze.metrics(rows)
+            streamed = analyze.streaming_metrics(path)
+            self.assertEqual(streamed[:2], (total, failures))
+            self.assertAlmostEqual(streamed[2], d2)
+            self.assertAlmostEqual(streamed[3], dinf)
+            self.assertEqual(streamed[4], ("b", 20, 12))
 
 
 if __name__ == "__main__":

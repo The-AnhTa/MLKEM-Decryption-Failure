@@ -48,6 +48,33 @@ def metrics(rows):
     return total, failures, math.log2(float(d2_sum)), math.log2(float(max_lambda)), frontier
 
 
+def streaming_metrics(path: Path):
+    """Compute summary statistics in bounded memory; does not build a frontier."""
+    total = failures = 0
+    d2_sum = 0.0
+    d2_compensation = 0.0
+    best = None
+    with path.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            z, n, e = row["feature_value"], int(row["Nz"]), int(row["Ez"])
+            total += n
+            failures += e
+            if e:
+                term = (e * e) / n
+                corrected = term - d2_compensation
+                updated = d2_sum + corrected
+                d2_compensation = (updated - d2_sum) - corrected
+                d2_sum = updated
+                if best is None or e * best[1] > best[2] * n:
+                    best = (z, n, e)
+    if failures == 0:
+        return total, failures, None, None, best
+    d2 = math.log2(total * d2_sum / (failures * failures))
+    assert best is not None
+    dinf = math.log2(best[2] * total / (best[1] * failures))
+    return total, failures, d2, dinf, best
+
+
 def write_frontier(path: Path, frontier):
     with path.open("w", newline="", encoding="utf-8") as handle:
         out = csv.writer(handle)
@@ -58,7 +85,6 @@ def write_frontier(path: Path, frontier):
 
 
 def independent_output(source: Path, output: Path):
-    pk_rows = load_law(source / "pk.csv")
     marginals = []
     with (source / "coordinate_marginals.csv").open(newline="", encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
@@ -67,16 +93,24 @@ def independent_output(source: Path, output: Path):
     correct = math.prod(value for _, value in marginals)
     failure = denominator - correct
     output.mkdir(parents=True, exist_ok=True)
-    with (output / "pk.csv").open("w", newline="", encoding="utf-8") as handle:
-        out = csv.writer(handle)
-        out.writerow(["feature_id", "feature_value", "Nz", "Ez"])
-        for z, n, _ in pk_rows:
-            out.writerow(["pk", z, n * denominator, n * failure])
+    derived = []
+    for feature_id in ("pk", "t_norm2", "t_histogram", "t_autocorrelation"):
+        feature_path = source / f"{feature_id}.csv"
+        if not feature_path.exists():
+            continue
+        rows = load_law(feature_path)
+        with (output / f"{feature_id}.csv").open("w", newline="", encoding="utf-8") as handle:
+            out = csv.writer(handle)
+            out.writerow(["feature_id", "feature_value", "Nz", "Ez"])
+            for z, n, _ in rows:
+                out.writerow([feature_id, z, n * denominator, n * failure])
+        derived.append(feature_id)
     metadata = {
         "schema_version": 1,
         "mode": "independent-output",
         "source": str(source),
         "definition": "key prior times product of global honest one-coordinate marginals",
+        "derived_features": derived,
     }
     (output / "metadata.json").write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
 
@@ -128,17 +162,50 @@ def main():
     parser.add_argument("directory", type=Path)
     parser.add_argument("--feature", default="pk")
     parser.add_argument("--derive-independent-output", type=Path)
+    parser.add_argument("--summary-only", action="store_true",
+                        help="stream the law without constructing the oracle frontier")
     args = parser.parse_args()
     if args.derive_independent_output:
         independent_output(args.directory, args.derive_independent_output)
-    rows = load_law(args.directory / f"{args.feature}.csv")
-    total, failures, d2, dinf, frontier = metrics(rows)
-    write_frontier(args.directory / f"{args.feature}_frontier.csv", frontier)
-    plotted = plot_frontier(args.directory / f"{args.feature}_frontier.png", frontier)
+    law_path = args.directory / f"{args.feature}.csv"
+    rows = None
+    streaming_best = None
+    if args.summary_only:
+        total, failures, d2, dinf, streaming_best = streaming_metrics(law_path)
+        frontier = []
+        plotted = False
+    else:
+        rows = load_law(law_path)
+        total, failures, d2, dinf, frontier = metrics(rows)
+        write_frontier(args.directory / f"{args.feature}_frontier.csv", frontier)
+        plotted = plot_frontier(args.directory / f"{args.feature}_frontier.png", frontier)
     margin_cdf_written = write_margin_cdf(args.directory)
+    best = None
+    if streaming_best:
+        z, n, e = streaming_best
+        amp = Fraction(e * total, n * failures)
+        best = {
+            "feature_value": z, "p": f"{n}/{total}",
+            "conditional_failure": f"{e}/{n}",
+            "amplification": f"{amp.numerator}/{amp.denominator}",
+            "amplification_float": float(amp),
+        }
+    elif frontier:
+        z, p, amp = frontier[0]
+        matching = next((item for item in rows if item[0] == z), None)
+        if matching:
+            _, n, e = matching
+            best = {
+                "feature_value": z,
+                "p": f"{n}/{total}",
+                "conditional_failure": f"{e}/{n}",
+                "amplification": f"{amp.numerator}/{amp.denominator}",
+                "amplification_float": float(amp),
+            }
     summary = {"N": str(total), "E": str(failures), "delta": f"{failures}/{total}",
                "D2_bits": d2, "Dinf_bits": dinf, "plot_written": plotted,
-               "margin_cdf_written": margin_cdf_written}
+               "margin_cdf_written": margin_cdf_written, "summary_only": args.summary_only,
+               "maximizing_cell": best}
     (args.directory / f"{args.feature}_analysis.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(summary, indent=2))
 

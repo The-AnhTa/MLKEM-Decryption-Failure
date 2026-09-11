@@ -46,15 +46,15 @@ int main(int argc, char** argv) {
         const auto mode = toy::parse_ablation(mode_name);
         if (brute_force && mode != toy::Ablation::None)
             throw std::invalid_argument("the brute-force CLI currently models the exact scheme only");
-        if (ciphertext_dp && mode != toy::Ablation::None)
-            throw std::invalid_argument("ciphertext DP currently models the exact scheme only");
+        if (ciphertext_dp && mode == toy::Ablation::IndependentCompression)
+            throw std::invalid_argument("ciphertext observables are undefined for independent-compression mode");
         if (static_cast<int>(brute_force) + static_cast<int>(ciphertext_dp) + static_cast<int>(sample_keys != 0) > 1)
             throw std::invalid_argument("choose only one of --bruteforce, --ciphertext-dp, or --sample-keys");
 
         const auto start = std::chrono::steady_clock::now();
         toy::ExperimentResult result;
         if (brute_force) result = toy::enumerate_bruteforce(params, true);
-        else if (ciphertext_dp) result = toy::enumerate_ciphertext_dp(params, max_outer);
+        else if (ciphertext_dp) result = toy::enumerate_ciphertext_dp(params, mode, max_outer);
         else if (sample_keys) result = toy::enumerate_sampled_keys(params, sample_keys, seed, mode, max_outer);
         else result = toy::enumerate_optimized_pk(params, mode, max_outer);
         toy::export_result(result, params, mode, output);
