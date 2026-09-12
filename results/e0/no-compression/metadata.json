@@ -3,6 +3,10 @@
   "parameters": "n2-k1-q17-e1_1-d3_2",
   "mode": "no-compression",
   "laws": {
+    "at_correlations": {"N": "1212153856", "E": "2219520", "cells": 2897},
+    "at_norm_pair": {"N": "1212153856", "E": "2219520", "cells": 663},
+    "at_pair_histogram": {"N": "1212153856", "E": "2219520", "cells": 10790},
+    "at_projections": {"N": "1212153856", "E": "2219520", "cells": 10633},
     "global": {"N": "1212153856", "E": "2219520", "cells": 1},
     "margin": {"N": "1212153856", "E": "2219520", "cells": 7},
     "norm_margin": {"N": "1212153856", "E": "2219520", "cells": 294},
@@ -11,5 +15,8 @@
     "t_autocorrelation": {"N": "1212153856", "E": "2219520", "cells": 61},
     "t_histogram": {"N": "1212153856", "E": "2219520", "cells": 153},
     "t_norm2": {"N": "1212153856", "E": "2219520", "cells": 42}
+  },
+  "run": {
+    "enumeration": "global-exact"
   }
 }

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "parameters": "n2-k1-q19-e1_1-d3_2",
+  "mode": "none",
+  "laws": {
+    "at_correlations": {"N": "1514143744", "E": "60158336", "cells": 3827},
+    "at_norm_pair": {"N": "1514143744", "E": "60158336", "cells": 844},
+    "at_pair_histogram": {"N": "1514143744", "E": "60158336", "cells": 13715},
+    "at_projections": {"N": "1514143744", "E": "60158336", "cells": 13787},
+    "global": {"N": "1514143744", "E": "60158336", "cells": 1},
+    "t_autocorrelation": {"N": "1514143744", "E": "60158336", "cells": 73},
+    "t_histogram": {"N": "1514143744", "E": "60158336", "cells": 190},
+    "t_norm2": {"N": "1514143744", "E": "60158336", "cells": 51}
+  },
+  "run": {
+    "enumeration": "global-exact",
+    "observable_scope": "frozen-public-features"
+  }
+}

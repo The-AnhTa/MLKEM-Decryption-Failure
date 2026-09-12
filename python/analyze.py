@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gzip
 import json
 import math
 from fractions import Fraction
@@ -48,13 +49,20 @@ def metrics(rows):
     return total, failures, math.log2(float(d2_sum)), math.log2(float(max_lambda)), frontier
 
 
-def streaming_metrics(path: Path):
+def open_law(path: Path):
+    if path.suffix == ".gz":
+        return gzip.open(path, "rt", newline="", encoding="utf-8")
+    return path.open(newline="", encoding="utf-8")
+
+
+def streaming_metrics(path: Path, with_ratio_groups=False):
     """Compute summary statistics in bounded memory; does not build a frontier."""
     total = failures = 0
     d2_sum = 0.0
     d2_compensation = 0.0
     best = None
-    with path.open(newline="", encoding="utf-8") as handle:
+    groups = {}
+    with open_law(path) as handle:
         for row in csv.DictReader(handle):
             z, n, e = row["feature_value"], int(row["Nz"]), int(row["Ez"])
             total += n
@@ -67,12 +75,22 @@ def streaming_metrics(path: Path):
                 d2_sum = updated
                 if best is None or e * best[1] > best[2] * n:
                     best = (z, n, e)
+            if with_ratio_groups:
+                divisor = math.gcd(e, n)
+                ratio = (e // divisor, n // divisor)
+                group_n, group_e = groups.get(ratio, (0, 0))
+                groups[ratio] = (group_n + n, group_e + e)
     if failures == 0:
-        return total, failures, None, None, best
+        result = (total, failures, None, None, best)
+        return result + ([],) if with_ratio_groups else result
     d2 = math.log2(total * d2_sum / (failures * failures))
     assert best is not None
     dinf = math.log2(best[2] * total / (best[1] * failures))
-    return total, failures, d2, dinf, best
+    result = (total, failures, d2, dinf, best)
+    if with_ratio_groups:
+        ratio_rows = [(f"q={num}/{den}", n, e) for (num, den), (n, e) in groups.items()]
+        return result + (ratio_rows,)
+    return result
 
 
 def write_frontier(path: Path, frontier):
@@ -82,6 +100,54 @@ def write_frontier(path: Path, frontier):
         for rank, (z, p, amp) in enumerate(frontier, 1):
             out.writerow([rank, z, p.numerator, p.denominator, amp.numerator, amp.denominator,
                           -math.log2(float(p)), math.log2(float(amp))])
+
+
+def budgeted_frontier(rows, max_bits=20):
+    """Neyman-Pearson frontier with randomized selection inside a boundary cell."""
+    total = sum(n for _, n, _ in rows)
+    failures = sum(e for _, _, e in rows)
+    if failures == 0:
+        return []
+    scored = sorted(rows, key=lambda row: Fraction(row[2], row[1]), reverse=True)
+    output = []
+    for bits in range(1, max_bits + 1):
+        target = Fraction(total, 1 << bits)
+        index = 0
+        cumulative_n = 0
+        cumulative_e = Fraction(0)
+        while index < len(scored) and cumulative_n + scored[index][1] <= target:
+            _, n, e = scored[index]
+            cumulative_n += n
+            cumulative_e += e
+            index += 1
+        selected_failures = cumulative_e
+        boundary_fraction = Fraction(0)
+        boundary_value = None
+        if cumulative_n < target and index < len(scored):
+            boundary_value, n, e = scored[index]
+            boundary_fraction = (target - cumulative_n) / n
+            selected_failures += boundary_fraction * e
+        conditional = selected_failures / target
+        amplification = conditional / Fraction(failures, total)
+        output.append({
+            "b": bits,
+            "p": f"1/{1 << bits}",
+            "amplification": f"{amplification.numerator}/{amplification.denominator}",
+            "amplification_float": float(amplification),
+            "G_bits": math.log2(float(amplification)) if amplification else None,
+            "conditional_failure": f"{conditional.numerator}/{conditional.denominator}",
+            "boundary_fraction": f"{boundary_fraction.numerator}/{boundary_fraction.denominator}",
+            "boundary_cell": boundary_value,
+        })
+    return output
+
+
+def write_budgeted_frontier(path: Path, rows):
+    payload = {
+        "selection": "randomized boundary-cell selection at exact mass p=2^-b",
+        "budgets": budgeted_frontier(rows),
+    }
+    path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
 
 def independent_output(source: Path, output: Path):
@@ -168,16 +234,20 @@ def main():
     if args.derive_independent_output:
         independent_output(args.directory, args.derive_independent_output)
     law_path = args.directory / f"{args.feature}.csv"
+    if not law_path.exists() and law_path.with_suffix(law_path.suffix + ".gz").exists():
+        law_path = law_path.with_suffix(law_path.suffix + ".gz")
     rows = None
     streaming_best = None
     if args.summary_only:
-        total, failures, d2, dinf, streaming_best = streaming_metrics(law_path)
+        total, failures, d2, dinf, streaming_best, ratio_rows = streaming_metrics(law_path, with_ratio_groups=True)
         frontier = []
         plotted = False
+        write_budgeted_frontier(args.directory / f"{args.feature}_frontier_summary.json", ratio_rows)
     else:
         rows = load_law(law_path)
         total, failures, d2, dinf, frontier = metrics(rows)
         write_frontier(args.directory / f"{args.feature}_frontier.csv", frontier)
+        write_budgeted_frontier(args.directory / f"{args.feature}_frontier_summary.json", rows)
         plotted = plot_frontier(args.directory / f"{args.feature}_frontier.png", frontier)
     margin_cdf_written = write_margin_cdf(args.directory)
     best = None

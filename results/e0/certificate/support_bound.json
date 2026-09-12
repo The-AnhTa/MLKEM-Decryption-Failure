@@ -1,0 +1,7 @@
+{
+  "parameters": "n2-k1-q17-e1_1-d3_2",
+  "terms": {"ey": 2, "se1": 2, "e2": 1, "scu": 2, "cv": 2},
+  "total_noise_bound": 9,
+  "decoding_margin": 4,
+  "failure_impossible": false
+}

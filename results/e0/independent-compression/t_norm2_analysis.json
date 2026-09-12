@@ -6,6 +6,7 @@
   "Dinf_bits": 0.3294701866335517,
   "plot_written": true,
   "margin_cdf_written": true,
+  "summary_only": false,
   "maximizing_cell": {
     "feature_value": "10",
     "p": "2101874786304/101240302206976",

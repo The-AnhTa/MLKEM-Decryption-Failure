@@ -4,8 +4,9 @@
   "delta": "98640000/1212153856",
   "D2_bits": 3.497129575310113,
   "Dinf_bits": 3.6192562185483905,
-  "plot_written": true,
+  "plot_written": false,
   "margin_cdf_written": false,
+  "summary_only": true,
   "maximizing_cell": {
     "feature_value": "A=0.0|t=0.16|u=0.0|v=0.3",
     "p": "8192/1212153856",

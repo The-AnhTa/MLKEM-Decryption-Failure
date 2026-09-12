@@ -82,6 +82,29 @@ void test_pke_and_margin() {
     }
 }
 
+void test_scalable_features_are_deterministic() {
+    const toy::Params p = toy::Params::e0();
+    const toy::Matrix a{{toy::Poly{1, 16}}};
+    const toy::ModuleVector t{{2, 3}};
+    const toy::Ciphertext c{{toy::Poly{0, 7}}, toy::Poly{0, 3}};
+    require(toy::feature_at_norm_pair(a, t, p.q) == "A=2|t=13", "A,t norm pair");
+    require(toy::feature_at_correlations(a, t, p.q) == "-1.1", "A,t correlations");
+    require(toy::feature_hist_u(c, 8) == "1.0.0.0.0.0.0.1.", "u histogram");
+    require(toy::feature_hist_v(c, 4) == "1.0.0.1.", "v histogram");
+    require(toy::feature_extreme_symbol_counts(c, 8, 4) == "1.1.1.1", "extreme symbols");
+    require(toy::feature_entropy_1024(c, 8, 4) == "1024.1024", "entropy quantization");
+}
+
+void test_noise_support_certificates() {
+    require(!toy::noise_support_bound(toy::Params::e0()).failure_impossible,
+            "E0 bound must not exclude observed failures");
+    for (const char* preset : {"e2", "e3", "e4", "e5"}) {
+        const auto bound = toy::noise_support_bound(toy::Params::preset(preset));
+        require(bound.total < bound.decoding_margin, "large-q toy failure support certificate");
+        require(bound.failure_impossible, "large-q toy failure impossible");
+    }
+}
+
 void test_reference_matches_optimized() {
     const toy::Params tiny{1, 1, 5, 1, 1, 2, 1};
     const auto brute = toy::enumerate_bruteforce(tiny, true);
@@ -92,6 +115,9 @@ void test_reference_matches_optimized() {
     for (const auto& [key, cell] : brute.laws.at("pk").cells()) {
         const auto& other = fast.laws.at("pk").cells().at(key);
         require(cell.total == other.total && cell.failures == other.failures, "pk law equality");
+        const auto& coordinates = fast.pk_coordinate_laws.at(key);
+        for (const auto& coordinate : coordinates)
+            require(coordinate.total == other.total, "per-pk coordinate marginal mass");
     }
     require(fast.laws.at("margin").total() == fast.laws.at("global").total(), "margin mass conservation");
     require(fast.laws.at("margin").failures() == fast.laws.at("global").failures(), "margin failure equivalence");
@@ -124,6 +150,33 @@ void test_sampled_key_reproducibility() {
     const auto a = toy::enumerate_sampled_keys(p, 2, 12345, toy::Ablation::None, 20);
     const auto b = toy::enumerate_sampled_keys(p, 2, 12345, toy::Ablation::None, 20);
     require(a.laws.at("pk").cells() == b.laws.at("pk").cells(), "sampled-key seed reproducibility");
+}
+
+void test_frozen_public_matches_exact() {
+    const toy::Params tiny{1, 1, 5, 1, 1, 2, 1};
+    const auto exact = toy::enumerate_optimized_pk(tiny);
+    const auto frozen = toy::enumerate_frozen_public(tiny);
+    for (const char* feature : {"global", "t_norm2", "t_histogram", "t_autocorrelation",
+                                "at_norm_pair", "at_pair_histogram", "at_correlations", "at_projections"})
+        require(exact.laws.at(feature).cells() == frozen.laws.at(feature).cells(), "frozen public law equality");
+}
+
+void test_scalable_ciphertext_scope() {
+    const toy::Params tiny{1, 1, 5, 1, 1, 2, 1};
+    const auto complete = toy::enumerate_ciphertext_dp(tiny);
+    const auto scalable = toy::enumerate_ciphertext_dp(tiny, toy::Ablation::None, 0, true);
+    require(scalable.laws.find("ciphertext") == scalable.laws.end(), "scalable scope excludes exact ciphertext");
+    require(scalable.laws.find("pk_ciphertext") == scalable.laws.end(), "scalable scope excludes exact joint lookup");
+    for (const char* feature : {"hist_u", "hist_v", "extreme_symbols", "entropy_1024",
+                                "decompressed_norms", "joint_uv_histogram"})
+        require(complete.laws.at(feature).cells() == scalable.laws.at(feature).cells(), "scalable ciphertext law equality");
+}
+
+void test_sampled_ciphertext_reproducibility() {
+    const toy::Params p{2, 1, 17, 1, 1, 3, 2};
+    const auto a = toy::enumerate_sampled_ciphertext_features(p, 2, 42, 20);
+    const auto b = toy::enumerate_sampled_ciphertext_features(p, 2, 42, 20);
+    require(a.laws.at("hist_v").cells() == b.laws.at("hist_v").cells(), "sampled ciphertext reproducibility");
 }
 
 void test_ablation_mass() {
@@ -159,10 +212,15 @@ int main() {
         test_cbd_mass();
         test_arbitrary_precision_weight();
         test_pke_and_margin();
+        test_scalable_features_are_deterministic();
+        test_noise_support_certificates();
         test_reference_matches_optimized();
         test_ciphertext_dp_matches_reference();
         test_no_compression_ciphertext_dp();
         test_sampled_key_reproducibility();
+        test_frozen_public_matches_exact();
+        test_scalable_ciphertext_scope();
+        test_sampled_ciphertext_reproducibility();
         test_ablation_mass();
         test_universal_bound();
         std::cout << "all tests passed\n";

@@ -1,0 +1,7 @@
+{
+  "parameters": "n4-k1-q3329-e3_2-d10_4",
+  "terms": {"ey": 36, "se1": 24, "e2": 2, "scu": 24, "cv": 104},
+  "total_noise_bound": 190,
+  "decoding_margin": 832,
+  "failure_impossible": true
+}

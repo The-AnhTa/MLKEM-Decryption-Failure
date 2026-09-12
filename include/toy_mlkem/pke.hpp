@@ -34,5 +34,17 @@ int signed_decoding_margin(int residue, int expected_bit, int q);
 int minimum_margin(const Params& p, const ModuleVector& s, const Ciphertext& ciphertext,
                    const Bits& expected);
 
-} // namespace toy
+struct NoiseSupportBound {
+    int ey{};
+    int se1{};
+    int e2{};
+    int scu{};
+    int cv{};
+    int total{};
+    int decoding_margin{};
+    bool failure_impossible{};
+};
 
+NoiseSupportBound noise_support_bound(const Params& p);
+
+} // namespace toy

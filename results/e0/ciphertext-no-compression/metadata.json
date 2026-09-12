@@ -8,6 +8,7 @@
     "pk_ciphertext": {"N": "1212153856", "E": "2219520", "cells": 61887204}
   },
   "run": {
-    "enumeration": "global-ciphertext-dp"
+    "enumeration": "global-ciphertext-dp",
+    "observable_scope": "complete"
   }
 }

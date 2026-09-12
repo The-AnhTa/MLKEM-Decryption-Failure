@@ -1,0 +1,205 @@
+{
+  "selection": "randomized boundary-cell selection at exact mass p=2^-b",
+  "budgets": [
+    {
+      "b": 1,
+      "p": "1/2",
+      "amplification": "2/1",
+      "amplification_float": 2.0,
+      "G_bits": 1.0,
+      "conditional_failure": "15/4096",
+      "boundary_fraction": "1176877/2360621",
+      "boundary_cell": "q=0/1"
+    },
+    {
+      "b": 2,
+      "p": "1/4",
+      "amplification": "4/1",
+      "amplification_float": 4.0,
+      "G_bits": 2.0,
+      "conditional_failure": "15/2048",
+      "boundary_fraction": "585005/2360621",
+      "boundary_cell": "q=0/1"
+    },
+    {
+      "b": 3,
+      "p": "1/8",
+      "amplification": "8/1",
+      "amplification_float": 8.0,
+      "G_bits": 3.0,
+      "conditional_failure": "15/1024",
+      "boundary_fraction": "289069/2360621",
+      "boundary_cell": "q=0/1"
+    },
+    {
+      "b": 4,
+      "p": "1/16",
+      "amplification": "16/1",
+      "amplification_float": 16.0,
+      "G_bits": 4.0,
+      "conditional_failure": "15/512",
+      "boundary_fraction": "141101/2360621",
+      "boundary_cell": "q=0/1"
+    },
+    {
+      "b": 5,
+      "p": "1/32",
+      "amplification": "32/1",
+      "amplification_float": 32.0,
+      "G_bits": 5.0,
+      "conditional_failure": "15/256",
+      "boundary_fraction": "67117/2360621",
+      "boundary_cell": "q=0/1"
+    },
+    {
+      "b": 6,
+      "p": "1/64",
+      "amplification": "64/1",
+      "amplification_float": 64.0,
+      "G_bits": 6.0,
+      "conditional_failure": "15/128",
+      "boundary_fraction": "30125/2360621",
+      "boundary_cell": "q=0/1"
+    },
+    {
+      "b": 7,
+      "p": "1/128",
+      "amplification": "128/1",
+      "amplification_float": 128.0,
+      "G_bits": 7.0,
+      "conditional_failure": "15/64",
+      "boundary_fraction": "11629/2360621",
+      "boundary_cell": "q=0/1"
+    },
+    {
+      "b": 8,
+      "p": "1/256",
+      "amplification": "256/1",
+      "amplification_float": 256.0,
+      "G_bits": 8.0,
+      "conditional_failure": "15/32",
+      "boundary_fraction": "2381/2360621",
+      "boundary_cell": "q=0/1"
+    },
+    {
+      "b": 9,
+      "p": "1/512",
+      "amplification": "2066816/4335",
+      "amplification_float": 476.7741637831603,
+      "G_bits": 8.897162248578537,
+      "conditional_failure": "16147/18496",
+      "boundary_fraction": "853/1004",
+      "boundary_cell": "q=1/3"
+    },
+    {
+      "b": 10,
+      "p": "1/1024",
+      "amplification": "8192/15",
+      "amplification_float": 546.1333333333333,
+      "G_bits": 9.093109404391482,
+      "conditional_failure": "1/1",
+      "boundary_fraction": "9248/14475",
+      "boundary_cell": "q=1/1"
+    },
+    {
+      "b": 11,
+      "p": "1/2048",
+      "amplification": "8192/15",
+      "amplification_float": 546.1333333333333,
+      "G_bits": 9.093109404391482,
+      "conditional_failure": "1/1",
+      "boundary_fraction": "4624/14475",
+      "boundary_cell": "q=1/1"
+    },
+    {
+      "b": 12,
+      "p": "1/4096",
+      "amplification": "8192/15",
+      "amplification_float": 546.1333333333333,
+      "G_bits": 9.093109404391482,
+      "conditional_failure": "1/1",
+      "boundary_fraction": "2312/14475",
+      "boundary_cell": "q=1/1"
+    },
+    {
+      "b": 13,
+      "p": "1/8192",
+      "amplification": "8192/15",
+      "amplification_float": 546.1333333333333,
+      "G_bits": 9.093109404391482,
+      "conditional_failure": "1/1",
+      "boundary_fraction": "1156/14475",
+      "boundary_cell": "q=1/1"
+    },
+    {
+      "b": 14,
+      "p": "1/16384",
+      "amplification": "8192/15",
+      "amplification_float": 546.1333333333333,
+      "G_bits": 9.093109404391482,
+      "conditional_failure": "1/1",
+      "boundary_fraction": "578/14475",
+      "boundary_cell": "q=1/1"
+    },
+    {
+      "b": 15,
+      "p": "1/32768",
+      "amplification": "8192/15",
+      "amplification_float": 546.1333333333333,
+      "G_bits": 9.093109404391482,
+      "conditional_failure": "1/1",
+      "boundary_fraction": "289/14475",
+      "boundary_cell": "q=1/1"
+    },
+    {
+      "b": 16,
+      "p": "1/65536",
+      "amplification": "8192/15",
+      "amplification_float": 546.1333333333333,
+      "G_bits": 9.093109404391482,
+      "conditional_failure": "1/1",
+      "boundary_fraction": "289/28950",
+      "boundary_cell": "q=1/1"
+    },
+    {
+      "b": 17,
+      "p": "1/131072",
+      "amplification": "8192/15",
+      "amplification_float": 546.1333333333333,
+      "G_bits": 9.093109404391482,
+      "conditional_failure": "1/1",
+      "boundary_fraction": "289/57900",
+      "boundary_cell": "q=1/1"
+    },
+    {
+      "b": 18,
+      "p": "1/262144",
+      "amplification": "8192/15",
+      "amplification_float": 546.1333333333333,
+      "G_bits": 9.093109404391482,
+      "conditional_failure": "1/1",
+      "boundary_fraction": "289/115800",
+      "boundary_cell": "q=1/1"
+    },
+    {
+      "b": 19,
+      "p": "1/524288",
+      "amplification": "8192/15",
+      "amplification_float": 546.1333333333333,
+      "G_bits": 9.093109404391482,
+      "conditional_failure": "1/1",
+      "boundary_fraction": "289/231600",
+      "boundary_cell": "q=1/1"
+    },
+    {
+      "b": 20,
+      "p": "1/1048576",
+      "amplification": "8192/15",
+      "amplification_float": 546.1333333333333,
+      "G_bits": 9.093109404391482,
+      "conditional_failure": "1/1",
+      "boundary_fraction": "289/463200",
+      "boundary_cell": "q=1/1"
+    }
+  ]
+}

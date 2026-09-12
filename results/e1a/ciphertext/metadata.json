@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "parameters": "n2-k1-q19-e1_1-d3_2",
+  "mode": "none",
+  "laws": {
+    "decompressed_norms": {"N": "1514143744", "E": "60158336", "cells": 90},
+    "entropy_1024": {"N": "1514143744", "E": "60158336", "cells": 4},
+    "extreme_symbols": {"N": "1514143744", "E": "60158336", "cells": 36},
+    "global": {"N": "1514143744", "E": "60158336", "cells": 1},
+    "hist_u": {"N": "1514143744", "E": "60158336", "cells": 36},
+    "hist_v": {"N": "1514143744", "E": "60158336", "cells": 10},
+    "joint_uv_histogram": {"N": "1514143744", "E": "60158336", "cells": 528}
+  },
+  "run": {
+    "enumeration": "global-ciphertext-dp",
+    "observable_scope": "frozen-scalable-only"
+  }
+}

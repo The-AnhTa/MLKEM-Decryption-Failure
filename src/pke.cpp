@@ -86,5 +86,29 @@ int minimum_margin(const Params& p, const ModuleVector& s, const Ciphertext& cip
     return result;
 }
 
-} // namespace toy
+static int maximum_compression_error(int d, int q) {
+    int maximum = 0;
+    for (int x = 0; x < q; ++x) {
+        const int error = centered(decompress_coeff(compress_coeff(x, d, q), d, q) - x, q);
+        maximum = std::max(maximum, std::abs(error));
+    }
+    return maximum;
+}
 
+NoiseSupportBound noise_support_bound(const Params& p) {
+    p.validate();
+    NoiseSupportBound bound;
+    bound.ey = static_cast<int>(p.k * p.n) * p.eta1 * p.eta1;
+    bound.se1 = static_cast<int>(p.k * p.n) * p.eta1 * p.eta2;
+    bound.e2 = p.eta2;
+    bound.scu = static_cast<int>(p.k * p.n) * p.eta1 * maximum_compression_error(p.du, p.q);
+    bound.cv = maximum_compression_error(p.dv, p.q);
+    bound.total = bound.ey + bound.se1 + bound.e2 + bound.scu + bound.cv;
+    bound.decoding_margin = std::min(
+        signed_decoding_margin(decompress_coeff(0, 1, p.q), 0, p.q),
+        signed_decoding_margin(decompress_coeff(1, 1, p.q), 1, p.q));
+    bound.failure_impossible = bound.total < bound.decoding_margin;
+    return bound;
+}
+
+} // namespace toy

@@ -31,6 +31,9 @@ Params Params::e0() { return {2, 1, 17, 1, 1, 3, 2}; }
 Params Params::preset(const std::string& name) {
     if (name == "e0") return e0();
     if (name == "e1") return {2, 1, 97, 1, 1, 5, 3};
+    if (name == "e1a") return {2, 1, 19, 1, 1, 3, 2};
+    if (name == "e1b") return {2, 1, 23, 1, 1, 4, 2};
+    if (name == "e1c") return {2, 1, 31, 1, 1, 4, 3};
     if (name == "e2") return {4, 1, 3329, 2, 2, 10, 4};
     if (name == "e3") return {2, 2, 3329, 2, 2, 10, 4};
     if (name == "e4") return {4, 1, 3329, 3, 2, 10, 4};

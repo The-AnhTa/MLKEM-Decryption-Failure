@@ -41,4 +41,8 @@ All reported counts are arbitrary-precision integer probability masses.
   `Z_q`; preserve negacyclic multiplication by `s`.
 - `independent-output`: retain the key distribution, but draw each output
   coordinate independently from its global one-coordinate honest marginal.
-  This is a diagnostic distribution for `pk` selection, not a K-PKE scheme.
+  This is a software sanity check, not a scientifically informative ablation
+  for public-key selection and not a K-PKE scheme.
+- `conditional-independent-given-pk`: preserve the exact public-key posterior
+  and every coordinate marginal `Pr[F_i | pk]`, then replace the joint failure
+  law by `1-product_i(1-Pr[F_i | pk])`.

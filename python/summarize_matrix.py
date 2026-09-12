@@ -13,11 +13,19 @@ from pathlib import Path
 OBSERVABLES = (
     "pk", "ciphertext", "pk_ciphertext", "ciphertext_symbols",
     "t_norm2", "t_histogram", "t_autocorrelation",
+    "at_norm_pair", "at_pair_histogram", "at_correlations", "at_projections",
+    "hist_u", "hist_v", "extreme_symbols", "entropy_1024",
+    "decompressed_norms", "joint_uv_histogram",
 )
+
+CIPHERTEXT_OBSERVABLES = {
+    "ciphertext", "pk_ciphertext", "ciphertext_symbols", "hist_u", "hist_v",
+    "extreme_symbols", "entropy_1024", "decompressed_norms", "joint_uv_histogram",
+}
 
 
 def analysis_directory(root: Path, mode: str, observable: str) -> Path:
-    if observable in {"ciphertext", "pk_ciphertext", "ciphertext_symbols"}:
+    if observable in CIPHERTEXT_OBSERVABLES:
         if mode == "none":
             return root / "ciphertext-none"
         if mode == "no-compression":
@@ -28,7 +36,7 @@ def analysis_directory(root: Path, mode: str, observable: str) -> Path:
 
 def collect(root: Path):
     rows = []
-    for mode in ("none", "no-compression", "independent-compression", "independent-output"):
+    for mode in ("none", "no-compression", "independent-compression"):
         for observable in OBSERVABLES:
             path = analysis_directory(root, mode, observable) / f"{observable}_analysis.json"
             if not path.exists():
@@ -48,6 +56,16 @@ def collect(root: Path):
                 "failure_given_z_star": best.get("conditional_failure"),
                 "z_star": best.get("feature_value"),
             })
+    ci_path = root / "none" / "pk_ci_analysis.json"
+    if ci_path.exists():
+        data = json.loads(ci_path.read_text(encoding="utf-8"))
+        best = data.get("maximizing_cell") or {}
+        rows.append({
+            "mode": "conditional-independent-given-pk", "observable": "pk", "status": "ok",
+            "D2_bits": data.get("D2_bits"), "Dinf_bits": data.get("Dinf_bits"),
+            "max_amplification": best.get("amplification_float"), "p_z_star": best.get("p"),
+            "failure_given_z_star": best.get("conditional_failure"), "z_star": best.get("feature_value"),
+        })
     return rows
 
 
@@ -73,6 +91,7 @@ def main():
             out.write(f"| {row['mode']} | {row['observable']} | {row['D2_bits']:.6f} | "
                       f"{row['Dinf_bits']:.6f} | {row['max_amplification']:.6g} | "
                       f"{row['p_z_star']} | {row['failure_given_z_star']} |\n")
+        out.write("\nThe former global `independent-output` construction is retained only as a software sanity check and is excluded from this scientific comparison.\n")
     print(f"wrote {args.root / 'observable_matrix.csv'} and observable_matrix.md")
 
 

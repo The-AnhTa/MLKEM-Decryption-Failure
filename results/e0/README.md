@@ -10,6 +10,11 @@ The combined research table is available in
 [`observable_matrix.md`](observable_matrix.md) and
 [`observable_matrix.csv`](observable_matrix.csv).
 
+Each analyzed observable also has a `*_frontier_summary.json` file reporting
+the exact optimal randomized selector at budgets $p=2^{-1},\ldots,2^{-20}$.
+The selector takes cells in decreasing likelihood-ratio order and randomizes
+within the boundary cell when necessary.
+
 Every exact baseline law has total mass `1212153856`. The baseline
 public-key/ciphertext law contains 5,091,996 cells. Its raw CSV is stored as
 `ciphertext-none/pk_ciphertext.csv.gz` with SHA-256
@@ -17,9 +22,13 @@ public-key/ciphertext law contains 5,091,996 cells. Its raw CSV is stored as
 
 The no-compression public-key/ciphertext law contains 61,887,204 cells and its
 uncompressed CSV is approximately 2.88 GB. The analyzer processed it in bounded
-memory and retained its exact mass, numerical divergences, and maximizing cell
-in `ciphertext-no-compression/pk_ciphertext_analysis.json`; the reproducible raw
-table is not stored in Git.
+memory and retained its exact mass, numerical divergences, maximizing cell, and
+budget frontier in `ciphertext-no-compression/`; the reproducible raw table is
+not stored in Git.
 
-The `independent-compression` and `independent-output` models do not define a
-transmitted ciphertext observable, so their ciphertext entries are marked N/A.
+`none/pk_ci_analysis.json` is the scientific conditional-independence ablation:
+coordinate failure events are made independent conditional on the complete
+public key while preserving their exact per-key marginals. The older global
+`independent-output` construction is retained only as a sanity check. Neither
+`independent-compression` nor that global sanity model defines a transmitted
+ciphertext observable, so their ciphertext entries are marked N/A.

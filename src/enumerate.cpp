@@ -12,6 +12,17 @@
 
 namespace toy {
 
+static void add_public_features(ExperimentResult& result, const Matrix& a, const ModuleVector& t,
+                                int q, Weight total, Weight failures) {
+    result.laws["t_norm2"].add(feature_t_centered_norm(t, q), total, failures);
+    result.laws["t_histogram"].add(feature_t_histogram(t, q), total, failures);
+    result.laws["t_autocorrelation"].add(feature_t_autocorrelation(t, q), total, failures);
+    result.laws["at_norm_pair"].add(feature_at_norm_pair(a, t, q), total, failures);
+    result.laws["at_pair_histogram"].add(feature_at_pair_histogram(a, t, q), total, failures);
+    result.laws["at_correlations"].add(feature_at_correlations(a, t, q), total, failures);
+    result.laws["at_projections"].add(feature_at_projections(a, t, q), total, failures);
+}
+
 std::string ablation_name(Ablation mode) {
     switch (mode) {
         case Ablation::None: return "none";
@@ -119,9 +130,7 @@ ExperimentResult enumerate_bruteforce(const Params& p, bool ciphertext_features)
                     result.laws["global"].add("all", weight, failed);
                     result.laws["pk"].add(feature_pk(a, t), weight, failed);
                     result.laws["secret_key"].add(feature_secret_key(a, s, e), weight, failed);
-                    result.laws["t_norm2"].add(feature_t_centered_norm(t, p.q), weight, failed);
-                    result.laws["t_histogram"].add(feature_t_histogram(t, p.q), weight, failed);
-                    result.laws["t_autocorrelation"].add(feature_t_autocorrelation(t, p.q), weight, failed);
+                    add_public_features(result, a, t, p.q, weight, failed);
                     const int margin = minimum_margin(p, s, c, message);
                     result.laws["margin"].add(std::to_string(margin), weight, failed);
                     if (ciphertext_features) {
@@ -132,6 +141,10 @@ ExperimentResult enumerate_bruteforce(const Params& p, bool ciphertext_features)
                     for (std::size_t i = 0; i < p.n; ++i) {
                         result.coordinate_total[i] = checked_add(result.coordinate_total[i], weight);
                         if (decoded[i] == message[i]) result.coordinate_correct[i] = checked_add(result.coordinate_correct[i], weight);
+                        auto& cells = result.pk_coordinate_laws[feature_pk(a, t)];
+                        if (cells.empty()) cells.resize(p.n);
+                        cells[i].total = checked_add(cells[i].total, weight);
+                        if (decoded[i] != message[i]) cells[i].failures = checked_add(cells[i].failures, weight);
                     }
                 }
         }
@@ -140,13 +153,15 @@ ExperimentResult enumerate_bruteforce(const Params& p, bool ciphertext_features)
     return result;
 }
 
-ExperimentResult enumerate_ciphertext_dp(const Params& p, Ablation mode, std::size_t max_outer_states) {
+ExperimentResult enumerate_ciphertext_dp(const Params& p, Ablation mode, std::size_t max_outer_states,
+                                         bool scalable_only) {
     p.validate();
     if (p.k != 1) throw std::invalid_argument("ciphertext DP global enumerator currently supports k=1");
     if (mode == Ablation::IndependentCompression)
         throw std::invalid_argument("ciphertext observables are not defined for independent-compression mode");
     ExperimentResult result;
     result.metadata["enumeration"] = max_outer_states ? "deterministic-prefix-ciphertext-dp" : "global-ciphertext-dp";
+    result.metadata["observable_scope"] = scalable_only ? "frozen-scalable-only" : "complete";
     if (max_outer_states) result.metadata["max_outer_states"] = std::to_string(max_outer_states);
     // This DP tracks the joint ciphertext/failure law, not coordinate marginals.
     const auto uniform = uniform_polynomials(p.n, p.q);
@@ -201,10 +216,20 @@ ExperimentResult enumerate_ciphertext_dp(const Params& p, Ablation mode, std::si
                     const Weight scaled = checked_mul(outer, weight);
                     const Weight failed = state.second ? scaled : 0;
                     result.laws["global"].add("all", scaled, failed);
-                    result.laws["ciphertext"].add(feature_ciphertext(c), scaled, failed);
-                    result.laws["pk_ciphertext"].add(feature_pk_ciphertext(a, t, c), scaled, failed);
-                    if (mode == Ablation::None)
+                    if (!scalable_only) {
+                        result.laws["ciphertext"].add(feature_ciphertext(c), scaled, failed);
+                        result.laws["pk_ciphertext"].add(feature_pk_ciphertext(a, t, c), scaled, failed);
+                    }
+                    if (mode == Ablation::None && !scalable_only)
                         result.laws["ciphertext_symbols"].add(feature_ciphertext_symbols(c, p.du, p.dv), scaled, failed);
+                    if (mode == Ablation::None) {
+                        result.laws["hist_u"].add(feature_hist_u(c, 1 << p.du), scaled, failed);
+                        result.laws["hist_v"].add(feature_hist_v(c, 1 << p.dv), scaled, failed);
+                        result.laws["extreme_symbols"].add(feature_extreme_symbol_counts(c, 1 << p.du, 1 << p.dv), scaled, failed);
+                        result.laws["entropy_1024"].add(feature_entropy_1024(c, 1 << p.du, 1 << p.dv), scaled, failed);
+                        result.laws["decompressed_norms"].add(feature_decompressed_norms(c, p.du, p.dv, p.q), scaled, failed);
+                        result.laws["joint_uv_histogram"].add(feature_joint_uv_histogram(c), scaled, failed);
+                    }
                 }
             }
         }
@@ -305,6 +330,42 @@ static InnerResult evaluate_inner(const Params& p, Ablation mode, const ModuleVe
     return aggregate;
 }
 
+ExperimentResult enumerate_frozen_public(const Params& p, std::size_t max_keys) {
+    p.validate();
+    if (p.k != 1) throw std::invalid_argument("exact frozen-public enumerator currently supports k=1");
+    ExperimentResult result;
+    result.metadata["enumeration"] = max_keys ? "deterministic-key-prefix" : "global-exact";
+    result.metadata["observable_scope"] = "frozen-public-features";
+    if (max_keys) result.metadata["max_keys"] = std::to_string(max_keys);
+    const auto uniform = uniform_polynomials(p.n, p.q);
+    const auto cbd1 = cbd_polynomials(p.n, p.eta1, p.q);
+    const auto cbd2 = cbd_polynomials(p.n, p.eta2, p.q);
+    std::size_t key_count = 0;
+    for (const auto& ap : uniform) {
+        const Matrix a{{ap}};
+        for (const auto& sw : cbd1) for (const auto& ew : cbd1) {
+            if (max_keys && key_count >= max_keys) goto frozen_done;
+            ++key_count;
+            const ModuleVector s{sw.value}, e{ew.value};
+            const auto t = keygen(p, a, s, e);
+            Weight key_total = 0, key_failures = 0;
+            for (const auto& yw : cbd1) for (const auto& e1w : cbd2) {
+                const ModuleVector y{yw.value}, e1{e1w.value};
+                RawCiphertext base{transpose_mat_vec(a, y, e1, p.q), dot(t, y, p.q)};
+                const Weight outer = checked_mul(checked_mul(checked_mul(sw.weight, ew.weight), yw.weight), e1w.weight);
+                const auto inner = evaluate_inner(p, Ablation::None, s, base, outer);
+                key_total = checked_add(key_total, checked_mul(outer, inner.total));
+                key_failures = checked_add(key_failures, checked_mul(outer, inner.failures));
+            }
+            result.laws["global"].add("all", key_total, key_failures);
+            add_public_features(result, a, t, p.q, key_total, key_failures);
+        }
+    }
+frozen_done:
+    for (const auto& [_, law] : result.laws) law.validate();
+    return result;
+}
+
 ExperimentResult enumerate_optimized_pk(const Params& p, Ablation mode, std::size_t max_outer_states) {
     p.validate();
     if (p.k != 1) throw std::invalid_argument("exact global enumerator currently supports k=1");
@@ -340,9 +401,7 @@ ExperimentResult enumerate_optimized_pk(const Params& p, Ablation mode, std::siz
                 result.laws["global"].add("all", total, failures);
                 result.laws["pk"].add(pk, total, failures);
                 result.laws["secret_key"].add(sk, total, failures);
-                result.laws["t_norm2"].add(feature_t_centered_norm(t, p.q), total, failures);
-                result.laws["t_histogram"].add(feature_t_histogram(t, p.q), total, failures);
-                result.laws["t_autocorrelation"].add(feature_t_autocorrelation(t, p.q), total, failures);
+                add_public_features(result, a, t, p.q, total, failures);
                 for (const auto& [margin, weight] : inner.margins) {
                     const Weight scaled = checked_mul(outer, weight);
                     result.laws["margin"].add(std::to_string(margin), scaled, margin <= 0 ? scaled : 0);
@@ -351,6 +410,11 @@ ExperimentResult enumerate_optimized_pk(const Params& p, Ablation mode, std::siz
                 for (std::size_t i = 0; i < p.n; ++i) {
                     result.coordinate_total[i] = checked_add(result.coordinate_total[i], inner.coordinate_total[i]);
                     result.coordinate_correct[i] = checked_add(result.coordinate_correct[i], inner.coordinate_correct[i]);
+                    auto& cells = result.pk_coordinate_laws[pk];
+                    if (cells.empty()) cells.resize(p.n);
+                    cells[i].total = checked_add(cells[i].total, inner.coordinate_total[i]);
+                    cells[i].failures = checked_add(cells[i].failures,
+                                                    inner.coordinate_total[i] - inner.coordinate_correct[i]);
                 }
             }
         }
@@ -369,6 +433,90 @@ static Poly sample_cbd_poly(std::size_t n, int eta, int q, std::mt19937_64& rng)
         out[i] = mod_q(x, q);
     }
     return out;
+}
+
+ExperimentResult enumerate_sampled_ciphertext_features(const Params& p, std::size_t key_count,
+                                                       std::uint64_t seed,
+                                                       std::size_t max_outer_per_key) {
+    p.validate();
+    if (key_count == 0) throw std::invalid_argument("sampled-key count must be positive");
+    if (p.dv > 4 || p.n > 15)
+        throw std::invalid_argument("packed exact ciphertext histogram DP requires dv<=4 and n<=15");
+    ExperimentResult result;
+    result.metadata["enumeration"] = "sampled-keys";
+    result.metadata["conditional_enumeration"] = max_outer_per_key ? "deterministic-prefix" : "exact";
+    result.metadata["observable_scope"] = "frozen-scalable-ciphertext-features";
+    result.metadata["key_count"] = std::to_string(key_count);
+    result.metadata["seed"] = std::to_string(seed);
+    if (max_outer_per_key) result.metadata["max_outer_per_key"] = std::to_string(max_outer_per_key);
+    std::mt19937_64 rng(seed);
+    std::uniform_int_distribution<int> uniform(0, p.q - 1);
+    const auto y_support = module_support(cbd_polynomials(p.n, p.eta1, p.q), p.k);
+    const auto e1_support = module_support(cbd_polynomials(p.n, p.eta2, p.q), p.k);
+    const auto e2coeff = cbd_coefficients(p.eta2);
+
+    for (std::size_t key_index = 0; key_index < key_count; ++key_index) {
+        Matrix a(p.k, std::vector<Poly>(p.k, Poly(p.n)));
+        for (auto& row : a) for (auto& poly : row) for (int& x : poly) x = uniform(rng);
+        ModuleVector s(p.k), e(p.k);
+        for (std::size_t i = 0; i < p.k; ++i) {
+            s[i] = sample_cbd_poly(p.n, p.eta1, p.q, rng);
+            e[i] = sample_cbd_poly(p.n, p.eta1, p.q, rng);
+        }
+        const auto t = keygen(p, a, s, e);
+        const auto sk = feature_secret_key(a, s, e);
+        std::size_t visited = 0;
+        for (const auto& [y, yweight] : y_support) for (const auto& [e1, e1weight] : e1_support) {
+            if (max_outer_per_key && visited >= max_outer_per_key) goto sampled_cipher_key_done;
+            ++visited;
+            const auto raw_u = transpose_mat_vec(a, y, e1, p.q);
+            Ciphertext base_c;
+            ModuleVector uhat;
+            for (const auto& poly : raw_u) {
+                base_c.u.push_back(compress_poly(poly, p.du, p.q));
+                uhat.push_back(decompress_poly(base_c.u.back(), p.du, p.q));
+            }
+            const Poly h = dot(s, uhat, p.q);
+            const Poly ty = dot(t, y, p.q);
+            using HistogramState = std::pair<std::uint64_t, bool>;
+            std::map<HistogramState, Weight> dp{{{0, false}, 1}};
+            for (std::size_t i = 0; i < p.n; ++i) {
+                std::map<HistogramState, Weight> next;
+                for (const auto& [state, state_weight] : dp)
+                    for (const auto& [e2, e2weight] : e2coeff) for (int bit = 0; bit <= 1; ++bit) {
+                        const int raw_v = mod_q(ty[i] + e2 + decompress_coeff(bit, 1, p.q), p.q);
+                        const int vc = compress_coeff(raw_v, p.dv, p.q);
+                        const int w = mod_q(decompress_coeff(vc, p.dv, p.q) - h[i], p.q);
+                        const bool failed = state.second || compress_coeff(w, 1, p.q) != bit;
+                        const std::uint64_t code = state.first + (std::uint64_t{1} << (4 * vc));
+                        auto& weight = next[{code, failed}];
+                        weight = checked_add(weight, checked_mul(state_weight, e2weight));
+                    }
+                dp = std::move(next);
+            }
+            const Weight outer = checked_mul(yweight, e1weight);
+            for (const auto& [state, weight] : dp) {
+                Ciphertext c = base_c;
+                for (int symbol = 0; symbol < (1 << p.dv); ++symbol) {
+                    const int count = static_cast<int>((state.first >> (4 * symbol)) & 0xFULL);
+                    for (int j = 0; j < count; ++j) c.v.push_back(symbol);
+                }
+                const Weight scaled = checked_mul(outer, weight);
+                const Weight failed = state.second ? scaled : 0;
+                result.laws["global"].add("all", scaled, failed);
+                result.laws["secret_key"].add(sk, scaled, failed);
+                result.laws["hist_u"].add(feature_hist_u(c, 1 << p.du), scaled, failed);
+                result.laws["hist_v"].add(feature_hist_v(c, 1 << p.dv), scaled, failed);
+                result.laws["extreme_symbols"].add(feature_extreme_symbol_counts(c, 1 << p.du, 1 << p.dv), scaled, failed);
+                result.laws["entropy_1024"].add(feature_entropy_1024(c, 1 << p.du, 1 << p.dv), scaled, failed);
+                result.laws["decompressed_norms"].add(feature_decompressed_norms(c, p.du, p.dv, p.q), scaled, failed);
+            }
+        }
+sampled_cipher_key_done:
+        continue;
+    }
+    for (const auto& [_, law] : result.laws) law.validate();
+    return result;
 }
 
 ExperimentResult enumerate_sampled_keys(const Params& p, std::size_t key_count,
@@ -414,9 +562,7 @@ ExperimentResult enumerate_sampled_keys(const Params& p, std::size_t key_count,
             result.laws["global"].add("all", total, failures);
             result.laws["pk"].add(pk, total, failures);
             result.laws["secret_key"].add(sk, total, failures);
-            result.laws["t_norm2"].add(feature_t_centered_norm(t, p.q), total, failures);
-            result.laws["t_histogram"].add(feature_t_histogram(t, p.q), total, failures);
-            result.laws["t_autocorrelation"].add(feature_t_autocorrelation(t, p.q), total, failures);
+            add_public_features(result, a, t, p.q, total, failures);
             for (const auto& [margin, weight] : inner.margins) {
                 const Weight scaled = checked_mul(outer, weight);
                 result.laws["margin"].add(std::to_string(margin), scaled, margin <= 0 ? scaled : 0);
@@ -424,6 +570,11 @@ ExperimentResult enumerate_sampled_keys(const Params& p, std::size_t key_count,
             for (std::size_t i = 0; i < p.n; ++i) {
                 result.coordinate_total[i] = checked_add(result.coordinate_total[i], inner.coordinate_total[i]);
                 result.coordinate_correct[i] = checked_add(result.coordinate_correct[i], inner.coordinate_correct[i]);
+                auto& cells = result.pk_coordinate_laws[pk];
+                if (cells.empty()) cells.resize(p.n);
+                cells[i].total = checked_add(cells[i].total, inner.coordinate_total[i]);
+                cells[i].failures = checked_add(cells[i].failures,
+                                                inner.coordinate_total[i] - inner.coordinate_correct[i]);
             }
         }
 sampled_key_done:
@@ -444,6 +595,13 @@ void export_result(const ExperimentResult& result, const Params& p,
         for (std::size_t i = 0; i < result.coordinate_total.size(); ++i)
             out << i << ',' << result.coordinate_total[i] << ',' << result.coordinate_correct[i] << ','
                 << result.coordinate_total[i] - result.coordinate_correct[i] << '\n';
+    }
+    if (!result.pk_coordinate_laws.empty()) {
+        std::ofstream out(std::filesystem::path(directory) / "pk_coordinate_marginals.csv");
+        out << "feature_value,coordinate,Nz,Eiz\n";
+        for (const auto& [pk, cells] : result.pk_coordinate_laws)
+            for (std::size_t i = 0; i < cells.size(); ++i)
+                out << '"' << pk << "\"," << i << ',' << cells[i].total << ',' << cells[i].failures << '\n';
     }
 }
 

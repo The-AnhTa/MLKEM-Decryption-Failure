@@ -6,6 +6,8 @@ from fractions import Fraction
 from pathlib import Path
 
 import analyze
+import conditional_independence
+import sampled_key_ci
 import summarize_matrix
 
 
@@ -18,6 +20,8 @@ class AnalysisTests(unittest.TestCase):
                          root / "ciphertext-no-compression")
         self.assertEqual(summarize_matrix.analysis_directory(root, "independent-compression", "ciphertext"),
                          root / "undefined-ciphertext-observable")
+        self.assertEqual(summarize_matrix.analysis_directory(root, "none", "hist_v"),
+                         root / "ciphertext-none")
 
     def test_metrics_and_universal_bound(self):
         rows = [("a", 80, 8), ("b", 20, 12)]
@@ -27,6 +31,11 @@ class AnalysisTests(unittest.TestCase):
         self.assertAlmostEqual(dinf, math.log2(3))
         for _, p, amplification in frontier:
             self.assertLessEqual(amplification, 1 / p)
+        budgets = analyze.budgeted_frontier(rows, max_bits=5)
+        self.assertEqual([item["b"] for item in budgets], [1, 2, 3, 4, 5])
+        for item in budgets:
+            self.assertLessEqual(item["amplification_float"], 2 ** item["b"])
+        self.assertAlmostEqual(budgets[0]["amplification_float"], 1.5)
 
     def test_independent_output_is_independent(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -64,6 +73,36 @@ class AnalysisTests(unittest.TestCase):
             self.assertAlmostEqual(streamed[2], d2)
             self.assertAlmostEqual(streamed[3], dinf)
             self.assertEqual(streamed[4], ("b", 20, 12))
+
+    def test_conditionally_independent_derivation(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "pk_coordinate_marginals.csv"
+            with path.open("w", newline="") as handle:
+                writer = csv.writer(handle)
+                writer.writerow(["feature_value", "coordinate", "Nz", "Eiz"])
+                writer.writerow(["pk0", 0, 100, 10])
+                writer.writerow(["pk0", 1, 100, 20])
+                writer.writerow(["pk1", 0, 100, 0])
+                writer.writerow(["pk1", 1, 100, 0])
+            total, cells = conditional_independence.derive(path)
+            self.assertEqual(total, 200)
+            self.assertEqual(cells[0][2], Fraction(7, 25))
+            analysis = conditional_independence.analyze_cells(total, cells, max_bits=4)
+            self.assertEqual(len(analysis["budgets"]), 4)
+            self.assertGreater(analysis["Dinf_bits"], 0)
+
+    def test_sampled_key_confidence_interval(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "secret_key.csv"
+            with path.open("w", newline="") as handle:
+                writer = csv.writer(handle)
+                writer.writerow(["feature_id", "feature_value", "Nz", "Ez"])
+                writer.writerow(["secret_key", "k0", 10, 1])
+                writer.writerow(["secret_key", "k1", 10, 3])
+            result = sampled_key_ci.analyze(path)
+            self.assertAlmostEqual(result["mean_exact_conditional_failure"], 0.2)
+            self.assertLessEqual(result["lower"], 0.2)
+            self.assertGreaterEqual(result["upper"], 0.2)
 
 
 if __name__ == "__main__":
