@@ -150,6 +150,10 @@ void test_sampled_key_reproducibility() {
     const auto a = toy::enumerate_sampled_keys(p, 2, 12345, toy::Ablation::None, 20);
     const auto b = toy::enumerate_sampled_keys(p, 2, 12345, toy::Ablation::None, 20);
     require(a.laws.at("pk").cells() == b.laws.at("pk").cells(), "sampled-key seed reproducibility");
+    const auto screen = toy::enumerate_sampled_keys(p, 2, 12345, toy::Ablation::None, 20, true);
+    require(screen.laws.at("global").cells() == a.laws.at("global").cells(), "screen global law equality");
+    require(screen.laws.at("secret_key").cells() == a.laws.at("secret_key").cells(), "screen key law equality");
+    require(screen.laws.find("pk") == screen.laws.end(), "screen excludes feature laws");
 }
 
 void test_frozen_public_matches_exact() {

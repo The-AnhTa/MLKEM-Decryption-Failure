@@ -20,6 +20,7 @@ int main(int argc, char** argv) {
         bool scalable_only = false;
         bool frozen_public = false;
         bool support_bound = false;
+        bool screen_only = false;
 
         for (int i = 1; i < argc; ++i) {
             const std::string arg = argv[i];
@@ -32,6 +33,10 @@ int main(int argc, char** argv) {
             else if (arg == "--output") output = value("--output");
             else if (arg == "--max-outer") max_outer = std::stoull(value("--max-outer"));
             else if (arg == "--sample-keys") sample_keys = std::stoull(value("--sample-keys"));
+            else if (arg == "--screen-keys") {
+                sample_keys = std::stoull(value("--screen-keys"));
+                screen_only = true;
+            }
             else if (arg == "--seed") seed = std::stoull(value("--seed"));
             else if (arg == "--bruteforce") brute_force = true;
             else if (arg == "--ciphertext-dp") ciphertext_dp = true;
@@ -39,12 +44,14 @@ int main(int argc, char** argv) {
             else if (arg == "--frozen-public") frozen_public = true;
             else if (arg == "--support-bound") support_bound = true;
             else if (arg == "--list-presets") {
-                std::cout << "e0 e1 e1a e1b e1c e2 e3 e4 e5\n";
+                std::cout << "e0 e1 e1a e1b e1c e2 e3 e4 e5 "
+                             "n4q17d32 n4q17d42 n4q17d43 n4q19d32 n4q19d42 n4q19d43 "
+                             "n4q23d32 n4q23d42 n4q23d43 n4q29d32 n4q29d42 n4q29d43\n";
                 return 0;
             } else if (arg == "--help") {
                 std::cout << "toy-mlkem [--preset e0] [--mode none|no-compression|independent-compression]\n"
                              "          [--output DIR] [--max-outer N] [--bruteforce|--ciphertext-dp]\n"
-                             "          [--sample-keys N --seed N] [--scalable-only|--frozen-public]\n"
+                             "          [--sample-keys N|--screen-keys N --seed N] [--scalable-only|--frozen-public]\n"
                              "          [--support-bound]\n";
                 return 0;
             } else throw std::invalid_argument("unknown option: " + arg);
@@ -87,7 +94,8 @@ int main(int argc, char** argv) {
         else if (sample_keys && scalable_only) {
             if (mode != toy::Ablation::None) throw std::invalid_argument("sampled scalable ciphertext supports exact compression only");
             result = toy::enumerate_sampled_ciphertext_features(params, sample_keys, seed, max_outer);
-        } else if (sample_keys) result = toy::enumerate_sampled_keys(params, sample_keys, seed, mode, max_outer);
+        } else if (sample_keys)
+            result = toy::enumerate_sampled_keys(params, sample_keys, seed, mode, max_outer, screen_only);
         else result = toy::enumerate_optimized_pk(params, mode, max_outer);
         toy::export_result(result, params, mode, output);
         const auto elapsed = std::chrono::duration<double>(std::chrono::steady_clock::now() - start).count();

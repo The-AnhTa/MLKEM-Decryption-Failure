@@ -38,6 +38,18 @@ Params Params::preset(const std::string& name) {
     if (name == "e3") return {2, 2, 3329, 2, 2, 10, 4};
     if (name == "e4") return {4, 1, 3329, 3, 2, 10, 4};
     if (name == "e5") return {8, 1, 3329, 1, 1, 10, 4};
+    if (name == "n4q17d32") return {4, 1, 17, 1, 1, 3, 2};
+    if (name == "n4q17d42") return {4, 1, 17, 1, 1, 4, 2};
+    if (name == "n4q17d43") return {4, 1, 17, 1, 1, 4, 3};
+    if (name == "n4q19d32") return {4, 1, 19, 1, 1, 3, 2};
+    if (name == "n4q19d42") return {4, 1, 19, 1, 1, 4, 2};
+    if (name == "n4q19d43") return {4, 1, 19, 1, 1, 4, 3};
+    if (name == "n4q23d32") return {4, 1, 23, 1, 1, 3, 2};
+    if (name == "n4q23d42") return {4, 1, 23, 1, 1, 4, 2};
+    if (name == "n4q23d43") return {4, 1, 23, 1, 1, 4, 3};
+    if (name == "n4q29d32") return {4, 1, 29, 1, 1, 3, 2};
+    if (name == "n4q29d42") return {4, 1, 29, 1, 1, 4, 2};
+    if (name == "n4q29d43") return {4, 1, 29, 1, 1, 4, 3};
     throw std::invalid_argument("unknown parameter preset: " + name);
 }
 

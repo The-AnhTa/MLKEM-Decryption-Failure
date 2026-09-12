@@ -7,6 +7,7 @@ from pathlib import Path
 
 import analyze
 import conditional_independence
+import predicate_transfer
 import sampled_key_ci
 import summarize_matrix
 
@@ -103,6 +104,21 @@ class AnalysisTests(unittest.TestCase):
             self.assertAlmostEqual(result["mean_exact_conditional_failure"], 0.2)
             self.assertLessEqual(result["lower"], 0.2)
             self.assertGreaterEqual(result["upper"], 0.2)
+
+    def test_transfer_selector_is_frozen(self):
+        cells = {"high": (20, 10), "low": (80, 0)}
+        groups = {Fraction(5): 20, Fraction(0): 80}
+        selector = predicate_transfer.selector_for_budget(groups, 100, 1)
+        self.assertEqual(selector["threshold_score"], "0/1")
+        self.assertEqual(selector["boundary_probability"], "3/8")
+        scores = {"high": Fraction(5), "low": Fraction(0)}
+        mass, failures = predicate_transfer.evaluate_selector(cells, scores, selector, True)
+        self.assertEqual(mass, 50)
+        self.assertEqual(failures, 10)
+        target = {"high": (10, 4), "low": (90, 9), "unseen": (20, 10)}
+        mass, failures = predicate_transfer.evaluate_selector(target, scores, selector, True)
+        self.assertEqual(mass, Fraction(175, 4))
+        self.assertEqual(failures, Fraction(59, 8))
 
 
 if __name__ == "__main__":

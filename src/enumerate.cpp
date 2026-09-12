@@ -521,7 +521,8 @@ sampled_cipher_key_done:
 
 ExperimentResult enumerate_sampled_keys(const Params& p, std::size_t key_count,
                                         std::uint64_t seed, Ablation mode,
-                                        std::size_t max_outer_per_key) {
+                                        std::size_t max_outer_per_key,
+                                        bool screen_only) {
     p.validate();
     if (key_count == 0) throw std::invalid_argument("sampled-key count must be positive");
     if (mode == Ablation::IndependentCompression && p.k != 1)
@@ -531,9 +532,12 @@ ExperimentResult enumerate_sampled_keys(const Params& p, std::size_t key_count,
     result.metadata["conditional_enumeration"] = max_outer_per_key ? "deterministic-prefix" : "exact";
     result.metadata["key_count"] = std::to_string(key_count);
     result.metadata["seed"] = std::to_string(seed);
+    result.metadata["observable_scope"] = screen_only ? "screen-only" : "public-features";
     if (max_outer_per_key) result.metadata["max_outer_per_key"] = std::to_string(max_outer_per_key);
-    result.coordinate_total.assign(p.n, 0);
-    result.coordinate_correct.assign(p.n, 0);
+    if (!screen_only) {
+        result.coordinate_total.assign(p.n, 0);
+        result.coordinate_correct.assign(p.n, 0);
+    }
     std::mt19937_64 rng(seed);
     std::uniform_int_distribution<int> uniform(0, p.q - 1);
     const auto y_support = module_support(cbd_polynomials(p.n, p.eta1, p.q), p.k);
@@ -560,9 +564,12 @@ ExperimentResult enumerate_sampled_keys(const Params& p, std::size_t key_count,
             const Weight total = checked_mul(outer, inner.total);
             const Weight failures = checked_mul(outer, inner.failures);
             result.laws["global"].add("all", total, failures);
-            result.laws["pk"].add(pk, total, failures);
             result.laws["secret_key"].add(sk, total, failures);
-            add_public_features(result, a, t, p.q, total, failures);
+            if (!screen_only) {
+                result.laws["pk"].add(pk, total, failures);
+                add_public_features(result, a, t, p.q, total, failures);
+            }
+            if (screen_only) continue;
             for (const auto& [margin, weight] : inner.margins) {
                 const Weight scaled = checked_mul(outer, weight);
                 result.laws["margin"].add(std::to_string(margin), scaled, margin <= 0 ? scaled : 0);

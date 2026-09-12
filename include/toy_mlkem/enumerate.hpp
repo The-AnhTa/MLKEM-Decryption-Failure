@@ -31,7 +31,8 @@ ExperimentResult enumerate_optimized_pk(const Params& p, Ablation mode = Ablatio
                                         std::size_t max_outer_states = 0);
 ExperimentResult enumerate_sampled_keys(const Params& p, std::size_t key_count,
                                         std::uint64_t seed, Ablation mode = Ablation::None,
-                                        std::size_t max_outer_per_key = 0);
+                                        std::size_t max_outer_per_key = 0,
+                                        bool screen_only = false);
 ExperimentResult enumerate_sampled_ciphertext_features(const Params& p, std::size_t key_count,
                                                        std::uint64_t seed,
                                                        std::size_t max_outer_per_key = 0);
