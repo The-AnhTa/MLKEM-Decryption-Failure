@@ -48,8 +48,8 @@ The named presets are `n4q{q}d{du}{dv}`. Each point is processed as follows:
    encapsulation randomness exactly.
 
 The final sampled analysis must label sample maxima and sample `D_infinity` as
-descriptive, never as population bounds. The primary dimension-scaling claim
-uses a predeclared 64/64 key split: the first half constructs predicates within
-each frozen feature family, and the second half evaluates them. Confidence
-intervals are computed across held-out keys. The complete-sample empirical
-frontiers remain secondary descriptive summaries.
+descriptive, never as population bounds. Distribution-free confidence intervals
+are computed across the 128 exact per-key conditional failure probabilities for
+the population mean. Feature-conditioned empirical frontiers are reported as
+descriptive results on the sampled-key mixture. The already-frozen E0 predicates
+provide the non-refitted dimension-transfer comparison.

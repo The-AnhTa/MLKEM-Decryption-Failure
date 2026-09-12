@@ -1,0 +1,155 @@
+{
+  "protocol": "docs/transfer-and-n4-protocol.md",
+  "pilot_keys": 12,
+  "seed": 20260912,
+  "selected": [
+    "n4q29d43",
+    "n4q19d43"
+  ],
+  "points": [
+    {
+      "preset": "n4q17d32",
+      "support_possible": true,
+      "noise_bound": 15,
+      "decoding_margin": 4,
+      "N": "3221225472",
+      "E": "955927750",
+      "delta_exact": "477963875/1610612736",
+      "delta_float": 0.29675903109212715,
+      "eligible": false,
+      "selected": false
+    },
+    {
+      "preset": "n4q17d42",
+      "support_possible": true,
+      "noise_bound": 15,
+      "decoding_margin": 4,
+      "N": "3221225472",
+      "E": "523996158",
+      "delta_exact": "87332693/536870912",
+      "delta_float": 0.16266981698572636,
+      "eligible": false,
+      "selected": false
+    },
+    {
+      "preset": "n4q17d43",
+      "support_possible": true,
+      "noise_bound": 14,
+      "decoding_margin": 4,
+      "N": "3221225472",
+      "E": "277210328",
+      "delta_exact": "34651291/402653184",
+      "delta_float": 0.08605741212765376,
+      "eligible": true,
+      "selected": false
+    },
+    {
+      "preset": "n4q19d32",
+      "support_possible": true,
+      "noise_bound": 15,
+      "decoding_margin": 5,
+      "N": "3221225472",
+      "E": "686350138",
+      "delta_exact": "343175069/1610612736",
+      "delta_float": 0.21307112586994967,
+      "eligible": false,
+      "selected": false
+    },
+    {
+      "preset": "n4q19d42",
+      "support_possible": true,
+      "noise_bound": 15,
+      "decoding_margin": 5,
+      "N": "3221225472",
+      "E": "383746318",
+      "delta_exact": "191873159/1610612736",
+      "delta_float": 0.11913053629299004,
+      "eligible": false,
+      "selected": false
+    },
+    {
+      "preset": "n4q19d43",
+      "support_possible": true,
+      "noise_bound": 14,
+      "decoding_margin": 5,
+      "N": "3221225472",
+      "E": "167174876",
+      "delta_exact": "41793719/805306368",
+      "delta_float": 0.05189791197578112,
+      "eligible": true,
+      "selected": true
+    },
+    {
+      "preset": "n4q23d32",
+      "support_possible": true,
+      "noise_bound": 16,
+      "decoding_margin": 6,
+      "N": "3221225472",
+      "E": "444891888",
+      "delta_exact": "9268581/67108864",
+      "delta_float": 0.1381126195192337,
+      "eligible": false,
+      "selected": false
+    },
+    {
+      "preset": "n4q23d42",
+      "support_possible": true,
+      "noise_bound": 16,
+      "decoding_margin": 6,
+      "N": "3221225472",
+      "E": "241492560",
+      "delta_exact": "5031095/67108864",
+      "delta_float": 0.07496915757656097,
+      "eligible": true,
+      "selected": false
+    },
+    {
+      "preset": "n4q23d43",
+      "support_possible": true,
+      "noise_bound": 14,
+      "decoding_margin": 6,
+      "N": "3221225472",
+      "E": "67723248",
+      "delta_exact": "1410901/67108864",
+      "delta_float": 0.021024063229560852,
+      "eligible": true,
+      "selected": false
+    },
+    {
+      "preset": "n4q29d32",
+      "support_possible": true,
+      "noise_bound": 21,
+      "decoding_margin": 7,
+      "N": "3221225472",
+      "E": "359213792",
+      "delta_exact": "11225431/100663296",
+      "delta_float": 0.11151463786760966,
+      "eligible": false,
+      "selected": false
+    },
+    {
+      "preset": "n4q29d42",
+      "support_possible": true,
+      "noise_bound": 17,
+      "decoding_margin": 7,
+      "N": "3221225472",
+      "E": "103531584",
+      "delta_exact": "539227/16777216",
+      "delta_float": 0.03214043378829956,
+      "eligible": true,
+      "selected": false
+    },
+    {
+      "preset": "n4q29d43",
+      "support_possible": true,
+      "noise_bound": 15,
+      "decoding_margin": 7,
+      "N": "3221225472",
+      "E": "22016704",
+      "delta_exact": "344011/50331648",
+      "delta_float": 0.006834884484608968,
+      "eligible": true,
+      "selected": true
+    }
+  ]
+}

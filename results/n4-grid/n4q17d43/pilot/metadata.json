@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "parameters": "n4-k1-q17-e1_1-d4_3",
+  "mode": "none",
+  "laws": {
+    "global": {"N": "3221225472", "E": "277210328", "cells": 1},
+    "secret_key": {"N": "3221225472", "E": "277210328", "cells": 12}
+  },
+  "run": {
+    "conditional_enumeration": "exact",
+    "enumeration": "sampled-keys",
+    "key_count": "12",
+    "observable_scope": "screen-only",
+    "seed": "20260912"
+  }
+}

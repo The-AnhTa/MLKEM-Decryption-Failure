@@ -1,0 +1,3702 @@
+{
+  "schema_version": 1,
+  "model": "results\\predicate-transfer\\e0-model.json",
+  "results": {
+    "at_norm_pair": {
+      "evaluation_parameters": "n2-k1-q19-e1_1-d3_2",
+      "N": "1514143744",
+      "E": "60158336",
+      "delta": "469987/11829248",
+      "budgets": [
+        {
+          "b": 1,
+          "target_p": "1/2",
+          "randomized": {
+            "achieved_p": "213575/405764",
+            "achieved_p_float": 0.526352756774874,
+            "conditional_failure": "175495471/3499212800",
+            "conditional_failure_float": 0.0501528432337696,
+            "amplification": "126707730062/100377473525",
+            "amplification_float": 1.2623124054864978,
+            "G_bits": 0.33606900229326087,
+            "oracle_amplification_at_achieved_p": 1.341264102139926,
+            "oracle_retention": 0.9411363529915813
+          },
+          "deterministic": {
+            "achieved_p": "355/722",
+            "achieved_p_float": 0.4916897506925208,
+            "conditional_failure": "593237/11632640",
+            "conditional_failure_float": 0.05099762392715669,
+            "amplification": "214158557/166845385",
+            "amplification_float": 1.283574951743496,
+            "G_bits": 0.36016754160986225,
+            "oracle_amplification_at_achieved_p": 1.359759504382095,
+            "oracle_retention": 0.9439720388840238
+          }
+        },
+        {
+          "b": 2,
+          "target_p": "1/4",
+          "randomized": {
+            "achieved_p": "103511/410096",
+            "achieved_p_float": 0.2524067535406344,
+            "conditional_failure": "26479643/423981056",
+            "conditional_failure_float": 0.06245477863992112,
+            "amplification": "76473208984/48648824357",
+            "amplification_float": 1.5719436182633342,
+            "G_bits": 0.6525494726152031,
+            "oracle_amplification_at_achieved_p": 1.5954483416554326,
+            "oracle_retention": 0.985267637454366
+          },
+          "deterministic": {
+            "achieved_p": "1471/5776",
+            "achieved_p_float": 0.2546745152354571,
+            "conditional_failure": "1504167/24100864",
+            "conditional_failure_float": 0.062411330979669444,
+            "amplification": "155144082/98764411",
+            "amplification_float": 1.570850070679812,
+            "G_bits": 0.6515454896016545,
+            "oracle_amplification_at_achieved_p": 1.5922354502856217,
+            "oracle_retention": 0.98656895900542
+          }
+        },
+        {
+          "b": 3,
+          "target_p": "1/8",
+          "randomized": {
+            "achieved_p": "118325/883728",
+            "achieved_p_float": 0.13389300780330599,
+            "conditional_failure": "121953543/1938636800",
+            "conditional_failure_float": 0.06290685444535046,
+            "amplification": "88050458046/55611211775",
+            "amplification_float": 1.5833220538737307,
+            "G_bits": 0.6629547351150216,
+            "oracle_amplification_at_achieved_p": 1.774862104450959,
+            "oracle_retention": 0.8920817284357537
+          },
+          "deterministic": {
+            "achieved_p": "725/5776",
+            "achieved_p_float": 0.12551939058171746,
+            "conditional_failure": "744191/11878400",
+            "conditional_failure_float": 0.0626507778825431,
+            "amplification": "76757986/48677225",
+            "amplification_float": 1.576876783752566,
+            "G_bits": 0.6570699331695665,
+            "oracle_amplification_at_achieved_p": 1.7945018313908365,
+            "oracle_retention": 0.8787267620286577
+          }
+        },
+        {
+          "b": 4,
+          "target_p": "1/16",
+          "randomized": {
+            "achieved_p": "53/722",
+            "achieved_p_float": 0.07340720221606649,
+            "conditional_failure": "2374371/34734080",
+            "conditional_failure_float": 0.06835854008512676,
+            "amplification": "857147931/498186220",
+            "amplification_float": 1.7205372139759305,
+            "G_bits": 0.7828590968629799,
+            "oracle_amplification_at_achieved_p": 1.9723212814634612,
+            "oracle_retention": 0.8723412509645958
+          },
+          "deterministic": {
+            "achieved_p": "3/38",
+            "achieved_p_float": 0.07894736842105263,
+            "conditional_failure": "503915/7471104",
+            "conditional_failure_float": 0.06744853237219024,
+            "amplification": "9574385/5639844",
+            "amplification_float": 1.6976329487127657,
+            "G_bits": 0.7635245623568411,
+            "oracle_amplification_at_achieved_p": 1.9518030007998879,
+            "oracle_retention": 0.8697767899818998
+          }
+        },
+        {
+          "b": 5,
+          "target_p": "1/32",
+          "randomized": {
+            "achieved_p": "7101/184832",
+            "achieved_p_float": 0.03841867209141274,
+            "conditional_failure": "638539/9695232",
+            "conditional_failure_float": 0.06586113669069497,
+            "amplification": "1844100632/1112459229",
+            "amplification_float": 1.6576792963978368,
+            "G_bits": 0.7291649222440401,
+            "oracle_amplification_at_achieved_p": 2.132257337226405,
+            "oracle_retention": 0.7774292846632249
+          },
+          "deterministic": {
+            "achieved_p": "237/5776",
+            "achieved_p_float": 0.04103185595567867,
+            "conditional_failure": "246217/3883008",
+            "conditional_failure_float": 0.06340883150382384,
+            "amplification": "177768674/111386919",
+            "amplification_float": 1.5959564695384025,
+            "G_bits": 0.6744213019126821,
+            "oracle_amplification_at_achieved_p": 2.1260911579752015,
+            "oracle_retention": 0.750652888777508
+          }
+        },
+        {
+          "b": 6,
+          "target_p": "1/64",
+          "randomized": {
+            "achieved_p": "1223/69312",
+            "achieved_p_float": 0.017644852262234535,
+            "conditional_failure": "1619181/20037632",
+            "conditional_failure_float": 0.08080700354213512,
+            "amplification": "1169048682/574794101",
+            "amplification_float": 2.0338564365329144,
+            "G_bits": 1.0242178475278827,
+            "oracle_amplification_at_achieved_p": 2.2342102756703848,
+            "oracle_retention": 0.9103245377934029
+          },
+          "deterministic": {
+            "achieved_p": "129/5776",
+            "achieved_p_float": 0.022333795013850414,
+            "conditional_failure": "42217/528384",
+            "conditional_failure_float": 0.07989833151647287,
+            "amplification": "17417528/8661189",
+            "amplification_float": 2.010985789595401,
+            "G_bits": 1.0079028870372584,
+            "oracle_amplification_at_achieved_p": 2.194624592803911,
+            "oracle_retention": 0.916323364000087
+          }
+        },
+        {
+          "b": 7,
+          "target_p": "1/128",
+          "randomized": {
+            "achieved_p": "11431/1432448",
+            "achieved_p_float": 0.007980045348941114,
+            "conditional_failure": "4264859/46821376",
+            "conditional_failure_float": 0.09108786123671377,
+            "amplification": "12316912792/5372421397",
+            "amplification_float": 2.292618519998795,
+            "G_bits": 1.1969963178092933,
+            "oracle_amplification_at_achieved_p": 2.4001238686480124,
+            "oracle_retention": 0.9552084165098633
+          },
+          "deterministic": {
+            "achieved_p": "47/5776",
+            "achieved_p_float": 0.008137119113573408,
+            "conditional_failure": "35171/385024",
+            "conditional_failure_float": 0.09134755236037234,
+            "amplification": "50786924/22089389",
+            "amplification_float": 2.2991547661187006,
+            "G_bits": 1.20110358341007,
+            "oracle_amplification_at_achieved_p": 2.39517010293947,
+            "oracle_retention": 0.9599129361614297
+          }
+        },
+        {
+          "b": 8,
+          "target_p": "1/256",
+          "randomized": {
+            "achieved_p": "18527/2864896",
+            "achieved_p_float": 0.006466901416316683,
+            "conditional_failure": "6673471/75886592",
+            "conditional_failure_float": 0.08794005402166433,
+            "amplification": "2753283464/1243921307",
+            "amplification_float": 2.2133903877249046,
+            "G_bits": 1.1462579295680149,
+            "oracle_amplification_at_achieved_p": 2.4532857239581607,
+            "oracle_retention": 0.9022146772834083
+          },
+          "deterministic": {
+            "achieved_p": "2/361",
+            "achieved_p_float": 0.00554016620498615,
+            "conditional_failure": "22325/262144",
+            "conditional_failure_float": 0.08516311645507812,
+            "amplification": "8059325/3759896",
+            "amplification_float": 2.1434967882090357,
+            "G_bits": 1.0999662554388285,
+            "oracle_amplification_at_achieved_p": 2.4958495749173206,
+            "oracle_retention": 0.8588245099987818
+          }
+        },
+        {
+          "b": 9,
+          "target_p": "1/512",
+          "randomized": {
+            "achieved_p": "32719/5729792",
+            "achieved_p_float": 0.005710329450004468,
+            "conditional_failure": "11490695/134017024",
+            "conditional_failure_float": 0.0857405623333346,
+            "amplification": "33185127160/15377504653",
+            "amplification_float": 2.1580307019140395,
+            "G_bits": 1.1097153899343872,
+            "oracle_amplification_at_achieved_p": 2.486998702432886,
+            "oracle_retention": 0.867724900621365
+          },
+          "deterministic": {
+            "achieved_p": "2/361",
+            "achieved_p_float": 0.00554016620498615,
+            "conditional_failure": "22325/262144",
+            "conditional_failure_float": 0.08516311645507812,
+            "amplification": "8059325/3759896",
+            "amplification_float": 2.1434967882090357,
+            "G_bits": 1.0999662554388285,
+            "oracle_amplification_at_achieved_p": 2.4958495749173206,
+            "oracle_retention": 0.8588245099987818
+          }
+        },
+        {
+          "b": 10,
+          "target_p": "1/1024",
+          "randomized": {
+            "achieved_p": "289/69312",
+            "achieved_p_float": 0.00416955216989843,
+            "conditional_failure": "22325/262144",
+            "conditional_failure_float": 0.08516311645507812,
+            "amplification": "8059325/3759896",
+            "amplification_float": 2.1434967882090357,
+            "G_bits": 1.0999662554388285,
+            "oracle_amplification_at_achieved_p": 2.5934849620089,
+            "oracle_retention": 0.8264928540586924
+          },
+          "deterministic": {
+            "achieved_p": "2/361",
+            "achieved_p_float": 0.00554016620498615,
+            "conditional_failure": "22325/262144",
+            "conditional_failure_float": 0.08516311645507812,
+            "amplification": "8059325/3759896",
+            "amplification_float": 2.1434967882090357,
+            "G_bits": 1.0999662554388285,
+            "oracle_amplification_at_achieved_p": 2.4958495749173206,
+            "oracle_retention": 0.8588245099987818
+          }
+        },
+        {
+          "b": 11,
+          "target_p": "1/2048",
+          "randomized": {
+            "achieved_p": "289/138624",
+            "achieved_p_float": 0.002084776084949215,
+            "conditional_failure": "22325/262144",
+            "conditional_failure_float": 0.08516311645507812,
+            "amplification": "8059325/3759896",
+            "amplification_float": 2.1434967882090357,
+            "G_bits": 1.0999662554388285,
+            "oracle_amplification_at_achieved_p": 2.774185392141046,
+            "oracle_retention": 0.7726580906529606
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 12,
+          "target_p": "1/4096",
+          "randomized": {
+            "achieved_p": "289/277248",
+            "achieved_p_float": 0.0010423880424746076,
+            "conditional_failure": "22325/262144",
+            "conditional_failure_float": 0.08516311645507812,
+            "amplification": "8059325/3759896",
+            "amplification_float": 2.1434967882090357,
+            "G_bits": 1.0999662554388285,
+            "oracle_amplification_at_achieved_p": 2.9171456652894387,
+            "oracle_retention": 0.7347925109514056
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 13,
+          "target_p": "1/8192",
+          "randomized": {
+            "achieved_p": "289/554496",
+            "achieved_p_float": 0.0005211940212373038,
+            "conditional_failure": "22325/262144",
+            "conditional_failure_float": 0.08516311645507812,
+            "amplification": "8059325/3759896",
+            "amplification_float": 2.1434967882090357,
+            "G_bits": 1.0999662554388285,
+            "oracle_amplification_at_achieved_p": 3.2030662115862247,
+            "oracle_retention": 0.6692015233576866
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 14,
+          "target_p": "1/16384",
+          "randomized": {
+            "achieved_p": "289/1108992",
+            "achieved_p_float": 0.0002605970106186519,
+            "conditional_failure": "22325/262144",
+            "conditional_failure_float": 0.08516311645507812,
+            "amplification": "8059325/3759896",
+            "amplification_float": 2.1434967882090357,
+            "G_bits": 1.0999662554388285,
+            "oracle_amplification_at_achieved_p": 3.4772174549508814,
+            "oracle_retention": 0.6164402474044621
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 15,
+          "target_p": "1/32768",
+          "randomized": {
+            "achieved_p": "289/2217984",
+            "achieved_p_float": 0.00013029850530932595,
+            "conditional_failure": "22325/262144",
+            "conditional_failure_float": 0.08516311645507812,
+            "amplification": "8059325/3759896",
+            "amplification_float": 2.1434967882090357,
+            "G_bits": 1.0999662554388285,
+            "oracle_amplification_at_achieved_p": 3.4772174549508814,
+            "oracle_retention": 0.6164402474044621
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 16,
+          "target_p": "1/65536",
+          "randomized": {
+            "achieved_p": "289/4435968",
+            "achieved_p_float": 6.514925265466297e-05,
+            "conditional_failure": "22325/262144",
+            "conditional_failure_float": 0.08516311645507812,
+            "amplification": "8059325/3759896",
+            "amplification_float": 2.1434967882090357,
+            "G_bits": 1.0999662554388285,
+            "oracle_amplification_at_achieved_p": 3.4772174549508814,
+            "oracle_retention": 0.6164402474044621
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 17,
+          "target_p": "1/131072",
+          "randomized": {
+            "achieved_p": "289/8871936",
+            "achieved_p_float": 3.257462632733149e-05,
+            "conditional_failure": "22325/262144",
+            "conditional_failure_float": 0.08516311645507812,
+            "amplification": "8059325/3759896",
+            "amplification_float": 2.1434967882090357,
+            "G_bits": 1.0999662554388285,
+            "oracle_amplification_at_achieved_p": 3.4772174549508814,
+            "oracle_retention": 0.6164402474044621
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 18,
+          "target_p": "1/262144",
+          "randomized": {
+            "achieved_p": "289/17743872",
+            "achieved_p_float": 1.6287313163665744e-05,
+            "conditional_failure": "22325/262144",
+            "conditional_failure_float": 0.08516311645507812,
+            "amplification": "8059325/3759896",
+            "amplification_float": 2.1434967882090357,
+            "G_bits": 1.0999662554388285,
+            "oracle_amplification_at_achieved_p": 3.4772174549508814,
+            "oracle_retention": 0.6164402474044621
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 19,
+          "target_p": "1/524288",
+          "randomized": {
+            "achieved_p": "289/35487744",
+            "achieved_p_float": 8.143656581832872e-06,
+            "conditional_failure": "22325/262144",
+            "conditional_failure_float": 0.08516311645507812,
+            "amplification": "8059325/3759896",
+            "amplification_float": 2.1434967882090357,
+            "G_bits": 1.0999662554388285,
+            "oracle_amplification_at_achieved_p": 3.4772174549508814,
+            "oracle_retention": 0.6164402474044621
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 20,
+          "target_p": "1/1048576",
+          "randomized": {
+            "achieved_p": "289/70975488",
+            "achieved_p_float": 4.071828290916436e-06,
+            "conditional_failure": "22325/262144",
+            "conditional_failure_float": 0.08516311645507812,
+            "amplification": "8059325/3759896",
+            "amplification_float": 2.1434967882090357,
+            "G_bits": 1.0999662554388285,
+            "oracle_amplification_at_achieved_p": 3.4772174549508814,
+            "oracle_retention": 0.6164402474044621
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        }
+      ]
+    },
+    "hist_u": {
+      "evaluation_parameters": "n2-k1-q19-e1_1-d3_2",
+      "N": "1514143744",
+      "E": "60158336",
+      "delta": "469987/11829248",
+      "budgets": [
+        {
+          "b": 1,
+          "target_p": "1/2",
+          "randomized": {
+            "achieved_p": "687/1444",
+            "achieved_p_float": 0.4757617728531856,
+            "conditional_failure": "16703395/270139392",
+            "conditional_failure_float": 0.061832503865263753,
+            "amplification": "6029925595/3874572828",
+            "amplification_float": 1.5562813922154517,
+            "G_bits": 0.6381029385055563,
+            "oracle_amplification_at_achieved_p": 1.574831850082855,
+            "oracle_retention": 0.9882206739300914
+          },
+          "deterministic": {
+            "achieved_p": "9/19",
+            "achieved_p_float": 0.47368421052631576,
+            "conditional_failure": "86783/1400832",
+            "conditional_failure_float": 0.061951040524488306,
+            "amplification": "6595508/4229883",
+            "amplification_float": 1.5592648780119922,
+            "G_bits": 0.6408660247226119,
+            "oracle_amplification_at_achieved_p": 1.5779442362826583,
+            "oracle_retention": 0.988162219018163
+          }
+        },
+        {
+          "b": 2,
+          "target_p": "1/4",
+          "randomized": {
+            "achieved_p": "603/2888",
+            "achieved_p_float": 0.20879501385041552,
+            "conditional_failure": "82330645/948436992",
+            "conditional_failure_float": 0.08680665736833681,
+            "amplification": "29721362845/13603303728",
+            "amplification_float": 2.1848635772076324,
+            "G_bits": 1.1275432007187836,
+            "oracle_amplification_at_achieved_p": 2.2440404607130007,
+            "oracle_retention": 0.9736293152724322
+          },
+          "deterministic": {
+            "achieved_p": "66/361",
+            "achieved_p_float": 0.18282548476454294,
+            "conditional_failure": "263565/2883584",
+            "conditional_failure_float": 0.09140188043767755,
+            "amplification": "95146965/41358856",
+            "amplification_float": 2.3005221662804214,
+            "G_bits": 1.201961357344776,
+            "oracle_amplification_at_achieved_p": 2.3681048571018932,
+            "oracle_retention": 0.97146127604156
+          }
+        },
+        {
+          "b": 3,
+          "target_p": "1/8",
+          "randomized": {
+            "achieved_p": "289/2888",
+            "achieved_p_float": 0.10006925207756233,
+            "conditional_failure": "3952509/37879808",
+            "conditional_failure_float": 0.10434342750628514,
+            "amplification": "1426855749/543304972",
+            "amplification_float": 2.626251962590175,
+            "G_bits": 1.3930053350203793,
+            "oracle_amplification_at_achieved_p": 2.6731826036208464,
+            "oracle_retention": 0.9824439075104321
+          },
+          "deterministic": {
+            "achieved_p": "42/361",
+            "achieved_p_float": 0.11634349030470914,
+            "conditional_failure": "566849/5505024",
+            "conditional_failure_float": 0.10296939668201265,
+            "amplification": "204632489/78957816",
+            "amplification_float": 2.591668556283269,
+            "G_bits": 1.3738812264087108,
+            "oracle_amplification_at_achieved_p": 2.6499806301633266,
+            "oracle_retention": 0.9779952829781764
+          }
+        },
+        {
+          "b": 4,
+          "target_p": "1/16",
+          "randomized": {
+            "achieved_p": "289/5776",
+            "achieved_p_float": 0.050034626038781164,
+            "conditional_failure": "3975449/37879808",
+            "conditional_failure_float": 0.10494902719675876,
+            "amplification": "1435137089/543304972",
+            "amplification_float": 2.641494488292664,
+            "G_bits": 1.4013543995850961,
+            "oracle_amplification_at_achieved_p": 2.703559460114379,
+            "oracle_retention": 0.9770432377251693
+          },
+          "deterministic": {
+            "achieved_p": "18/361",
+            "achieved_p_float": 0.04986149584487535,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.70374147070577,
+            "oracle_retention": 0.9768637498323078
+          }
+        },
+        {
+          "b": 5,
+          "target_p": "1/32",
+          "randomized": {
+            "achieved_p": "289/11552",
+            "achieved_p_float": 0.025017313019390582,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "18/361",
+            "achieved_p_float": 0.04986149584487535,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.70374147070577,
+            "oracle_retention": 0.9768637498323078
+          }
+        },
+        {
+          "b": 6,
+          "target_p": "1/64",
+          "randomized": {
+            "achieved_p": "289/23104",
+            "achieved_p_float": 0.012508656509695291,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 7,
+          "target_p": "1/128",
+          "randomized": {
+            "achieved_p": "289/46208",
+            "achieved_p_float": 0.0062543282548476456,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 8,
+          "target_p": "1/256",
+          "randomized": {
+            "achieved_p": "289/92416",
+            "achieved_p_float": 0.0031271641274238228,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 9,
+          "target_p": "1/512",
+          "randomized": {
+            "achieved_p": "289/184832",
+            "achieved_p_float": 0.0015635820637119114,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 10,
+          "target_p": "1/1024",
+          "randomized": {
+            "achieved_p": "289/369664",
+            "achieved_p_float": 0.0007817910318559557,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 11,
+          "target_p": "1/2048",
+          "randomized": {
+            "achieved_p": "289/739328",
+            "achieved_p_float": 0.00039089551592797785,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 12,
+          "target_p": "1/4096",
+          "randomized": {
+            "achieved_p": "289/1478656",
+            "achieved_p_float": 0.00019544775796398892,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 13,
+          "target_p": "1/8192",
+          "randomized": {
+            "achieved_p": "289/2957312",
+            "achieved_p_float": 9.772387898199446e-05,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 14,
+          "target_p": "1/16384",
+          "randomized": {
+            "achieved_p": "289/5914624",
+            "achieved_p_float": 4.886193949099723e-05,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 15,
+          "target_p": "1/32768",
+          "randomized": {
+            "achieved_p": "289/11829248",
+            "achieved_p_float": 2.4430969745498615e-05,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 16,
+          "target_p": "1/65536",
+          "randomized": {
+            "achieved_p": "289/23658496",
+            "achieved_p_float": 1.2215484872749308e-05,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 17,
+          "target_p": "1/131072",
+          "randomized": {
+            "achieved_p": "289/47316992",
+            "achieved_p_float": 6.107742436374654e-06,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 18,
+          "target_p": "1/262144",
+          "randomized": {
+            "achieved_p": "289/94633984",
+            "achieved_p_float": 3.053871218187327e-06,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 19,
+          "target_p": "1/524288",
+          "randomized": {
+            "achieved_p": "289/189267968",
+            "achieved_p_float": 1.5269356090936635e-06,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 20,
+          "target_p": "1/1048576",
+          "randomized": {
+            "achieved_p": "289/378535936",
+            "achieved_p_float": 7.634678045468317e-07,
+            "conditional_failure": "247577/2359296",
+            "conditional_failure_float": 0.10493681165907118,
+            "amplification": "89375297/33839064",
+            "amplification_float": 2.641187031650757,
+            "G_bits": 1.4011864673819552,
+            "oracle_amplification_at_achieved_p": 2.7300420011617343,
+            "oracle_retention": 0.9674528928590967
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        }
+      ]
+    },
+    "hist_v": {
+      "evaluation_parameters": "n2-k1-q19-e1_1-d3_2",
+      "N": "1514143744",
+      "E": "60158336",
+      "delta": "469987/11829248",
+      "budgets": [
+        {
+          "b": 1,
+          "target_p": "1/2",
+          "randomized": {
+            "achieved_p": "23563645/44743784",
+            "achieved_p_float": 0.5266350516979074,
+            "conditional_failure": "23641341727/386066759680",
+            "conditional_failure_float": 0.06123640830045988,
+            "amplification": "17069048726894/11074606822615",
+            "amplification_float": 1.5412780787881333,
+            "G_bits": 0.6241271776836842,
+            "oracle_amplification_at_achieved_p": 1.5412780787881333,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "670751/1478656",
+            "achieved_p_float": 0.4536220730176593,
+            "conditional_failure": "2911103/42928064",
+            "conditional_failure_float": 0.06781351705029139,
+            "amplification": "538064989696/315244250237",
+            "amplification_float": 1.7068193608336515,
+            "G_bits": 0.7713103805569103,
+            "oracle_amplification_at_achieved_p": 1.7068193608336515,
+            "oracle_retention": 1.0
+          }
+        },
+        {
+          "b": 2,
+          "target_p": "1/4",
+          "randomized": {
+            "achieved_p": "69517403/269496608",
+            "achieved_p_float": 0.2579527939735702,
+            "conditional_failure": "18701508069/284743282688",
+            "conditional_failure_float": 0.06567848727617462,
+            "amplification": "54009955303272/32672275683761",
+            "amplification_float": 1.6530821368563684,
+            "G_bits": 0.7251584097429832,
+            "oracle_amplification_at_achieved_p": 1.8213590179272228,
+            "oracle_retention": 0.9076091646871686
+          },
+          "deterministic": {
+            "achieved_p": "404347/1478656",
+            "achieved_p_float": 0.2734557598251385,
+            "conditional_failure": "1717185/25878208",
+            "conditional_failure_float": 0.06635641076847361,
+            "amplification": "317390737920/190037833489",
+            "amplification_float": 1.670145002670595,
+            "G_bits": 0.7399733635091111,
+            "oracle_amplification_at_achieved_p": 1.8114668037673443,
+            "oracle_retention": 0.9219848794342577
+          }
+        },
+        {
+          "b": 3,
+          "target_p": "1/8",
+          "randomized": {
+            "achieved_p": "2480359/19830452",
+            "achieved_p_float": 0.12507828868449392,
+            "conditional_failure": "10264145617/162552807424",
+            "conditional_failure_float": 0.06314345337775173,
+            "amplification": "3705356567737/2331472970666",
+            "amplification_float": 1.589277085497818,
+            "G_bits": 0.6683706759916603,
+            "oracle_amplification_at_achieved_p": 1.9181609062412686,
+            "oracle_retention": 0.8285421104802335
+          },
+          "deterministic": {
+            "achieved_p": "114871/739328",
+            "achieved_p_float": 0.1553721758137119,
+            "conditional_failure": "915035/14703488",
+            "conditional_failure_float": 0.062232512448746856,
+            "amplification": "84563874560/53987876677",
+            "amplification_float": 1.5663493318311226,
+            "G_bits": 0.6474060026013255,
+            "oracle_amplification_at_achieved_p": 1.8911691577582421,
+            "oracle_retention": 0.8282439069003457
+          }
+        },
+        {
+          "b": 4,
+          "target_p": "1/16",
+          "randomized": {
+            "achieved_p": "1144729/18304144",
+            "achieved_p_float": 0.0625393353548792,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "3961/46208",
+            "achieved_p_float": 0.08572108725761773,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9474458705565978,
+            "oracle_retention": 0.8438064845211668
+          }
+        },
+        {
+          "b": 5,
+          "target_p": "1/32",
+          "randomized": {
+            "achieved_p": "1144729/36608288",
+            "achieved_p_float": 0.0312696676774396,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 6,
+          "target_p": "1/64",
+          "randomized": {
+            "achieved_p": "1144729/73216576",
+            "achieved_p_float": 0.0156348338387198,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 7,
+          "target_p": "1/128",
+          "randomized": {
+            "achieved_p": "1144729/146433152",
+            "achieved_p_float": 0.0078174169193599,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 8,
+          "target_p": "1/256",
+          "randomized": {
+            "achieved_p": "1144729/292866304",
+            "achieved_p_float": 0.00390870845967995,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 9,
+          "target_p": "1/512",
+          "randomized": {
+            "achieved_p": "1144729/585732608",
+            "achieved_p_float": 0.001954354229839975,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 10,
+          "target_p": "1/1024",
+          "randomized": {
+            "achieved_p": "1144729/1171465216",
+            "achieved_p_float": 0.0009771771149199875,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 11,
+          "target_p": "1/2048",
+          "randomized": {
+            "achieved_p": "1144729/2342930432",
+            "achieved_p_float": 0.0004885885574599937,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 12,
+          "target_p": "1/4096",
+          "randomized": {
+            "achieved_p": "1144729/4685860864",
+            "achieved_p_float": 0.00024429427872999686,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 13,
+          "target_p": "1/8192",
+          "randomized": {
+            "achieved_p": "1144729/9371721728",
+            "achieved_p_float": 0.00012214713936499843,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 14,
+          "target_p": "1/16384",
+          "randomized": {
+            "achieved_p": "1144729/18743443456",
+            "achieved_p_float": 6.107356968249922e-05,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 15,
+          "target_p": "1/32768",
+          "randomized": {
+            "achieved_p": "1144729/37486886912",
+            "achieved_p_float": 3.053678484124961e-05,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 16,
+          "target_p": "1/65536",
+          "randomized": {
+            "achieved_p": "1144729/74973773824",
+            "achieved_p_float": 1.5268392420624804e-05,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 17,
+          "target_p": "1/131072",
+          "randomized": {
+            "achieved_p": "1144729/149947547648",
+            "achieved_p_float": 7.634196210312402e-06,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 18,
+          "target_p": "1/262144",
+          "randomized": {
+            "achieved_p": "1144729/299895095296",
+            "achieved_p_float": 3.817098105156201e-06,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 19,
+          "target_p": "1/524288",
+          "randomized": {
+            "achieved_p": "1144729/599790190592",
+            "achieved_p_float": 1.9085490525781005e-06,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 20,
+          "target_p": "1/1048576",
+          "randomized": {
+            "achieved_p": "1144729/1199580381184",
+            "achieved_p_float": 9.542745262890502e-07,
+            "conditional_failure": "529629/8112128",
+            "conditional_failure_float": 0.0652885408119793,
+            "amplification": "3059137104/1861618507",
+            "amplification_float": 1.6432674538296261,
+            "G_bits": 0.7165673085969679,
+            "oracle_amplification_at_achieved_p": 1.9540528659863492,
+            "oracle_retention": 0.8409534268153755
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        }
+      ]
+    },
+    "extreme_symbols": {
+      "evaluation_parameters": "n2-k1-q19-e1_1-d3_2",
+      "N": "1514143744",
+      "E": "60158336",
+      "delta": "469987/11829248",
+      "budgets": [
+        {
+          "b": 1,
+          "target_p": "1/2",
+          "randomized": {
+            "achieved_p": "119503116912269/232691575947264",
+            "achieved_p_float": 0.5135687290173004,
+            "conditional_failure": "6856401840082/119503116912269",
+            "conditional_failure_float": 0.057374251126148454,
+            "amplification": "81106077753986318336/56164911408246570503",
+            "amplification_float": 1.4440702516994923,
+            "G_bits": 0.5301409287300223,
+            "oracle_amplification_at_achieved_p": 1.4934802796990516,
+            "oracle_retention": 0.9669161831788528
+          },
+          "deterministic": {
+            "achieved_p": "22977917/47316992",
+            "achieved_p_float": 0.48561660470724766,
+            "conditional_failure": "1332748/22977917",
+            "conditional_failure_float": 0.058001253986599395,
+            "amplification": "15765406613504/10799322277079",
+            "amplification_float": 1.4598514803994003,
+            "G_bits": 0.5458216023996,
+            "oracle_amplification_at_achieved_p": 1.5121055529217768,
+            "oracle_retention": 0.9654428406658462
+          }
+        },
+        {
+          "b": 2,
+          "target_p": "1/4",
+          "randomized": {
+            "achieved_p": "888274149154137/3331320078401536",
+            "achieved_p_float": 0.2666432910224456,
+            "conditional_failure": "56980205947600/888274149154137",
+            "conditional_failure_float": 0.06414709468001478,
+            "amplification": "674032987245235404800/417477302538505386219",
+            "amplification_float": 1.6145380434977468,
+            "G_bits": 0.6911214356988126,
+            "oracle_amplification_at_achieved_p": 1.718023582641759,
+            "oracle_retention": 0.9397647737844872
+          },
+          "deterministic": {
+            "achieved_p": "47180645/189267968",
+            "achieved_p_float": 0.2492796086868751,
+            "conditional_failure": "3072548/47180645",
+            "conditional_failure_float": 0.06512306052619671,
+            "amplification": "36345932283904/22174289801615",
+            "amplification_float": 1.6391024293935605,
+            "G_bits": 0.7129060129247052,
+            "oracle_amplification_at_achieved_p": 1.7480658604705555,
+            "oracle_retention": 0.9376662896169922
+          }
+        },
+        {
+          "b": 3,
+          "target_p": "1/8",
+          "randomized": {
+            "achieved_p": "1696226685475/13524686798848",
+            "achieved_p_float": 0.1254170769869126,
+            "conditional_failure": "538143416857/6784906741900",
+            "conditional_failure_float": 0.07931478461357627,
+            "amplification": "1591457984392208384/797204491226338825",
+            "amplification_float": 1.9962983173163893,
+            "G_bits": 0.9973273262635136,
+            "oracle_amplification_at_achieved_p": 2.1070703791221264,
+            "oracle_retention": 0.9474283996854969
+          },
+          "deterministic": {
+            "achieved_p": "3036369/23658496",
+            "achieved_p_float": 0.12834159026846,
+            "conditional_failure": "949967/12145476",
+            "conditional_failure_float": 0.07821570764291165,
+            "amplification": "2809348808704/1427053957203",
+            "amplification_float": 1.968635309494725,
+            "G_bits": 0.9771958761384124,
+            "oracle_amplification_at_achieved_p": 2.095825224570134,
+            "oracle_retention": 0.939312728187296
+          }
+        },
+        {
+          "b": 4,
+          "target_p": "1/16",
+          "randomized": {
+            "achieved_p": "18820065213017/300138919755776",
+            "achieved_p_float": 0.06270451439063933,
+            "conditional_failure": "3854618340985/37640130426034",
+            "conditional_failure_float": 0.10240714623876362,
+            "amplification": "22798618150430064640/8845185989270220779",
+            "amplification_float": 2.57751710117642,
+            "G_bits": 1.365981999543168,
+            "oracle_amplification_at_achieved_p": 2.578965836036715,
+            "oracle_retention": 0.9994382496890608
+          },
+          "deterministic": {
+            "achieved_p": "2868713/47316992",
+            "achieved_p_float": 0.060627543695085266,
+            "conditional_failure": "595081/5737426",
+            "conditional_failure_float": 0.10371915907935021,
+            "amplification": "3519680364544/1348257816731",
+            "amplification_float": 2.610539557692203,
+            "G_bits": 1.3843480201123788,
+            "oracle_amplification_at_achieved_p": 2.610539557692203,
+            "oracle_retention": 1.0
+          }
+        },
+        {
+          "b": 5,
+          "target_p": "1/32",
+          "randomized": {
+            "achieved_p": "2285143514875/75340433195008",
+            "achieved_p_float": 0.03033090490680125,
+            "conditional_failure": "256477253891/2285143514875",
+            "conditional_failure_float": 0.11223682548666078,
+            "amplification": "3033933042635603968/1073987745125556625",
+            "amplification_float": 2.8249233349314578,
+            "G_bits": 1.4982117150269345,
+            "oracle_amplification_at_achieved_p": 2.97589259935744,
+            "oracle_retention": 0.9492692496837487
+          },
+          "deterministic": {
+            "achieved_p": "1487837/47316992",
+            "achieved_p_float": 0.03144403177615348,
+            "conditional_failure": "165610/1487837",
+            "conditional_failure_float": 0.1113092361596062,
+            "amplification": "1959041761280/699264048119",
+            "amplification_float": 2.8015765525909213,
+            "G_bits": 1.4862389144972024,
+            "oracle_amplification_at_achieved_p": 2.955672412734818,
+            "oracle_retention": 0.94786436430507
+          }
+        },
+        {
+          "b": 6,
+          "target_p": "1/64",
+          "randomized": {
+            "achieved_p": "1549087949/101400313856",
+            "achieved_p_float": 0.015276954183789623,
+            "conditional_failure": "213862789/1549087949",
+            "conditional_failure_float": 0.13805722853764194,
+            "amplification": "361405138436096/104007313983809",
+            "amplification_float": 3.474805036233861,
+            "G_bits": 1.7969320336205394,
+            "oracle_amplification_at_achieved_p": 3.538742292788022,
+            "oracle_retention": 0.9819322088854944
+          },
+          "deterministic": {
+            "achieved_p": "529715/47316992",
+            "achieved_p_float": 0.011195026936623529,
+            "conditional_failure": "83179/529715",
+            "conditional_failure_float": 0.15702594791538846,
+            "amplification": "983945019392/248959163705",
+            "amplification_float": 3.9522345944168946,
+            "G_bits": 1.982668584108059,
+            "oracle_amplification_at_achieved_p": 3.9522345944168946,
+            "oracle_retention": 1.0
+          }
+        },
+        {
+          "b": 7,
+          "target_p": "1/128",
+          "randomized": {
+            "achieved_p": "19125845813/2570022420480",
+            "achieved_p_float": 0.007441898428819111,
+            "conditional_failure": "3497770276/19125845813",
+            "conditional_failure_float": 0.1828818610271623,
+            "amplification": "5910856005976064/1284128413730633",
+            "amplification_float": 4.603010059409808,
+            "G_bits": 2.2025775954283615,
+            "oracle_amplification_at_achieved_p": 4.623891919197706,
+            "oracle_retention": 0.9954839213042157
+          },
+          "deterministic": {
+            "achieved_p": "241823/23658496",
+            "achieved_p_float": 0.010221402070528914,
+            "conditional_failure": "156181/967292",
+            "conditional_failure_float": 0.16146210244683096,
+            "amplification": "461875945472/113653666301",
+            "amplification_float": 4.063889538316953,
+            "G_bits": 2.0228611883580716,
+            "oracle_amplification_at_achieved_p": 4.079092998514889,
+            "oracle_retention": 0.9962728331510289
+          }
+        },
+        {
+          "b": 8,
+          "target_p": "1/256",
+          "randomized": {
+            "achieved_p": "11909819909/3804901277696",
+            "achieved_p_float": 0.0031301258665538388,
+            "conditional_failure": "3239286759/11909819909",
+            "conditional_failure_float": 0.2719845290483477,
+            "amplification": "38318326415327232/5597460529571183",
+            "amplification_float": 6.845662638064688,
+            "G_bits": 2.7751901964693286,
+            "oracle_amplification_at_achieved_p": 6.845662638064688,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "169913/47316992",
+            "achieved_p_float": 0.0035909510055077043,
+            "conditional_failure": "45427/169913",
+            "conditional_failure_float": 0.26735446964034537,
+            "amplification": "537367248896/79856901131",
+            "amplification_float": 6.729127242421845,
+            "G_bits": 2.7504194016142636,
+            "oracle_amplification_at_achieved_p": 6.729127242421845,
+            "oracle_retention": 1.0
+          }
+        },
+        {
+          "b": 9,
+          "target_p": "1/512",
+          "randomized": {
+            "achieved_p": "1179444569/753617731584",
+            "achieved_p_float": 0.0015650435486980528,
+            "conditional_failure": "352500097/1179444569",
+            "conditional_failure_float": 0.2988695749380317,
+            "amplification": "4169811067437056/554323614650603",
+            "amplification_float": 7.522340663883387,
+            "G_bits": 2.9111816431192885,
+            "oracle_amplification_at_achieved_p": 7.522340663883387,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "89423/47316992",
+            "achieved_p_float": 0.0018898707677783067,
+            "conditional_failure": "26439/89423",
+            "conditional_failure_float": 0.2956621898169375,
+            "amplification": "44679069696/6003949643",
+            "amplification_float": 7.441612996886357,
+            "G_bits": 2.895615364665433,
+            "oracle_amplification_at_achieved_p": 7.441612996886357,
+            "oracle_retention": 1.0
+          }
+        },
+        {
+          "b": 10,
+          "target_p": "1/1024",
+          "randomized": {
+            "achieved_p": "982838847/1256029552640",
+            "achieved_p_float": 0.0007824965940763169,
+            "conditional_failure": "312082391/982838847",
+            "conditional_failure_float": 0.3175315993589334,
+            "amplification": "3691699999571968/461921481184989",
+            "amplification_float": 7.992050921947764,
+            "G_bits": 2.998565775398533,
+            "oracle_amplification_at_achieved_p": 7.992050921947764,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "9711/47316992",
+            "achieved_p_float": 0.00020523282629631231,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 10.634298689525032,
+            "oracle_retention": 1.0
+          }
+        },
+        {
+          "b": 11,
+          "target_p": "1/2048",
+          "randomized": {
+            "achieved_p": "1474163389/3768088657920",
+            "achieved_p_float": 0.00039122311676544893,
+            "conditional_failure": "523120517/1474163389",
+            "conditional_failure_float": 0.35485925162939996,
+            "amplification": "6188122329481216/692837628705943",
+            "amplification_float": 8.93156213388578,
+            "G_bits": 3.1589125253704293,
+            "oracle_amplification_at_achieved_p": 8.93156213388578,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "9711/47316992",
+            "achieved_p_float": 0.00020523282629631231,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 10.634298689525032,
+            "oracle_retention": 1.0
+          }
+        },
+        {
+          "b": 12,
+          "target_p": "1/4096",
+          "randomized": {
+            "achieved_p": "2806479/14348877824",
+            "achieved_p_float": 0.0001955887445989588,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 10.634298689525032,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "9711/47316992",
+            "achieved_p_float": 0.00020523282629631231,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 10.634298689525032,
+            "oracle_retention": 1.0
+          }
+        },
+        {
+          "b": 13,
+          "target_p": "1/8192",
+          "randomized": {
+            "achieved_p": "2806479/28697755648",
+            "achieved_p_float": 9.77943722994794e-05,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 10.634298689525032,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 14,
+          "target_p": "1/16384",
+          "randomized": {
+            "achieved_p": "2806479/57395511296",
+            "achieved_p_float": 4.88971861497397e-05,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 10.634298689525032,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 15,
+          "target_p": "1/32768",
+          "randomized": {
+            "achieved_p": "2806479/114791022592",
+            "achieved_p_float": 2.444859307486985e-05,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 10.634298689525032,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 16,
+          "target_p": "1/65536",
+          "randomized": {
+            "achieved_p": "2806479/229582045184",
+            "achieved_p_float": 1.2224296537434926e-05,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 10.634298689525032,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 17,
+          "target_p": "1/131072",
+          "randomized": {
+            "achieved_p": "2806479/459164090368",
+            "achieved_p_float": 6.112148268717463e-06,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 10.634298689525032,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 18,
+          "target_p": "1/262144",
+          "randomized": {
+            "achieved_p": "2806479/918328180736",
+            "achieved_p_float": 3.0560741343587314e-06,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 10.634298689525032,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 19,
+          "target_p": "1/524288",
+          "randomized": {
+            "achieved_p": "2806479/1836656361472",
+            "achieved_p_float": 1.5280370671793657e-06,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 10.634298689525032,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 20,
+          "target_p": "1/1048576",
+          "randomized": {
+            "achieved_p": "2806479/3673312722944",
+            "achieved_p_float": 7.640185335896829e-07,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 10.634298689525032,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        }
+      ]
+    },
+    "entropy_1024": {
+      "evaluation_parameters": "n2-k1-q19-e1_1-d3_2",
+      "N": "1514143744",
+      "E": "60158336",
+      "delta": "469987/11829248",
+      "budgets": [
+        {
+          "b": 1,
+          "target_p": "1/2",
+          "randomized": {
+            "achieved_p": "5308767479/10650451596",
+            "achieved_p_float": 0.49845468346091715,
+            "conditional_failure": "9132974258873/173957692751872",
+            "conditional_failure_float": 0.05250112320068535,
+            "amplification": "3297003707453153/2495051701152773",
+            "amplification_float": 1.321416989447497,
+            "G_bits": 0.40208579866548566,
+            "oracle_amplification_at_achieved_p": 1.321416989447497,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "43318021/94633984",
+            "achieved_p_float": 0.4577427597257239,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          }
+        },
+        {
+          "b": 2,
+          "target_p": "1/4",
+          "randomized": {
+            "achieved_p": "12518908069/50242388712",
+            "achieved_p_float": 0.2491702403076619,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "43318021/94633984",
+            "achieved_p_float": 0.4577427597257239,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          }
+        },
+        {
+          "b": 3,
+          "target_p": "1/8",
+          "randomized": {
+            "achieved_p": "12518908069/100484777424",
+            "achieved_p_float": 0.12458512015383096,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 4,
+          "target_p": "1/16",
+          "randomized": {
+            "achieved_p": "12518908069/200969554848",
+            "achieved_p_float": 0.06229256007691548,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 5,
+          "target_p": "1/32",
+          "randomized": {
+            "achieved_p": "12518908069/401939109696",
+            "achieved_p_float": 0.03114628003845774,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 6,
+          "target_p": "1/64",
+          "randomized": {
+            "achieved_p": "12518908069/803878219392",
+            "achieved_p_float": 0.01557314001922887,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 7,
+          "target_p": "1/128",
+          "randomized": {
+            "achieved_p": "12518908069/1607756438784",
+            "achieved_p_float": 0.007786570009614435,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 8,
+          "target_p": "1/256",
+          "randomized": {
+            "achieved_p": "12518908069/3215512877568",
+            "achieved_p_float": 0.0038932850048072174,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 9,
+          "target_p": "1/512",
+          "randomized": {
+            "achieved_p": "12518908069/6431025755136",
+            "achieved_p_float": 0.0019466425024036087,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 10,
+          "target_p": "1/1024",
+          "randomized": {
+            "achieved_p": "12518908069/12862051510272",
+            "achieved_p_float": 0.0009733212512018043,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 11,
+          "target_p": "1/2048",
+          "randomized": {
+            "achieved_p": "12518908069/25724103020544",
+            "achieved_p_float": 0.00048666062560090217,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 12,
+          "target_p": "1/4096",
+          "randomized": {
+            "achieved_p": "12518908069/51448206041088",
+            "achieved_p_float": 0.00024333031280045108,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 13,
+          "target_p": "1/8192",
+          "randomized": {
+            "achieved_p": "12518908069/102896412082176",
+            "achieved_p_float": 0.00012166515640022554,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 14,
+          "target_p": "1/16384",
+          "randomized": {
+            "achieved_p": "12518908069/205792824164352",
+            "achieved_p_float": 6.083257820011277e-05,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 15,
+          "target_p": "1/32768",
+          "randomized": {
+            "achieved_p": "12518908069/411585648328704",
+            "achieved_p_float": 3.0416289100056386e-05,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 16,
+          "target_p": "1/65536",
+          "randomized": {
+            "achieved_p": "12518908069/823171296657408",
+            "achieved_p_float": 1.5208144550028193e-05,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 17,
+          "target_p": "1/131072",
+          "randomized": {
+            "achieved_p": "12518908069/1646342593314816",
+            "achieved_p_float": 7.604072275014096e-06,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 18,
+          "target_p": "1/262144",
+          "randomized": {
+            "achieved_p": "12518908069/3292685186629632",
+            "achieved_p_float": 3.802036137507048e-06,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 19,
+          "target_p": "1/524288",
+          "randomized": {
+            "achieved_p": "12518908069/6585370373259264",
+            "achieved_p_float": 1.901018068753524e-06,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 20,
+          "target_p": "1/1048576",
+          "randomized": {
+            "achieved_p": "12518908069/13170740746518528",
+            "achieved_p_float": 9.50509034376762e-07,
+            "conditional_failure": "2306034/43318021",
+            "conditional_failure_float": 0.0532349804253523,
+            "amplification": "27278648082432/20358906735727",
+            "amplification_float": 1.3398876686517667,
+            "G_bits": 0.42211205540536073,
+            "oracle_amplification_at_achieved_p": 1.3398876686517667,
+            "oracle_retention": 1.0
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        }
+      ]
+    },
+    "decompressed_norms": {
+      "evaluation_parameters": "n2-k1-q19-e1_1-d3_2",
+      "N": "1514143744",
+      "E": "60158336",
+      "delta": "469987/11829248",
+      "budgets": [
+        {
+          "b": 1,
+          "target_p": "1/2",
+          "randomized": {
+            "achieved_p": "21439753058859/54447236841472",
+            "achieved_p_float": 0.393771186612881,
+            "conditional_failure": "351939231438/7146584352953",
+            "conditional_failure_float": 0.04924579548166631,
+            "amplification": "4163176449609498624/3358801740291321611",
+            "amplification_float": 1.23948264039199,
+            "G_bits": 0.3097380658612883,
+            "oracle_amplification_at_achieved_p": 1.9673426823482818,
+            "oracle_retention": 0.6300288462773068
+          },
+          "deterministic": {
+            "achieved_p": "9257109/23658496",
+            "achieved_p_float": 0.39128053617609504,
+            "conditional_failure": "6625/134161",
+            "conditional_failure_float": 0.04938096764335388,
+            "amplification": "78368768000/63053925907",
+            "amplification_float": 1.2428848302893667,
+            "G_bits": 0.31369261781568225,
+            "oracle_amplification_at_achieved_p": 1.9726526486092424,
+            "oracle_retention": 0.6300576186920815
+          }
+        },
+        {
+          "b": 2,
+          "target_p": "1/4",
+          "randomized": {
+            "achieved_p": "8518521077323/36147153600512",
+            "achieved_p_float": 0.23566229229187055,
+            "conditional_failure": "558827164545/8518521077323",
+            "conditional_failure_float": 0.06560143004548567,
+            "amplification": "6610505118539612160/4003594165567804801",
+            "amplification_float": 1.651142659611226,
+            "G_bits": 0.7234647752615654,
+            "oracle_amplification_at_achieved_p": 2.250620491995036,
+            "oracle_retention": 0.7336388633641161
+          },
+          "deterministic": {
+            "achieved_p": "5367197/23658496",
+            "achieved_p_float": 0.22686129329607427,
+            "conditional_failure": "720915/10734394",
+            "conditional_failure_float": 0.0671593571094931,
+            "amplification": "4263941160960/2522512816439",
+            "amplification_float": 1.690354607188618,
+            "G_bits": 0.7573259307484983,
+            "oracle_amplification_at_achieved_p": 2.2690220638689316,
+            "oracle_retention": 0.7449705466091316
+          }
+        },
+        {
+          "b": 3,
+          "target_p": "1/8",
+          "randomized": {
+            "achieved_p": "13142271243077/107160258609152",
+            "achieved_p_float": 0.12264127964650681,
+            "conditional_failure": "1958524889243/26284542486154",
+            "conditional_failure_float": 0.07451242076116406,
+            "amplification": "11583938314513989632/6176696634720029999",
+            "amplification_float": 1.8754261378807464,
+            "G_bits": 0.9072184447580985,
+            "oracle_amplification_at_achieved_p": 2.518953323066329,
+            "oracle_retention": 0.744525958741381
+          },
+          "deterministic": {
+            "achieved_p": "5575223/47316992",
+            "achieved_p_float": 0.11782707996315574,
+            "conditional_failure": "826069/11150446",
+            "conditional_failure_float": 0.07408394247189753,
+            "amplification": "4885887533056/2620282332101",
+            "amplification_float": 1.8646416354448294,
+            "G_bits": 0.8988983862738565,
+            "oracle_amplification_at_achieved_p": 2.533707486139416,
+            "oracle_retention": 0.7359340593360935
+          }
+        },
+        {
+          "b": 4,
+          "target_p": "1/16",
+          "randomized": {
+            "achieved_p": "1168603529599/18757401968640",
+            "achieved_p_float": 0.06230092693821655,
+            "conditional_failure": "95626022504/1168603529599",
+            "conditional_failure_float": 0.08182931172286768,
+            "amplification": "1131183935453396992/549228467065645213",
+            "amplification_float": 2.0595872269639566,
+            "G_bits": 1.0423552280481152,
+            "oracle_amplification_at_achieved_p": 2.835470127367865,
+            "oracle_retention": 0.7263653413537627
+          },
+          "deterministic": {
+            "achieved_p": "3636363/47316992",
+            "achieved_p_float": 0.07685110245384998,
+            "conditional_failure": "100842/1212121",
+            "conditional_failure_float": 0.0831946645590663,
+            "amplification": "170412146688/81383016061",
+            "amplification_float": 2.093952214308068,
+            "G_bits": 1.066228519170629,
+            "oracle_amplification_at_achieved_p": 2.7218455571701323,
+            "oracle_retention": 0.7693133832637892
+          }
+        },
+        {
+          "b": 5,
+          "target_p": "1/32",
+          "randomized": {
+            "achieved_p": "327329556887/12581872074752",
+            "achieved_p_float": 0.02601596606150933,
+            "conditional_failure": "55165052345/654659113774",
+            "conditional_failure_float": 0.08426530874516162,
+            "amplification": "326280542560993280/153840636452650469",
+            "amplification_float": 2.1208995885909303,
+            "G_bits": 1.0846763198448746,
+            "oracle_amplification_at_achieved_p": 3.4968711885374293,
+            "oracle_retention": 0.6065135014246834
+          },
+          "deterministic": {
+            "achieved_p": "571861/23658496",
+            "achieved_p_float": 0.02417148579520862,
+            "conditional_failure": "48700/571861",
+            "conditional_failure_float": 0.0851605547501928,
+            "amplification": "576084377600/268767235807",
+            "amplification_float": 2.1434323118673677,
+            "G_bits": 1.0999228585473875,
+            "oracle_amplification_at_achieved_p": 3.574103506139172,
+            "oracle_retention": 0.5997118740925196
+          }
+        },
+        {
+          "b": 6,
+          "target_p": "1/64",
+          "randomized": {
+            "achieved_p": "83439135989/6209036238848",
+            "achieved_p_float": 0.013438339345959586,
+            "conditional_failure": "3197364949/30341503996",
+            "conditional_failure_float": 0.105379250462387,
+            "amplification": "9455605732057088/3565028109642013",
+            "amplification_float": 2.6523229105777193,
+            "G_bits": 1.4072564289684164,
+            "oracle_amplification_at_achieved_p": 4.276347902560205,
+            "oracle_retention": 0.6202308537595366
+          },
+          "deterministic": {
+            "achieved_p": "571861/23658496",
+            "achieved_p_float": 0.02417148579520862,
+            "conditional_failure": "48700/571861",
+            "conditional_failure_float": 0.0851605547501928,
+            "amplification": "576084377600/268767235807",
+            "amplification_float": 2.1434323118673677,
+            "G_bits": 1.0999228585473875,
+            "oracle_amplification_at_achieved_p": 3.574103506139172,
+            "oracle_retention": 0.5997118740925196
+          }
+        },
+        {
+          "b": 7,
+          "target_p": "1/128",
+          "randomized": {
+            "achieved_p": "44056195061/6209036238848",
+            "achieved_p_float": 0.007095496525749705,
+            "conditional_failure": "25743381287/176224780244",
+            "conditional_failure_float": 0.14608264088260367,
+            "amplification": "76131210400620544/20705838948134207",
+            "amplification_float": 3.6767991189017093,
+            "G_bits": 1.8784503573731306,
+            "oracle_amplification_at_achieved_p": 5.541332055409813,
+            "oracle_retention": 0.663522611916421
+          },
+          "deterministic": {
+            "achieved_p": "4943/2957312",
+            "achieved_p_float": 0.0016714502899930748,
+            "conditional_failure": "16843/39544",
+            "conditional_failure_float": 0.42593060894193807,
+            "amplification": "24905003008/2323145741",
+            "amplification_float": 10.720379082751657,
+            "G_bits": 3.4222840166472572,
+            "oracle_amplification_at_achieved_p": 11.136512446327265,
+            "oracle_retention": 0.9626334217663588
+          }
+        },
+        {
+          "b": 8,
+          "target_p": "1/256",
+          "randomized": {
+            "achieved_p": "24364724597/6209036238848",
+            "achieved_p_float": 0.0039240751156447646,
+            "conditional_failure": "21029564711/97458898388",
+            "conditional_failure_float": 0.2157788058231258,
+            "amplification": "62190984074616832/11451103819170239",
+            "amplification_float": 5.4310034261066775,
+            "G_bits": 2.4412187733754545,
+            "oracle_amplification_at_achieved_p": 7.047925704363364,
+            "oracle_retention": 0.770581821364029
+          },
+          "deterministic": {
+            "achieved_p": "4943/2957312",
+            "achieved_p_float": 0.0016714502899930748,
+            "conditional_failure": "16843/39544",
+            "conditional_failure_float": 0.42593060894193807,
+            "amplification": "24905003008/2323145741",
+            "amplification_float": 10.720379082751657,
+            "G_bits": 3.4222840166472572,
+            "oracle_amplification_at_achieved_p": 11.136512446327265,
+            "oracle_retention": 0.9626334217663588
+          }
+        },
+        {
+          "b": 9,
+          "target_p": "1/512",
+          "randomized": {
+            "achieved_p": "764157335/326791380992",
+            "achieved_p_float": 0.0023383644105922944,
+            "conditional_failure": "18672656423/58075957460",
+            "conditional_failure_float": 0.3215212841882263,
+            "amplification": "2906361626927104/359144013404645",
+            "amplification_float": 8.092468531982815,
+            "G_bits": 3.016579850444877,
+            "oracle_amplification_at_achieved_p": 9.333717848958733,
+            "oracle_retention": 0.8670144805036729
+          },
+          "deterministic": {
+            "achieved_p": "4943/2957312",
+            "achieved_p_float": 0.0016714502899930748,
+            "conditional_failure": "16843/39544",
+            "conditional_failure_float": 0.42593060894193807,
+            "amplification": "24905003008/2323145741",
+            "amplification_float": 10.720379082751657,
+            "G_bits": 3.4222840166472572,
+            "oracle_amplification_at_achieved_p": 11.136512446327265,
+            "oracle_retention": 0.9626334217663588
+          }
+        },
+        {
+          "b": 10,
+          "target_p": "1/1024",
+          "randomized": {
+            "achieved_p": "172778851/111668101120",
+            "achieved_p_float": 0.0015472534167508551,
+            "conditional_failure": "294340533/691115404",
+            "conditional_failure_float": 0.42589201643666447,
+            "amplification": "870456790327296/81203813844937",
+            "amplification_float": 10.71940773606372,
+            "G_bits": 3.4221532917419704,
+            "oracle_amplification_at_achieved_p": 11.17080282647998,
+            "oracle_retention": 0.9595915264616217
+          },
+          "deterministic": {
+            "achieved_p": "4943/2957312",
+            "achieved_p_float": 0.0016714502899930748,
+            "conditional_failure": "16843/39544",
+            "conditional_failure_float": 0.42593060894193807,
+            "amplification": "24905003008/2323145741",
+            "amplification_float": 10.720379082751657,
+            "G_bits": 3.4222840166472572,
+            "oracle_amplification_at_achieved_p": 11.136512446327265,
+            "oracle_retention": 0.9626334217663588
+          }
+        },
+        {
+          "b": 11,
+          "target_p": "1/2048",
+          "randomized": {
+            "achieved_p": "129123667/111668101120",
+            "achieved_p_float": 0.00115631649239958,
+            "conditional_failure": "219880261/516494668",
+            "conditional_failure_float": 0.4257164199805447,
+            "amplification": "650254534418432/60686444882329",
+            "amplification_float": 10.714988094611167,
+            "G_bits": 3.42155834192889,
+            "oracle_amplification_at_achieved_p": 11.326824551193718,
+            "oracle_retention": 0.9459834083403303
+          },
+          "deterministic": {
+            "achieved_p": "10331/11829248",
+            "achieved_p_float": 0.0008733437662309557,
+            "conditional_failure": "17583/41324",
+            "conditional_failure_float": 0.42549123995740973,
+            "amplification": "51998416896/4855435697",
+            "amplification_float": 10.709320469042142,
+            "G_bits": 3.4207950355688745,
+            "oracle_amplification_at_achieved_p": 11.526034917159253,
+            "oracle_retention": 0.9291417687012873
+          }
+        },
+        {
+          "b": 12,
+          "target_p": "1/4096",
+          "randomized": {
+            "achieved_p": "21459215/22333620224",
+            "achieved_p_float": 0.0009608480302239422,
+            "conditional_failure": "7306005/17167372",
+            "conditional_failure_float": 0.4255750385090974,
+            "amplification": "3086590894080/288158630863",
+            "amplification_float": 10.711429620678153,
+            "G_bits": 3.4210791397765092,
+            "oracle_amplification_at_achieved_p": 11.452445429343634,
+            "oracle_retention": 0.9352962811971286
+          },
+          "deterministic": {
+            "achieved_p": "10331/11829248",
+            "achieved_p_float": 0.0008733437662309557,
+            "conditional_failure": "17583/41324",
+            "conditional_failure_float": 0.42549123995740973,
+            "amplification": "51998416896/4855435697",
+            "amplification_float": 10.709320469042142,
+            "G_bits": 3.4207950355688745,
+            "oracle_amplification_at_achieved_p": 11.526034917159253,
+            "oracle_retention": 0.9291417687012873
+          }
+        },
+        {
+          "b": 13,
+          "target_p": "1/8192",
+          "randomized": {
+            "achieved_p": "2985659/3776487424",
+            "achieved_p_float": 0.0007905915377940366,
+            "conditional_failure": "17583/41324",
+            "conditional_failure_float": 0.42549123995740973,
+            "amplification": "51998416896/4855435697",
+            "amplification_float": 10.709320469042142,
+            "G_bits": 3.4207950355688745,
+            "oracle_amplification_at_achieved_p": 11.609097306590344,
+            "oracle_retention": 0.9224938155150607
+          },
+          "deterministic": {
+            "achieved_p": "10331/11829248",
+            "achieved_p_float": 0.0008733437662309557,
+            "conditional_failure": "17583/41324",
+            "conditional_failure_float": 0.42549123995740973,
+            "amplification": "51998416896/4855435697",
+            "amplification_float": 10.709320469042142,
+            "G_bits": 3.4207950355688745,
+            "oracle_amplification_at_achieved_p": 11.526034917159253,
+            "oracle_retention": 0.9291417687012873
+          }
+        },
+        {
+          "b": 14,
+          "target_p": "1/16384",
+          "randomized": {
+            "achieved_p": "2985659/7552974848",
+            "achieved_p_float": 0.0003952957688970183,
+            "conditional_failure": "17583/41324",
+            "conditional_failure_float": 0.42549123995740973,
+            "amplification": "51998416896/4855435697",
+            "amplification_float": 10.709320469042142,
+            "G_bits": 3.4207950355688745,
+            "oracle_amplification_at_achieved_p": 12.485714424801131,
+            "oracle_retention": 0.8577258861350833
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 15,
+          "target_p": "1/32768",
+          "randomized": {
+            "achieved_p": "2985659/15105949696",
+            "achieved_p_float": 0.00019764788444850915,
+            "conditional_failure": "17583/41324",
+            "conditional_failure_float": 0.42549123995740973,
+            "amplification": "51998416896/4855435697",
+            "amplification_float": 10.709320469042142,
+            "G_bits": 3.4207950355688745,
+            "oracle_amplification_at_achieved_p": 14.238948661222706,
+            "oracle_retention": 0.7521145502973201
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 16,
+          "target_p": "1/65536",
+          "randomized": {
+            "achieved_p": "2985659/30211899392",
+            "achieved_p_float": 9.882394222425458e-05,
+            "conditional_failure": "17583/41324",
+            "conditional_failure_float": 0.42549123995740973,
+            "amplification": "51998416896/4855435697",
+            "amplification_float": 10.709320469042142,
+            "G_bits": 3.4207950355688745,
+            "oracle_amplification_at_achieved_p": 17.15238144368341,
+            "oracle_retention": 0.6243634742035188
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 17,
+          "target_p": "1/131072",
+          "randomized": {
+            "achieved_p": "2985659/60423798784",
+            "achieved_p_float": 4.941197111212729e-05,
+            "conditional_failure": "17583/41324",
+            "conditional_failure_float": 0.42549123995740973,
+            "amplification": "51998416896/4855435697",
+            "amplification_float": 10.709320469042142,
+            "G_bits": 3.4207950355688745,
+            "oracle_amplification_at_achieved_p": 17.15238144368341,
+            "oracle_retention": 0.6243634742035188
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 18,
+          "target_p": "1/262144",
+          "randomized": {
+            "achieved_p": "2985659/120847597568",
+            "achieved_p_float": 2.4705985556063644e-05,
+            "conditional_failure": "17583/41324",
+            "conditional_failure_float": 0.42549123995740973,
+            "amplification": "51998416896/4855435697",
+            "amplification_float": 10.709320469042142,
+            "G_bits": 3.4207950355688745,
+            "oracle_amplification_at_achieved_p": 17.15238144368341,
+            "oracle_retention": 0.6243634742035188
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 19,
+          "target_p": "1/524288",
+          "randomized": {
+            "achieved_p": "2985659/241695195136",
+            "achieved_p_float": 1.2352992778031822e-05,
+            "conditional_failure": "17583/41324",
+            "conditional_failure_float": 0.42549123995740973,
+            "amplification": "51998416896/4855435697",
+            "amplification_float": 10.709320469042142,
+            "G_bits": 3.4207950355688745,
+            "oracle_amplification_at_achieved_p": 17.15238144368341,
+            "oracle_retention": 0.6243634742035188
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 20,
+          "target_p": "1/1048576",
+          "randomized": {
+            "achieved_p": "2985659/483390390272",
+            "achieved_p_float": 6.176496389015911e-06,
+            "conditional_failure": "17583/41324",
+            "conditional_failure_float": 0.42549123995740973,
+            "amplification": "51998416896/4855435697",
+            "amplification_float": 10.709320469042142,
+            "G_bits": 3.4207950355688745,
+            "oracle_amplification_at_achieved_p": 17.15238144368341,
+            "oracle_retention": 0.6243634742035188
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        }
+      ]
+    },
+    "joint_uv_histogram": {
+      "evaluation_parameters": "n2-k1-q19-e1_1-d3_2",
+      "N": "1514143744",
+      "E": "60158336",
+      "delta": "469987/11829248",
+      "budgets": [
+        {
+          "b": 1,
+          "target_p": "1/2",
+          "randomized": {
+            "achieved_p": "333818115389/665134956544",
+            "achieved_p_float": 0.5018802757315571,
+            "conditional_failure": "2325009874/30347101399",
+            "conditional_failure_float": 0.07661390270626024,
+            "amplification": "27503118401994752/14262743145211813",
+            "amplification_float": 1.9283189861852,
+            "G_bits": 0.9473437246601153,
+            "oracle_amplification_at_achieved_p": 1.9348713694489905,
+            "oracle_retention": 0.9966135303011607
+          },
+          "deterministic": {
+            "achieved_p": "23876031/47316992",
+            "achieved_p_float": 0.5045973970619265,
+            "conditional_failure": "1823050/23876031",
+            "conditional_failure_float": 0.07635481793435434,
+            "amplification": "21565310566400/11221424181597",
+            "amplification_float": 1.9217980015198828,
+            "G_bits": 0.9424567036868142,
+            "oracle_amplification_at_achieved_p": 1.9268784617862587,
+            "oracle_retention": 0.9973633727465788
+          }
+        },
+        {
+          "b": 2,
+          "target_p": "1/4",
+          "randomized": {
+            "achieved_p": "30432539851/124585639936",
+            "achieved_p_float": 0.24427004481923664,
+            "conditional_failure": "13440974039/121730159404",
+            "conditional_failure_float": 0.11041613766718139,
+            "amplification": "39749153817223168/14302898106951937",
+            "amplification_float": 2.7790978807227225,
+            "G_bits": 1.474616647617451,
+            "oracle_amplification_at_achieved_p": 2.9795290730285555,
+            "oracle_retention": 0.9327305801040215
+          },
+          "deterministic": {
+            "achieved_p": "1446347/5914624",
+            "achieved_p_float": 0.2445374380518525,
+            "conditional_failure": "1276521/11570776",
+            "conditional_failure_float": 0.11032285129363839,
+            "amplification": "1887535435776/679764287489",
+            "amplification_float": 2.7767499271672818,
+            "G_bits": 1.473397254549296,
+            "oracle_amplification_at_achieved_p": 2.9777689450912392,
+            "oracle_retention": 0.9324934131456603
+          }
+        },
+        {
+          "b": 3,
+          "target_p": "1/8",
+          "randomized": {
+            "achieved_p": "68968343993/594585321472",
+            "achieved_p_float": 0.11599402390603386,
+            "conditional_failure": "10375248421/68968343993",
+            "conditional_failure_float": 0.15043493609260858,
+            "amplification": "122731386633617408/32414225088238091",
+            "amplification_float": 3.786343381633147,
+            "G_bits": 1.920805254283834,
+            "oracle_amplification_at_achieved_p": 4.311970221239054,
+            "oracle_retention": 0.8781005404404515
+          },
+          "deterministic": {
+            "achieved_p": "11017/92416",
+            "achieved_p_float": 0.11921095914127423,
+            "conditional_failure": "52495/352544",
+            "conditional_failure_float": 0.14890339929200327,
+            "amplification": "19405511680/5177846779",
+            "amplification_float": 3.747795658748287,
+            "G_bits": 1.9060422950069438,
+            "oracle_amplification_at_achieved_p": 4.259455768012458,
+            "oracle_retention": 0.8798766468931025
+          }
+        },
+        {
+          "b": 4,
+          "target_p": "1/16",
+          "randomized": {
+            "achieved_p": "33465217491/593711202304",
+            "achieved_p_float": 0.05636615472494435,
+            "conditional_failure": "47255565217/211946377443",
+            "conditional_failure_float": 0.22296000425725002,
+            "amplification": "4202990979940352/748962722521077",
+            "amplification_float": 5.611749228042619,
+            "G_bits": 2.4884505407570323,
+            "oracle_amplification_at_achieved_p": 6.040538895105215,
+            "oracle_retention": 0.9290146666533257
+          },
+          "deterministic": {
+            "achieved_p": "2858337/47316992",
+            "achieved_p_float": 0.06040825672096823,
+            "conditional_failure": "200669/952779",
+            "conditional_failure_float": 0.2106144237016139,
+            "amplification": "339109052416/63970534839",
+            "amplification_float": 5.301019497014745,
+            "G_bits": 2.4062698468160733,
+            "oracle_amplification_at_achieved_p": 5.8363965207088935,
+            "oracle_retention": 0.9082692511047687
+          }
+        },
+        {
+          "b": 5,
+          "target_p": "1/32",
+          "randomized": {
+            "achieved_p": "2376209895/92930572288",
+            "achieved_p_float": 0.02556973272085226,
+            "conditional_failure": "1027488791/2851451874",
+            "conditional_failure_float": 0.36033881559384157,
+            "amplification": "868172837568512/95724665136117",
+            "amplification_float": 9.069478972154165,
+            "G_bits": 3.181019672486929,
+            "oracle_amplification_at_achieved_p": 9.363326908653125,
+            "oracle_retention": 0.9686171443798036
+          },
+          "deterministic": {
+            "achieved_p": "1308369/47316992",
+            "achieved_p_float": 0.027651144857221692,
+            "conditional_failure": "149375/436123",
+            "conditional_failure_float": 0.34250658644464976,
+            "amplification": "1766993920000/204972140401",
+            "amplification_float": 8.620654087639021,
+            "G_bits": 3.1077973372021668,
+            "oracle_amplification_at_achieved_p": 8.928770758397153,
+            "oracle_retention": 0.9654917032707597
+          }
+        },
+        {
+          "b": 6,
+          "target_p": "1/64",
+          "randomized": {
+            "achieved_p": "912783805/81515347968",
+            "achieved_p_float": 0.011197692554269978,
+            "conditional_failure": "708071701/1825567610",
+            "conditional_failure_float": 0.3878638605994987,
+            "amplification": "4187977876455424/428996522160535",
+            "amplification_float": 9.76226533344305,
+            "G_bits": 3.2872159639873164,
+            "oracle_amplification_at_achieved_p": 13.712542568426116,
+            "oracle_retention": 0.711922335681291
+          },
+          "deterministic": {
+            "achieved_p": "498115/47316992",
+            "achieved_p_float": 0.010527190739428238,
+            "conditional_failure": "185172/498115",
+            "conditional_failure_float": 0.37174548046133926,
+            "amplification": "2190445510656/234107574505",
+            "amplification_float": 9.356576844160235,
+            "G_bits": 3.225980808308065,
+            "oracle_amplification_at_achieved_p": 13.84639477882423,
+            "oracle_retention": 0.6757410137164058
+          }
+        },
+        {
+          "b": 7,
+          "target_p": "1/128",
+          "randomized": {
+            "achieved_p": "6661228383/1159408254976",
+            "achieved_p_float": 0.005745369117746957,
+            "conditional_failure": "2469965365/6661228383",
+            "conditional_failure_float": 0.3707972798686131,
+            "amplification": "4173976121999360/447241534863003",
+            "amplification_float": 9.332711290506401,
+            "G_bits": 3.222296266192704,
+            "oracle_amplification_at_achieved_p": 15.21394922590117,
+            "oracle_retention": 0.6134312105247344
+          },
+          "deterministic": {
+            "achieved_p": "145417/23658496",
+            "achieved_p_float": 0.006146502296680229,
+            "conditional_failure": "109663/290834",
+            "conditional_failure_float": 0.37706389211715274,
+            "amplification": "648615411712/68344099579",
+            "amplification_float": 9.490437590186632,
+            "G_bits": 3.2464746093367536,
+            "oracle_amplification_at_achieved_p": 15.042356129012335,
+            "oracle_retention": 0.6309143001795001
+          }
+        },
+        {
+          "b": 8,
+          "target_p": "1/256",
+          "randomized": {
+            "achieved_p": "11907853483/3804901277696",
+            "achieved_p_float": 0.0031296090526192625,
+            "conditional_failure": "4261471661/11907853483",
+            "conditional_failure_float": 0.35787068316584525,
+            "amplification": "50410005122940928/5596536334914721",
+            "amplification_float": 9.007357784573209,
+            "G_bits": 3.1711039683994224,
+            "oracle_amplification_at_achieved_p": 17.1014124803974,
+            "oracle_retention": 0.5267025630133153
+          },
+          "deterministic": {
+            "achieved_p": "114961/47316992",
+            "achieved_p_float": 0.002429592312207843,
+            "conditional_failure": "45181/114961",
+            "conditional_failure_float": 0.39301154304503266,
+            "amplification": "534457253888/54030175507",
+            "amplification_float": 9.891828943231124,
+            "G_bits": 3.3062372918016547,
+            "oracle_amplification_at_achieved_p": 17.380788771980008,
+            "oracle_retention": 0.5691242827355443
+          }
+        },
+        {
+          "b": 9,
+          "target_p": "1/512",
+          "randomized": {
+            "achieved_p": "5204794523/3326999658496",
+            "achieved_p_float": 0.001564410897881749,
+            "conditional_failure": "2499664466/5204794523",
+            "conditional_failure_float": 0.4802618921753734,
+            "amplification": "29569150885101568/2446185763481201",
+            "amplification_float": 12.087859935470027,
+            "G_bits": 3.595486943794146,
+            "oracle_amplification_at_achieved_p": 18.05924248185141,
+            "oracle_retention": 0.6693447938150058
+          },
+          "deterministic": {
+            "achieved_p": "44571/47316992",
+            "achieved_p_float": 0.0009419660488984591,
+            "conditional_failure": "28622/44571",
+            "conditional_failure_float": 0.6421664310874784,
+            "amplification": "338576736256/20947790577",
+            "amplification_float": 16.162885293867046,
+            "G_bits": 4.014612856565636,
+            "oracle_amplification_at_achieved_p": 18.413244250564645,
+            "oracle_retention": 0.8777858520706588
+          }
+        },
+        {
+          "b": 10,
+          "target_p": "1/1024",
+          "randomized": {
+            "achieved_p": "36999/47316992",
+            "achieved_p_float": 0.0007819389702540685,
+            "conditional_failure": "17381359/28378233",
+            "conditional_failure_float": 0.6124891215037949,
+            "amplification": "205608406188032/13337400592971",
+            "amplification_float": 15.415927920496785,
+            "G_bits": 3.9463498261104797,
+            "oracle_amplification_at_achieved_p": 18.582104671136452,
+            "oracle_retention": 0.829611510285071
+          },
+          "deterministic": {
+            "achieved_p": "36203/47316992",
+            "achieved_p_float": 0.0007651162609829467,
+            "conditional_failure": "22010/36203",
+            "conditional_failure_float": 0.607960666243129,
+            "amplification": "260361748480/17014939361",
+            "amplification_float": 15.30194983102767,
+            "G_bits": 3.935643593055251,
+            "oracle_amplification_at_achieved_p": 18.603959033855894,
+            "oracle_retention": 0.8225104023923535
+          }
+        },
+        {
+          "b": 11,
+          "target_p": "1/2048",
+          "randomized": {
+            "achieved_p": "18503/47316992",
+            "achieved_p_float": 0.00039104345432609074,
+            "conditional_failure": "45239374/86242483",
+            "conditional_failure_float": 0.5245601984812983,
+            "amplification": "535147774410752/40532845857721",
+            "amplification_float": 13.202817692328727,
+            "G_bits": 3.722773951512228,
+            "oracle_amplification_at_achieved_p": 19.409627205568714,
+            "oracle_retention": 0.6802200553620513
+          },
+          "deterministic": {
+            "achieved_p": "14327/47316992",
+            "achieved_p_float": 0.00030278763282332065,
+            "conditional_failure": "7118/14327",
+            "conditional_failure_float": 0.4968241781252181,
+            "amplification": "84200587264/6733503749",
+            "amplification_float": 12.50472122726667,
+            "G_bits": 3.6444009901893,
+            "oracle_amplification_at_achieved_p": 19.58818305787579,
+            "oracle_retention": 0.6383808641322104
+          }
+        },
+        {
+          "b": 12,
+          "target_p": "1/4096",
+          "randomized": {
+            "achieved_p": "2806479/14348877824",
+            "achieved_p_float": 0.0001955887445989588,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 20.019227568739048,
+            "oracle_retention": 0.5312042461683677
+          },
+          "deterministic": {
+            "achieved_p": "9711/47316992",
+            "achieved_p_float": 0.00020523282629631231,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 19.964243449482932,
+            "oracle_retention": 0.5326672516508736
+          }
+        },
+        {
+          "b": 13,
+          "target_p": "1/8192",
+          "randomized": {
+            "achieved_p": "2806479/28697755648",
+            "achieved_p_float": 9.77943722994794e-05,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 20.599783163022327,
+            "oracle_retention": 0.5162335256331312
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 14,
+          "target_p": "1/16384",
+          "randomized": {
+            "achieved_p": "2806479/57395511296",
+            "achieved_p_float": 4.88971861497397e-05,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 20.599783163022327,
+            "oracle_retention": 0.5162335256331312
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 15,
+          "target_p": "1/32768",
+          "randomized": {
+            "achieved_p": "2806479/114791022592",
+            "achieved_p_float": 2.444859307486985e-05,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 20.599783163022327,
+            "oracle_retention": 0.5162335256331312
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 16,
+          "target_p": "1/65536",
+          "randomized": {
+            "achieved_p": "2806479/229582045184",
+            "achieved_p_float": 1.2224296537434926e-05,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 20.599783163022327,
+            "oracle_retention": 0.5162335256331312
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 17,
+          "target_p": "1/131072",
+          "randomized": {
+            "achieved_p": "2806479/459164090368",
+            "achieved_p_float": 6.112148268717463e-06,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 20.599783163022327,
+            "oracle_retention": 0.5162335256331312
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 18,
+          "target_p": "1/262144",
+          "randomized": {
+            "achieved_p": "2806479/918328180736",
+            "achieved_p_float": 3.0560741343587314e-06,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 20.599783163022327,
+            "oracle_retention": 0.5162335256331312
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 19,
+          "target_p": "1/524288",
+          "randomized": {
+            "achieved_p": "2806479/1836656361472",
+            "achieved_p_float": 1.5280370671793657e-06,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 20.599783163022327,
+            "oracle_retention": 0.5162335256331312
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        },
+        {
+          "b": 20,
+          "target_p": "1/1048576",
+          "randomized": {
+            "achieved_p": "2806479/3673312722944",
+            "achieved_p_float": 7.640185335896829e-07,
+            "conditional_failure": "4103/9711",
+            "conditional_failure_float": 0.42251055504067553,
+            "amplification": "48535404544/4564043757",
+            "amplification_float": 10.634298689525032,
+            "G_bits": 3.410652988505087,
+            "oracle_amplification_at_achieved_p": 20.599783163022327,
+            "oracle_retention": 0.5162335256331312
+          },
+          "deterministic": {
+            "achieved_p": "0/1",
+            "achieved_p_float": 0.0,
+            "conditional_failure": "0/1",
+            "conditional_failure_float": 0.0,
+            "amplification": "0/1",
+            "amplification_float": 0.0,
+            "G_bits": null,
+            "oracle_amplification_at_achieved_p": 0.0,
+            "oracle_retention": null
+          }
+        }
+      ]
+    }
+  }
+}

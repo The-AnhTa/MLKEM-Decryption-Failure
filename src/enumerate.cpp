@@ -8,6 +8,7 @@
 #include <numeric>
 #include <random>
 #include <stdexcept>
+#include <tuple>
 #include <unordered_map>
 
 namespace toy {
@@ -478,8 +479,9 @@ ExperimentResult enumerate_sampled_ciphertext_features(const Params& p, std::siz
             }
             const Poly h = dot(s, uhat, p.q);
             const Poly ty = dot(t, y, p.q);
-            using HistogramState = std::pair<std::uint64_t, bool>;
-            std::map<HistogramState, Weight> dp{{{0, false}, 1}};
+            const bool track_joint = p.n <= 4;
+            using HistogramState = std::tuple<std::uint64_t, std::uint64_t, bool>;
+            std::map<HistogramState, Weight> dp{{{0, 0, false}, 1}};
             for (std::size_t i = 0; i < p.n; ++i) {
                 std::map<HistogramState, Weight> next;
                 for (const auto& [state, state_weight] : dp)
@@ -487,9 +489,12 @@ ExperimentResult enumerate_sampled_ciphertext_features(const Params& p, std::siz
                         const int raw_v = mod_q(ty[i] + e2 + decompress_coeff(bit, 1, p.q), p.q);
                         const int vc = compress_coeff(raw_v, p.dv, p.q);
                         const int w = mod_q(decompress_coeff(vc, p.dv, p.q) - h[i], p.q);
-                        const bool failed = state.second || compress_coeff(w, 1, p.q) != bit;
-                        const std::uint64_t code = state.first + (std::uint64_t{1} << (4 * vc));
-                        auto& weight = next[{code, failed}];
+                        const bool failed = std::get<2>(state) || compress_coeff(w, 1, p.q) != bit;
+                        const std::uint64_t code = std::get<0>(state) + (std::uint64_t{1} << (4 * vc));
+                        const std::uint64_t sequence = track_joint
+                            ? std::get<1>(state) | (static_cast<std::uint64_t>(vc) << (4 * i))
+                            : 0;
+                        auto& weight = next[{code, sequence, failed}];
                         weight = checked_add(weight, checked_mul(state_weight, e2weight));
                     }
                 dp = std::move(next);
@@ -497,19 +502,28 @@ ExperimentResult enumerate_sampled_ciphertext_features(const Params& p, std::siz
             const Weight outer = checked_mul(yweight, e1weight);
             for (const auto& [state, weight] : dp) {
                 Ciphertext c = base_c;
-                for (int symbol = 0; symbol < (1 << p.dv); ++symbol) {
-                    const int count = static_cast<int>((state.first >> (4 * symbol)) & 0xFULL);
-                    for (int j = 0; j < count; ++j) c.v.push_back(symbol);
+                if (track_joint) {
+                    for (std::size_t i = 0; i < p.n; ++i)
+                        c.v.push_back(static_cast<int>((std::get<1>(state) >> (4 * i)) & 0xFULL));
+                } else {
+                    for (int symbol = 0; symbol < (1 << p.dv); ++symbol) {
+                        const int count = static_cast<int>((std::get<0>(state) >> (4 * symbol)) & 0xFULL);
+                        for (int j = 0; j < count; ++j) c.v.push_back(symbol);
+                    }
                 }
                 const Weight scaled = checked_mul(outer, weight);
-                const Weight failed = state.second ? scaled : 0;
+                const Weight failed = std::get<2>(state) ? scaled : 0;
                 result.laws["global"].add("all", scaled, failed);
                 result.laws["secret_key"].add(sk, scaled, failed);
-                result.laws["hist_u"].add(feature_hist_u(c, 1 << p.du), scaled, failed);
-                result.laws["hist_v"].add(feature_hist_v(c, 1 << p.dv), scaled, failed);
-                result.laws["extreme_symbols"].add(feature_extreme_symbol_counts(c, 1 << p.du, 1 << p.dv), scaled, failed);
-                result.laws["entropy_1024"].add(feature_entropy_1024(c, 1 << p.du, 1 << p.dv), scaled, failed);
-                result.laws["decompressed_norms"].add(feature_decompressed_norms(c, p.du, p.dv, p.q), scaled, failed);
+                auto add = [&](const std::string& name, const std::string& feature) {
+                    result.laws[name].add(feature, scaled, failed);
+                };
+                add("hist_u", feature_hist_u(c, 1 << p.du));
+                add("hist_v", feature_hist_v(c, 1 << p.dv));
+                add("extreme_symbols", feature_extreme_symbol_counts(c, 1 << p.du, 1 << p.dv));
+                add("entropy_1024", feature_entropy_1024(c, 1 << p.du, 1 << p.dv));
+                add("decompressed_norms", feature_decompressed_norms(c, p.du, p.dv, p.q));
+                if (track_joint) add("joint_uv_histogram", feature_joint_uv_histogram(c));
             }
         }
 sampled_cipher_key_done:

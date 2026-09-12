@@ -236,7 +236,8 @@ def evaluate_feature(model, directory: Path, feature: str):
 def evaluate(model_path: Path, target: Path, output: Path):
     model = json.loads(model_path.read_text(encoding="utf-8"))
     results = {}
-    for feature, (_, subdirectory) in FEATURES.items():
+    for feature, (family, _) in FEATURES.items():
+        subdirectory = "public" if family == "public" else "ciphertext"
         results[feature] = evaluate_feature(model["models"][feature], target / subdirectory, feature)
     payload = {"schema_version": 1, "model": str(model_path), "results": results}
     output.parent.mkdir(parents=True, exist_ok=True)

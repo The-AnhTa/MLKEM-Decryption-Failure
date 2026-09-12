@@ -7,6 +7,7 @@ from pathlib import Path
 
 import analyze
 import conditional_independence
+import n4_screen
 import predicate_transfer
 import sampled_key_ci
 import summarize_matrix
@@ -119,6 +120,15 @@ class AnalysisTests(unittest.TestCase):
         mass, failures = predicate_transfer.evaluate_selector(target, scores, selector, True)
         self.assertEqual(mass, Fraction(175, 4))
         self.assertEqual(failures, Fraction(59, 8))
+
+    def test_n4_predeclared_selection(self):
+        rows = [
+            {"preset": "a", "support_possible": True, "delta_exact": Fraction(1, 100), "delta_float": .01},
+            {"preset": "b", "support_possible": True, "delta_exact": Fraction(1, 20), "delta_float": .05},
+            {"preset": "c", "support_possible": False, "delta_exact": Fraction(1, 100), "delta_float": .01},
+            {"preset": "d", "support_possible": True, "delta_exact": Fraction(1, 10000), "delta_float": .0001},
+        ]
+        self.assertEqual([row["preset"] for row in n4_screen.choose(rows)], ["a", "b"])
 
 
 if __name__ == "__main__":
