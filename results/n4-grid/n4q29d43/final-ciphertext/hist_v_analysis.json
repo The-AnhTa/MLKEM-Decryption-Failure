@@ -1,0 +1,17 @@
+{
+  "N": "34359738368",
+  "E": "192751736",
+  "delta": "192751736/34359738368",
+  "D2_bits": 0.2181828348647995,
+  "Dinf_bits": 0.9390005551967284,
+  "plot_written": true,
+  "margin_cdf_written": false,
+  "summary_only": false,
+  "maximizing_cell": {
+    "feature_value": "0.3.0.0.0.0.1.0.",
+    "p": "42003200/34359738368",
+    "conditional_failure": "451750/42003200",
+    "amplification": "303164293120/158128705421",
+    "amplification_float": 1.9171996147875805
+  }
+}

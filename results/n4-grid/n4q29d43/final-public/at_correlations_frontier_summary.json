@@ -1,0 +1,205 @@
+{
+  "selection": "randomized boundary-cell selection at exact mass p=2^-b",
+  "budgets": [
+    {
+      "b": 1,
+      "p": "1/2",
+      "amplification": "44915006/24093967",
+      "amplification_float": 1.8641598537924453,
+      "G_bits": 0.8985255780100968,
+      "conditional_failure": "22457503/2147483648",
+      "boundary_fraction": "0/1",
+      "boundary_cell": null
+    },
+    {
+      "b": 2,
+      "p": "1/4",
+      "amplification": "66917948/24093967",
+      "amplification_float": 2.7773736056001073,
+      "G_bits": 1.4737212580687065,
+      "conditional_failure": "16729487/1073741824",
+      "boundary_fraction": "0/1",
+      "boundary_cell": null
+    },
+    {
+      "b": 3,
+      "p": "1/8",
+      "amplification": "87882520/24093967",
+      "amplification_float": 3.6474906768154867,
+      "G_bits": 1.8669042905409037,
+      "conditional_failure": "10985315/536870912",
+      "boundary_fraction": "0/1",
+      "boundary_cell": null
+    },
+    {
+      "b": 4,
+      "p": "1/16",
+      "amplification": "106945328/24093967",
+      "amplification_float": 4.438676619752986,
+      "G_bits": 2.1501296047943077,
+      "conditional_failure": "6684083/268435456",
+      "boundary_fraction": "0/1",
+      "boundary_cell": null
+    },
+    {
+      "b": 5,
+      "p": "1/32",
+      "amplification": "122291712/24093967",
+      "amplification_float": 5.075615484988421,
+      "G_bits": 2.343582778613111,
+      "conditional_failure": "238851/8388608",
+      "boundary_fraction": "0/1",
+      "boundary_cell": null
+    },
+    {
+      "b": 6,
+      "p": "1/64",
+      "amplification": "132071424/24093967",
+      "amplification_float": 5.481514272846809,
+      "G_bits": 2.45457449394226,
+      "conditional_failure": "8061/262144",
+      "boundary_fraction": "0/1",
+      "boundary_cell": null
+    },
+    {
+      "b": 7,
+      "p": "1/128",
+      "amplification": "143949824/24093967",
+      "amplification_float": 5.974517355319695,
+      "G_bits": 2.578822171300699,
+      "conditional_failure": "4393/131072",
+      "boundary_fraction": "0/1",
+      "boundary_cell": null
+    },
+    {
+      "b": 8,
+      "p": "1/256",
+      "amplification": "143949824/24093967",
+      "amplification_float": 5.974517355319695,
+      "G_bits": 2.578822171300699,
+      "conditional_failure": "4393/131072",
+      "boundary_fraction": "1/2",
+      "boundary_cell": "-81.-209.-87.77"
+    },
+    {
+      "b": 9,
+      "p": "1/512",
+      "amplification": "143949824/24093967",
+      "amplification_float": 5.974517355319695,
+      "G_bits": 2.578822171300699,
+      "conditional_failure": "4393/131072",
+      "boundary_fraction": "1/4",
+      "boundary_cell": "-81.-209.-87.77"
+    },
+    {
+      "b": 10,
+      "p": "1/1024",
+      "amplification": "143949824/24093967",
+      "amplification_float": 5.974517355319695,
+      "G_bits": 2.578822171300699,
+      "conditional_failure": "4393/131072",
+      "boundary_fraction": "1/8",
+      "boundary_cell": "-81.-209.-87.77"
+    },
+    {
+      "b": 11,
+      "p": "1/2048",
+      "amplification": "143949824/24093967",
+      "amplification_float": 5.974517355319695,
+      "G_bits": 2.578822171300699,
+      "conditional_failure": "4393/131072",
+      "boundary_fraction": "1/16",
+      "boundary_cell": "-81.-209.-87.77"
+    },
+    {
+      "b": 12,
+      "p": "1/4096",
+      "amplification": "143949824/24093967",
+      "amplification_float": 5.974517355319695,
+      "G_bits": 2.578822171300699,
+      "conditional_failure": "4393/131072",
+      "boundary_fraction": "1/32",
+      "boundary_cell": "-81.-209.-87.77"
+    },
+    {
+      "b": 13,
+      "p": "1/8192",
+      "amplification": "143949824/24093967",
+      "amplification_float": 5.974517355319695,
+      "G_bits": 2.578822171300699,
+      "conditional_failure": "4393/131072",
+      "boundary_fraction": "1/64",
+      "boundary_cell": "-81.-209.-87.77"
+    },
+    {
+      "b": 14,
+      "p": "1/16384",
+      "amplification": "143949824/24093967",
+      "amplification_float": 5.974517355319695,
+      "G_bits": 2.578822171300699,
+      "conditional_failure": "4393/131072",
+      "boundary_fraction": "1/128",
+      "boundary_cell": "-81.-209.-87.77"
+    },
+    {
+      "b": 15,
+      "p": "1/32768",
+      "amplification": "143949824/24093967",
+      "amplification_float": 5.974517355319695,
+      "G_bits": 2.578822171300699,
+      "conditional_failure": "4393/131072",
+      "boundary_fraction": "1/256",
+      "boundary_cell": "-81.-209.-87.77"
+    },
+    {
+      "b": 16,
+      "p": "1/65536",
+      "amplification": "143949824/24093967",
+      "amplification_float": 5.974517355319695,
+      "G_bits": 2.578822171300699,
+      "conditional_failure": "4393/131072",
+      "boundary_fraction": "1/512",
+      "boundary_cell": "-81.-209.-87.77"
+    },
+    {
+      "b": 17,
+      "p": "1/131072",
+      "amplification": "143949824/24093967",
+      "amplification_float": 5.974517355319695,
+      "G_bits": 2.578822171300699,
+      "conditional_failure": "4393/131072",
+      "boundary_fraction": "1/1024",
+      "boundary_cell": "-81.-209.-87.77"
+    },
+    {
+      "b": 18,
+      "p": "1/262144",
+      "amplification": "143949824/24093967",
+      "amplification_float": 5.974517355319695,
+      "G_bits": 2.578822171300699,
+      "conditional_failure": "4393/131072",
+      "boundary_fraction": "1/2048",
+      "boundary_cell": "-81.-209.-87.77"
+    },
+    {
+      "b": 19,
+      "p": "1/524288",
+      "amplification": "143949824/24093967",
+      "amplification_float": 5.974517355319695,
+      "G_bits": 2.578822171300699,
+      "conditional_failure": "4393/131072",
+      "boundary_fraction": "1/4096",
+      "boundary_cell": "-81.-209.-87.77"
+    },
+    {
+      "b": 20,
+      "p": "1/1048576",
+      "amplification": "143949824/24093967",
+      "amplification_float": 5.974517355319695,
+      "G_bits": 2.578822171300699,
+      "conditional_failure": "4393/131072",
+      "boundary_fraction": "1/8192",
+      "boundary_cell": "-81.-209.-87.77"
+    }
+  ]
+}

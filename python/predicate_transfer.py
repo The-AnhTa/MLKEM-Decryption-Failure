@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gzip
 import json
 import math
 import re
@@ -99,13 +100,30 @@ def canonicalize(feature: str, value: str, params) -> str:
 def load_canonical_law(directory: Path, feature: str):
     params = load_params(directory)
     cells = {}
-    with (directory / f"{feature}.csv").open(newline="", encoding="utf-8") as handle:
+    law_path = resolve_law(directory, feature)
+    with open_law(law_path) as handle:
         for row in csv.DictReader(handle):
             key = canonicalize(feature, row["feature_value"], params)
             n, e = int(row["Nz"]), int(row["Ez"])
             old_n, old_e = cells.get(key, (0, 0))
             cells[key] = (old_n + n, old_e + e)
     return params, cells
+
+
+def resolve_law(directory: Path, feature: str):
+    path = directory / f"{feature}.csv"
+    if path.exists():
+        return path
+    compressed = path.with_suffix(path.suffix + ".gz")
+    if compressed.exists():
+        return compressed
+    raise FileNotFoundError(path)
+
+
+def open_law(path: Path):
+    if path.suffix == ".gz":
+        return gzip.open(path, "rt", newline="", encoding="utf-8")
+    return path.open(newline="", encoding="utf-8")
 
 
 def selector_for_budget(score_groups, total: int, bits: int):
@@ -199,36 +217,84 @@ def evaluate_selector(cells, scores, selector, randomized: bool):
     return selected_mass, selected_failures
 
 
+def evaluate_score_groups(groups, selector, randomized: bool):
+    threshold = parse_fraction(selector["threshold_score"])
+    boundary = (parse_fraction(selector["boundary_probability"]) if randomized else
+                Fraction(int(selector["deterministic_include_boundary"])))
+    selected_mass = Fraction(0)
+    selected_failures = Fraction(0)
+    for score, (n, e) in groups.items():
+        probability = Fraction(int(score > threshold))
+        if score == threshold:
+            probability = boundary
+        selected_mass += probability * n
+        selected_failures += probability * e
+    return selected_mass, selected_failures
+
+
+def result_row(selector, cells, scores, total, failures, score_groups=None, oracle_cells=None):
+    delta = Fraction(failures, total)
+    row = {"b": selector["b"], "target_p": selector["target_p"]}
+    for name, randomized in (("randomized", True), ("deterministic", False)):
+        if score_groups is None:
+            mass, selected_failures = evaluate_selector(cells, scores, selector, randomized)
+        else:
+            mass, selected_failures = evaluate_score_groups(score_groups, selector, randomized)
+        p = mass / total
+        conditional = selected_failures / mass if mass else Fraction(0)
+        amplification = conditional / delta if mass and failures else Fraction(0)
+        source = cells if oracle_cells is None else oracle_cells
+        oracle_failures = oracle_at_mass(source, mass) if mass else Fraction(0)
+        oracle_conditional = oracle_failures / mass if mass else Fraction(0)
+        oracle_amplification = oracle_conditional / delta if mass and failures else Fraction(0)
+        row[name] = {
+            "achieved_p": fraction_text(p),
+            "achieved_p_float": float(p),
+            "conditional_failure": fraction_text(conditional),
+            "conditional_failure_float": float(conditional),
+            "amplification": fraction_text(amplification),
+            "amplification_float": float(amplification),
+            "G_bits": math.log2(float(amplification)) if amplification else None,
+            "oracle_amplification_at_achieved_p": float(oracle_amplification),
+            "oracle_retention": (float(amplification / oracle_amplification)
+                                 if oracle_amplification else None),
+        }
+    return row
+
+
 def evaluate_feature(model, directory: Path, feature: str):
+    law_path = resolve_law(directory, feature)
+    scores = {key: parse_fraction(value) for key, value in model["scores"].items()}
+    if law_path.stat().st_size > 100_000_000:
+        if feature != "joint_uv_histogram":
+            raise ValueError("streamed transfer currently requires one-to-one canonicalization")
+        params = load_params(directory)
+        score_groups = {}
+        oracle_groups = {}
+        total = failures = 0
+        with open_law(law_path) as handle:
+            for raw in csv.DictReader(handle):
+                n, e = int(raw["Nz"]), int(raw["Ez"])
+                total += n
+                failures += e
+                key = canonicalize(feature, raw["feature_value"], params)
+                if key in scores:
+                    score = scores[key]
+                    old_n, old_e = score_groups.get(score, (0, 0))
+                    score_groups[score] = (old_n + n, old_e + e)
+                divisor = math.gcd(e, n)
+                ratio = Fraction(e // divisor, n // divisor)
+                old_n, old_e = oracle_groups.get(ratio, (0, 0))
+                oracle_groups[ratio] = (old_n + n, old_e + e)
+        rows = [result_row(selector, None, scores, total, failures, score_groups, oracle_groups)
+                for selector in model["selectors"]]
+        return {"evaluation_parameters": params["id"], "N": str(total), "E": str(failures),
+                "delta": fraction_text(Fraction(failures, total)), "streamed": True, "budgets": rows}
     params, cells = load_canonical_law(directory, feature)
     total = sum(n for n, _ in cells.values())
     failures = sum(e for _, e in cells.values())
     delta = Fraction(failures, total)
-    scores = {key: parse_fraction(value) for key, value in model["scores"].items()}
-    rows = []
-    for selector in model["selectors"]:
-        row = {"b": selector["b"], "target_p": selector["target_p"]}
-        for name, randomized in (("randomized", True), ("deterministic", False)):
-            mass, selected_failures = evaluate_selector(cells, scores, selector, randomized)
-            p = mass / total
-            conditional = selected_failures / mass if mass else Fraction(0)
-            amplification = conditional / delta if mass and failures else Fraction(0)
-            oracle_failures = oracle_at_mass(cells, mass) if mass else Fraction(0)
-            oracle_conditional = oracle_failures / mass if mass else Fraction(0)
-            oracle_amplification = oracle_conditional / delta if mass and failures else Fraction(0)
-            row[name] = {
-                "achieved_p": fraction_text(p),
-                "achieved_p_float": float(p),
-                "conditional_failure": fraction_text(conditional),
-                "conditional_failure_float": float(conditional),
-                "amplification": fraction_text(amplification),
-                "amplification_float": float(amplification),
-                "G_bits": math.log2(float(amplification)) if amplification else None,
-                "oracle_amplification_at_achieved_p": float(oracle_amplification),
-                "oracle_retention": (float(amplification / oracle_amplification)
-                                     if oracle_amplification else None),
-            }
-        rows.append(row)
+    rows = [result_row(selector, cells, scores, total, failures) for selector in model["selectors"]]
     return {"evaluation_parameters": params["id"], "N": str(total), "E": str(failures),
             "delta": fraction_text(delta), "budgets": rows}
 
@@ -237,7 +303,9 @@ def evaluate(model_path: Path, target: Path, output: Path):
     model = json.loads(model_path.read_text(encoding="utf-8"))
     results = {}
     for feature, (family, _) in FEATURES.items():
-        subdirectory = "public" if family == "public" else "ciphertext"
+        ordinary = "public" if family == "public" else "ciphertext"
+        final = "final-public" if family == "public" else "final-ciphertext"
+        subdirectory = ordinary if (target / ordinary).exists() else final
         results[feature] = evaluate_feature(model["models"][feature], target / subdirectory, feature)
     payload = {"schema_version": 1, "model": str(model_path), "results": results}
     output.parent.mkdir(parents=True, exist_ok=True)

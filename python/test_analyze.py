@@ -1,4 +1,6 @@
 import csv
+import gzip
+import json
 import math
 import tempfile
 import unittest
@@ -129,6 +131,19 @@ class AnalysisTests(unittest.TestCase):
             {"preset": "d", "support_possible": True, "delta_exact": Fraction(1, 10000), "delta_float": .0001},
         ]
         self.assertEqual([row["preset"] for row in n4_screen.choose(rows)], ["a", "b"])
+
+    def test_transfer_law_gzip_fallback(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "metadata.json").write_text(json.dumps({
+                "parameters": "n2-k1-q17-e1_1-d3_2"
+            }))
+            with gzip.open(root / "hist_v.csv.gz", "wt", newline="", encoding="utf-8") as handle:
+                writer = csv.writer(handle)
+                writer.writerow(["feature_id", "feature_value", "Nz", "Ez"])
+                writer.writerow(["hist_v", "1.1.0.0.", 10, 2])
+            _, cells = predicate_transfer.load_canonical_law(root, "hist_v")
+            self.assertEqual(cells, {"1/2.1/2.0/1.0/1": (10, 2)})
 
 
 if __name__ == "__main__":

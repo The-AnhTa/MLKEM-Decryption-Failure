@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "parameters": "n4-k1-q19-e1_1-d4_3",
+  "mode": "none",
+  "laws": {
+    "decompressed_norms": {"N": "34359738368", "E": "1736726092", "cells": 15622},
+    "entropy_1024": {"N": "34359738368", "E": "1736726092", "cells": 25},
+    "extreme_symbols": {"N": "34359738368", "E": "1736726092", "cells": 200},
+    "global": {"N": "34359738368", "E": "1736726092", "cells": 1},
+    "hist_u": {"N": "34359738368", "E": "1736726092", "cells": 3876},
+    "hist_v": {"N": "34359738368", "E": "1736726092", "cells": 330},
+    "joint_uv_histogram": {"N": "34359738368", "E": "1736726092", "cells": 11480306},
+    "secret_key": {"N": "34359738368", "E": "1736726092", "cells": 128}
+  },
+  "run": {
+    "conditional_enumeration": "exact",
+    "enumeration": "sampled-keys",
+    "key_count": "128",
+    "observable_scope": "frozen-scalable-ciphertext-features",
+    "seed": "20260913"
+  }
+}

@@ -92,3 +92,17 @@ For the current E2-E5 presets, exact support certificates prove that failure is
 impossible for every key and encapsulation; see
 [`results/milestone.md`](results/milestone.md). Sampling cannot estimate a
 post-selection effect when the failure event has empty support.
+
+## Predicate transfer and n=4 study
+
+The next experiment is predeclared in
+[`docs/transfer-and-n4-protocol.md`](docs/transfer-and-n4-protocol.md). It freezes
+an E0-trained dimensionless selector, evaluates it unchanged on E1a, screens a
+12-point toy `n=4` grid by support and unconditional failure probability, and
+runs the two selected points with 128 sampled keys and exact conditional
+encapsulation enumeration.
+
+The concise results and methodological qualifications are in
+[`results/n4-grid/dimension-scaling.md`](results/n4-grid/dimension-scaling.md).
+Sample maxima and `D_infinity` values are descriptive for the sampled-key
+mixture and are not population bounds.

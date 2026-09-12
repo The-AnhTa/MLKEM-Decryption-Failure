@@ -1,0 +1,18 @@
+{
+  "method": "two-sided Hoeffding bound for iid key-level values in [0,1]",
+  "alpha": 0.05,
+  "confidence": 0.95,
+  "sampled_keys": 128,
+  "mean_exact_conditional_failure": 0.0505453817313537,
+  "lower": 0.0,
+  "upper": 0.1705857306463438,
+  "radius": 0.12004034891499009,
+  "sample_standard_deviation": 0.038484751432250046,
+  "approximate_normal_interval": {
+    "lower": 0.04387836120771594,
+    "upper": 0.05721240225499146,
+    "radius": 0.00666702052363776,
+    "warning": "Approximate CLT interval; unlike the Hoeffding interval above, this is not a finite-sample distribution-free guarantee."
+  },
+  "warning": "This interval concerns the population mean over keys; sampled maxima and D_infinity are not population bounds."
+}

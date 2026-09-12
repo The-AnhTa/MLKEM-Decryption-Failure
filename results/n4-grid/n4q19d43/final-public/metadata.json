@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "parameters": "n4-k1-q19-e1_1-d4_3",
+  "mode": "none",
+  "laws": {
+    "at_correlations": {"N": "34359738368", "E": "1736726092", "cells": 128},
+    "at_norm_pair": {"N": "34359738368", "E": "1736726092", "cells": 128},
+    "at_pair_histogram": {"N": "34359738368", "E": "1736726092", "cells": 128},
+    "at_projections": {"N": "34359738368", "E": "1736726092", "cells": 128},
+    "global": {"N": "34359738368", "E": "1736726092", "cells": 1},
+    "margin": {"N": "34359738368", "E": "1736726092", "cells": 10},
+    "pk": {"N": "34359738368", "E": "1736726092", "cells": 128},
+    "secret_key": {"N": "34359738368", "E": "1736726092", "cells": 128},
+    "t_autocorrelation": {"N": "34359738368", "E": "1736726092", "cells": 74},
+    "t_histogram": {"N": "34359738368", "E": "1736726092", "cells": 125},
+    "t_norm2": {"N": "34359738368", "E": "1736726092", "cells": 92}
+  },
+  "run": {
+    "conditional_enumeration": "exact",
+    "enumeration": "sampled-keys",
+    "key_count": "128",
+    "observable_scope": "public-features",
+    "seed": "20260913"
+  }
+}

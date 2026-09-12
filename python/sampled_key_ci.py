@@ -20,6 +20,9 @@ def analyze(path: Path, alpha: float = 0.05):
         raise ValueError("no sampled keys")
     mean = sum(values) / len(values)
     radius = math.sqrt(math.log(2.0 / alpha) / (2.0 * len(values)))
+    variance = (sum((value - mean) ** 2 for value in values) / (len(values) - 1)
+                if len(values) > 1 else 0.0)
+    normal_radius = 1.959963984540054 * math.sqrt(variance / len(values))
     return {
         "method": "two-sided Hoeffding bound for iid key-level values in [0,1]",
         "alpha": alpha,
@@ -29,6 +32,13 @@ def analyze(path: Path, alpha: float = 0.05):
         "lower": max(0.0, mean - radius),
         "upper": min(1.0, mean + radius),
         "radius": radius,
+        "sample_standard_deviation": math.sqrt(variance),
+        "approximate_normal_interval": {
+            "lower": max(0.0, mean - normal_radius),
+            "upper": min(1.0, mean + normal_radius),
+            "radius": normal_radius,
+            "warning": "Approximate CLT interval; unlike the Hoeffding interval above, this is not a finite-sample distribution-free guarantee.",
+        },
         "warning": "This interval concerns the population mean over keys; sampled maxima and D_infinity are not population bounds.",
     }
 
