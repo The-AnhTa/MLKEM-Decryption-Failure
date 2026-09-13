@@ -5,6 +5,7 @@
 #include "toy_mlkem/ring.hpp"
 
 #include <cstdlib>
+#include <numeric>
 #include <iostream>
 #include <stdexcept>
 
@@ -95,6 +96,33 @@ void test_scalable_features_are_deterministic() {
     require(toy::feature_entropy_1024(c, 8, 4) == "1024.1024", "entropy quantization");
 }
 
+void test_normalized_ciphertext_histogram() {
+    for (const char* preset : {"e0", "e1a", "n4q19d43", "n4q29d43"}) {
+        const auto p = toy::Params::preset(preset);
+        for (int d : {p.du, p.dv}) for (int symbol = 0; symbol < (1 << d); ++symbol) {
+            const int residue = toy::decompress_coeff(symbol, d, p.q);
+            const int bin = toy::normalized_coordinate_bin(residue, p.q);
+            require(bin >= 0 && bin < 4, "normalized coordinate bin range");
+            const int value = toy::centered(residue, p.q);
+            if (bin == 0) require(4LL * value < -p.q, "normalized bin zero interval");
+            if (bin == 1) require(4LL * value >= -p.q && value < 0, "normalized bin one interval");
+            if (bin == 2) require(value >= 0 && 4LL * value < p.q, "normalized bin two interval");
+            if (bin == 3) require(4LL * value >= p.q, "normalized bin three interval");
+        }
+    }
+    const auto p = toy::Params::e0();
+    const toy::Ciphertext c{{toy::Poly{0, 7}}, toy::Poly{0, 3}};
+    const auto joint = toy::normalized_joint_histogram(c, p.du, p.dv, p.q);
+    require(std::accumulate(joint.begin(), joint.end(), 0) == static_cast<int>(p.n),
+            "normalized joint count mass");
+    const auto u = toy::normalized_u_marginal(joint);
+    const auto v = toy::normalized_v_marginal(joint);
+    require(std::accumulate(u.begin(), u.end(), 0) == static_cast<int>(p.n), "normalized u mass");
+    require(std::accumulate(v.begin(), v.end(), 0) == static_cast<int>(p.n), "normalized v mass");
+    require(toy::encode_normalized_histogram(joint) == "0.0.0.0.0.1.0.0.0.0.1.0.0.0.0.0",
+            "normalized histogram encoding");
+}
+
 void test_noise_support_certificates() {
     require(!toy::noise_support_bound(toy::Params::e0()).failure_impossible,
             "E0 bound must not exclude observed failures");
@@ -129,7 +157,8 @@ void test_ciphertext_dp_matches_reference() {
     const toy::Params tiny{1, 1, 5, 1, 1, 2, 1};
     const auto brute = toy::enumerate_bruteforce(tiny, true);
     const auto dp = toy::enumerate_ciphertext_dp(tiny);
-    for (const char* name : {"global", "ciphertext", "pk_ciphertext", "ciphertext_symbols"}) {
+    for (const char* name : {"global", "ciphertext", "pk_ciphertext", "ciphertext_symbols",
+                             "normalized_uv_margin"}) {
         require(brute.laws.at(name).total() == dp.laws.at(name).total(), "ciphertext DP total");
         require(brute.laws.at(name).failures() == dp.laws.at(name).failures(), "ciphertext DP failures");
         require(brute.laws.at(name).cells() == dp.laws.at(name).cells(), "ciphertext DP law");
@@ -172,8 +201,19 @@ void test_scalable_ciphertext_scope() {
     require(scalable.laws.find("ciphertext") == scalable.laws.end(), "scalable scope excludes exact ciphertext");
     require(scalable.laws.find("pk_ciphertext") == scalable.laws.end(), "scalable scope excludes exact joint lookup");
     for (const char* feature : {"hist_u", "hist_v", "extreme_symbols", "entropy_1024",
-                                "decompressed_norms", "joint_uv_histogram"})
+                                "decompressed_norms", "joint_uv_histogram", "normalized_uv_margin"})
         require(complete.laws.at(feature).cells() == scalable.laws.at(feature).cells(), "scalable ciphertext law equality");
+}
+
+void test_normalized_transfer_scope() {
+    const toy::Params tiny{1, 1, 5, 1, 1, 2, 1};
+    const auto complete = toy::enumerate_ciphertext_dp(tiny);
+    const auto focused = toy::enumerate_ciphertext_dp(tiny, toy::Ablation::None, 0, false, true);
+    require(focused.laws.size() == 2, "normalized transfer scope law count");
+    require(focused.laws.at("global").cells() == complete.laws.at("global").cells(),
+            "normalized transfer global equality");
+    require(focused.laws.at("normalized_uv_margin").cells() ==
+            complete.laws.at("normalized_uv_margin").cells(), "normalized transfer law equality");
 }
 
 void test_sampled_ciphertext_reproducibility() {
@@ -181,6 +221,13 @@ void test_sampled_ciphertext_reproducibility() {
     const auto a = toy::enumerate_sampled_ciphertext_features(p, 2, 42, 20);
     const auto b = toy::enumerate_sampled_ciphertext_features(p, 2, 42, 20);
     require(a.laws.at("hist_v").cells() == b.laws.at("hist_v").cells(), "sampled ciphertext reproducibility");
+    require(a.laws.at("normalized_uv_margin_by_key").cells() ==
+            b.laws.at("normalized_uv_margin_by_key").cells(), "sampled sufficient-statistic reproducibility");
+    for (const char* feature : {"normalized_uv_margin", "normalized_uv_margin_by_key"}) {
+        require(a.laws.at(feature).total() == a.laws.at("global").total(), "sampled sufficient-statistic total mass");
+        require(a.laws.at(feature).failures() == a.laws.at("global").failures(),
+                "sampled sufficient-statistic failure mass");
+    }
 }
 
 void test_ablation_mass() {
@@ -217,6 +264,7 @@ int main() {
         test_arbitrary_precision_weight();
         test_pke_and_margin();
         test_scalable_features_are_deterministic();
+        test_normalized_ciphertext_histogram();
         test_noise_support_certificates();
         test_reference_matches_optimized();
         test_ciphertext_dp_matches_reference();
@@ -224,6 +272,7 @@ int main() {
         test_sampled_key_reproducibility();
         test_frozen_public_matches_exact();
         test_scalable_ciphertext_scope();
+        test_normalized_transfer_scope();
         test_sampled_ciphertext_reproducibility();
         test_ablation_mass();
         test_universal_bound();

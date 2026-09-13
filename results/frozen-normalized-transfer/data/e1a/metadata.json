@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "parameters": "n2-k1-q19-e1_1-d3_2",
+  "mode": "none",
+  "laws": {
+    "global": {"N": "1514143744", "E": "60158336", "cells": 1},
+    "normalized_uv_margin": {"N": "1514143744", "E": "60158336", "cells": 661}
+  },
+  "run": {
+    "enumeration": "global-ciphertext-dp",
+    "observable_scope": "frozen-normalized-transfer"
+  }
+}

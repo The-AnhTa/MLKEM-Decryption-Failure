@@ -13,8 +13,12 @@ def main():
     parser.add_argument("--remove-source", action="store_true")
     args = parser.parse_args()
     target = args.source.with_suffix(args.source.suffix + ".gz")
-    with args.source.open("rb") as source, gzip.open(target, "wb", compresslevel=9) as output:
-        shutil.copyfileobj(source, output, length=1024 * 1024)
+    # Suppress the source filename and wall-clock timestamp so committed result
+    # archives are byte-for-byte reproducible.
+    with args.source.open("rb") as source, target.open("wb") as raw_output:
+        with gzip.GzipFile(filename="", mode="wb", compresslevel=9,
+                           fileobj=raw_output, mtime=0) as output:
+            shutil.copyfileobj(source, output, length=1024 * 1024)
     if args.remove_source:
         args.source.unlink()
     print(target)

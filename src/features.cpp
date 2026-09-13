@@ -3,6 +3,7 @@
 #include <map>
 #include <cmath>
 #include <sstream>
+#include <stdexcept>
 
 namespace toy {
 
@@ -207,6 +208,56 @@ std::string feature_joint_uv_histogram(const Ciphertext& c) {
     std::ostringstream out;
     for (const auto& [pair, count] : counts) out << pair.first << ':' << pair.second << ':' << count << ';';
     return out.str();
+}
+
+int normalized_coordinate_bin(int residue, int q) {
+    if (q <= 2 || (q % 2) == 0) throw std::invalid_argument("normalized binning requires odd q > 2");
+    const int value = centered(residue, q);
+    const long long scaled = 4LL * value;
+    if (scaled < -q) return 0;
+    if (value < 0) return 1;
+    if (scaled < q) return 2;
+    return 3;
+}
+
+NormalizedJointHistogram normalized_joint_histogram(const Ciphertext& c, int du, int dv, int q) {
+    if (c.u.size() != 1 || c.u.front().size() != c.v.size() || c.v.empty())
+        throw std::invalid_argument("normalized joint histogram currently requires k=1 and aligned nonempty u,v");
+    NormalizedJointHistogram counts{};
+    for (std::size_t i = 0; i < c.v.size(); ++i) {
+        const int ubin = normalized_coordinate_bin(decompress_coeff(c.u[0][i], du, q), q);
+        const int vbin = normalized_coordinate_bin(decompress_coeff(c.v[i], dv, q), q);
+        ++counts[static_cast<std::size_t>(4 * ubin + vbin)];
+    }
+    return counts;
+}
+
+std::array<int, 4> normalized_u_marginal(const NormalizedJointHistogram& histogram) {
+    std::array<int, 4> out{};
+    for (std::size_t u = 0; u < 4; ++u)
+        for (std::size_t v = 0; v < 4; ++v) out[u] += histogram[4 * u + v];
+    return out;
+}
+
+std::array<int, 4> normalized_v_marginal(const NormalizedJointHistogram& histogram) {
+    std::array<int, 4> out{};
+    for (std::size_t u = 0; u < 4; ++u)
+        for (std::size_t v = 0; v < 4; ++v) out[v] += histogram[4 * u + v];
+    return out;
+}
+
+std::string encode_normalized_histogram(const NormalizedJointHistogram& histogram) {
+    std::ostringstream out;
+    for (std::size_t i = 0; i < histogram.size(); ++i) {
+        if (i) out << '.';
+        out << histogram[i];
+    }
+    return out.str();
+}
+
+std::string feature_normalized_uv_margin(const Ciphertext& c, int du, int dv, int q, int margin) {
+    return encode_normalized_histogram(normalized_joint_histogram(c, du, dv, q)) + "|M=" +
+           std::to_string(margin);
 }
 
 } // namespace toy

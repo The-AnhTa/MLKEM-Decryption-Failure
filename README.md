@@ -106,3 +106,24 @@ The concise results and methodological qualifications are in
 [`results/n4-grid/dimension-scaling.md`](results/n4-grid/dimension-scaling.md).
 Sample maxima and `D_infinity` values are descriptive for the sampled-key
 mixture and are not population bounds.
+
+## Frozen normalized ciphertext-score transfer
+
+The strict E0-only score-transfer experiment is specified in
+[`docs/frozen-normalized-transfer-protocol.md`](docs/frozen-normalized-transfer-protocol.md).
+Its C++ observer preserves the exact joint normalized ciphertext histogram and
+true decoding margin, including sampled-key cluster identity. Run the complete
+experiment with:
+
+```powershell
+./scripts/run-frozen-normalized-transfer.ps1
+```
+
+To regenerate analysis, bootstrap intervals, figures, and the report from the
+committed exact sufficient statistics without rerunning the long enumerations:
+
+```powershell
+./scripts/run-frozen-normalized-transfer.ps1 -ReuseData
+```
+
+Results are in [`results/frozen-normalized-transfer/`](results/frozen-normalized-transfer/).

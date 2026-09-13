@@ -138,6 +138,8 @@ ExperimentResult enumerate_bruteforce(const Params& p, bool ciphertext_features)
                         result.laws["ciphertext"].add(feature_ciphertext(c), weight, failed);
                         result.laws["pk_ciphertext"].add(feature_pk_ciphertext(a, t, c), weight, failed);
                         result.laws["ciphertext_symbols"].add(feature_ciphertext_symbols(c, p.du, p.dv), weight, failed);
+                        result.laws["normalized_uv_margin"].add(
+                            feature_normalized_uv_margin(c, p.du, p.dv, p.q, margin), weight, failed);
                     }
                     for (std::size_t i = 0; i < p.n; ++i) {
                         result.coordinate_total[i] = checked_add(result.coordinate_total[i], weight);
@@ -155,14 +157,15 @@ ExperimentResult enumerate_bruteforce(const Params& p, bool ciphertext_features)
 }
 
 ExperimentResult enumerate_ciphertext_dp(const Params& p, Ablation mode, std::size_t max_outer_states,
-                                         bool scalable_only) {
+                                         bool scalable_only, bool normalized_only) {
     p.validate();
     if (p.k != 1) throw std::invalid_argument("ciphertext DP global enumerator currently supports k=1");
     if (mode == Ablation::IndependentCompression)
         throw std::invalid_argument("ciphertext observables are not defined for independent-compression mode");
     ExperimentResult result;
     result.metadata["enumeration"] = max_outer_states ? "deterministic-prefix-ciphertext-dp" : "global-ciphertext-dp";
-    result.metadata["observable_scope"] = scalable_only ? "frozen-scalable-only" : "complete";
+    result.metadata["observable_scope"] = normalized_only ? "frozen-normalized-transfer" :
+        (scalable_only ? "frozen-scalable-only" : "complete");
     if (max_outer_states) result.metadata["max_outer_states"] = std::to_string(max_outer_states);
     // This DP tracks the joint ciphertext/failure law, not coordinate marginals.
     const auto uniform = uniform_polynomials(p.n, p.q);
@@ -191,8 +194,8 @@ ExperimentResult enumerate_ciphertext_dp(const Params& p, Ablation mode, std::si
                     ? ModuleVector{decompress_poly(base_c.u[0], p.du, p.q)} : base_c.u;
                 const Poly h = dot(s, uhat, p.q);
                 const Poly ty = dot(t, y, p.q);
-                using State = std::pair<std::vector<int>, bool>;
-                std::map<State, Weight> dp{{State{{}, false}, 1}};
+                using State = std::pair<std::vector<int>, int>;
+                std::map<State, Weight> dp{{State{{}, std::numeric_limits<int>::max()}, 1}};
                 for (std::size_t i = 0; i < p.n; ++i) {
                     std::map<State, Weight> next;
                     for (const auto& [state, state_weight] : dp)
@@ -202,10 +205,10 @@ ExperimentResult enumerate_ciphertext_dp(const Params& p, Ablation mode, std::si
                             const int reconstructed_v = mode == Ablation::None
                                 ? decompress_coeff(vc, p.dv, p.q) : vc;
                             const int w = mod_q(reconstructed_v - h[i], p.q);
-                            const bool failed = state.second || compress_coeff(w, 1, p.q) != bit;
+                            const int margin = signed_decoding_margin(w, bit, p.q);
                             auto symbols = state.first;
                             symbols.push_back(vc);
-                            auto& weight = next[{std::move(symbols), failed}];
+                            auto& weight = next[{std::move(symbols), std::min(state.second, margin)}];
                             weight = checked_add(weight, checked_mul(state_weight, e2weight));
                         }
                     dp = std::move(next);
@@ -215,22 +218,27 @@ ExperimentResult enumerate_ciphertext_dp(const Params& p, Ablation mode, std::si
                     Ciphertext c = base_c;
                     c.v = state.first;
                     const Weight scaled = checked_mul(outer, weight);
-                    const Weight failed = state.second ? scaled : 0;
+                    const Weight failed = state.second <= 0 ? scaled : 0;
                     result.laws["global"].add("all", scaled, failed);
-                    if (!scalable_only) {
+                    if (!scalable_only && !normalized_only) {
                         result.laws["ciphertext"].add(feature_ciphertext(c), scaled, failed);
                         result.laws["pk_ciphertext"].add(feature_pk_ciphertext(a, t, c), scaled, failed);
                     }
-                    if (mode == Ablation::None && !scalable_only)
+                    if (mode == Ablation::None && !scalable_only && !normalized_only)
                         result.laws["ciphertext_symbols"].add(feature_ciphertext_symbols(c, p.du, p.dv), scaled, failed);
-                    if (mode == Ablation::None) {
+                    if (mode == Ablation::None && !normalized_only) {
                         result.laws["hist_u"].add(feature_hist_u(c, 1 << p.du), scaled, failed);
                         result.laws["hist_v"].add(feature_hist_v(c, 1 << p.dv), scaled, failed);
                         result.laws["extreme_symbols"].add(feature_extreme_symbol_counts(c, 1 << p.du, 1 << p.dv), scaled, failed);
                         result.laws["entropy_1024"].add(feature_entropy_1024(c, 1 << p.du, 1 << p.dv), scaled, failed);
                         result.laws["decompressed_norms"].add(feature_decompressed_norms(c, p.du, p.dv, p.q), scaled, failed);
                         result.laws["joint_uv_histogram"].add(feature_joint_uv_histogram(c), scaled, failed);
+                        result.laws["normalized_uv_margin"].add(
+                            feature_normalized_uv_margin(c, p.du, p.dv, p.q, state.second), scaled, failed);
                     }
+                    if (mode == Ablation::None && normalized_only)
+                        result.laws["normalized_uv_margin"].add(
+                            feature_normalized_uv_margin(c, p.du, p.dv, p.q, state.second), scaled, failed);
                 }
             }
         }
@@ -438,7 +446,8 @@ static Poly sample_cbd_poly(std::size_t n, int eta, int q, std::mt19937_64& rng)
 
 ExperimentResult enumerate_sampled_ciphertext_features(const Params& p, std::size_t key_count,
                                                        std::uint64_t seed,
-                                                       std::size_t max_outer_per_key) {
+                                                       std::size_t max_outer_per_key,
+                                                       bool normalized_only) {
     p.validate();
     if (key_count == 0) throw std::invalid_argument("sampled-key count must be positive");
     if (p.dv > 4 || p.n > 15)
@@ -446,7 +455,8 @@ ExperimentResult enumerate_sampled_ciphertext_features(const Params& p, std::siz
     ExperimentResult result;
     result.metadata["enumeration"] = "sampled-keys";
     result.metadata["conditional_enumeration"] = max_outer_per_key ? "deterministic-prefix" : "exact";
-    result.metadata["observable_scope"] = "frozen-scalable-ciphertext-features";
+    result.metadata["observable_scope"] = normalized_only ? "frozen-normalized-transfer" :
+        "frozen-scalable-ciphertext-features";
     result.metadata["key_count"] = std::to_string(key_count);
     result.metadata["seed"] = std::to_string(seed);
     if (max_outer_per_key) result.metadata["max_outer_per_key"] = std::to_string(max_outer_per_key);
@@ -480,8 +490,8 @@ ExperimentResult enumerate_sampled_ciphertext_features(const Params& p, std::siz
             const Poly h = dot(s, uhat, p.q);
             const Poly ty = dot(t, y, p.q);
             const bool track_joint = p.n <= 4;
-            using HistogramState = std::tuple<std::uint64_t, std::uint64_t, bool>;
-            std::map<HistogramState, Weight> dp{{{0, 0, false}, 1}};
+            using HistogramState = std::tuple<std::uint64_t, std::uint64_t, std::uint64_t, int>;
+            std::map<HistogramState, Weight> dp{{{0, 0, 0, std::numeric_limits<int>::max()}, 1}};
             for (std::size_t i = 0; i < p.n; ++i) {
                 std::map<HistogramState, Weight> next;
                 for (const auto& [state, state_weight] : dp)
@@ -489,12 +499,18 @@ ExperimentResult enumerate_sampled_ciphertext_features(const Params& p, std::siz
                         const int raw_v = mod_q(ty[i] + e2 + decompress_coeff(bit, 1, p.q), p.q);
                         const int vc = compress_coeff(raw_v, p.dv, p.q);
                         const int w = mod_q(decompress_coeff(vc, p.dv, p.q) - h[i], p.q);
-                        const bool failed = std::get<2>(state) || compress_coeff(w, 1, p.q) != bit;
+                        const int margin = signed_decoding_margin(w, bit, p.q);
                         const std::uint64_t code = std::get<0>(state) + (std::uint64_t{1} << (4 * vc));
                         const std::uint64_t sequence = track_joint
                             ? std::get<1>(state) | (static_cast<std::uint64_t>(vc) << (4 * i))
                             : 0;
-                        auto& weight = next[{code, sequence, failed}];
+                        const int ubin = normalized_coordinate_bin(
+                            decompress_coeff(base_c.u[0][i], p.du, p.q), p.q);
+                        const int vbin = normalized_coordinate_bin(decompress_coeff(vc, p.dv, p.q), p.q);
+                        const std::size_t joint_bin = static_cast<std::size_t>(4 * ubin + vbin);
+                        const std::uint64_t normalized = std::get<2>(state) +
+                            (std::uint64_t{1} << (4 * joint_bin));
+                        auto& weight = next[{code, sequence, normalized, std::min(std::get<3>(state), margin)}];
                         weight = checked_add(weight, checked_mul(state_weight, e2weight));
                     }
                 dp = std::move(next);
@@ -512,18 +528,28 @@ ExperimentResult enumerate_sampled_ciphertext_features(const Params& p, std::siz
                     }
                 }
                 const Weight scaled = checked_mul(outer, weight);
-                const Weight failed = std::get<2>(state) ? scaled : 0;
+                const int minimum_margin = std::get<3>(state);
+                const Weight failed = minimum_margin <= 0 ? scaled : 0;
                 result.laws["global"].add("all", scaled, failed);
-                result.laws["secret_key"].add(sk, scaled, failed);
+                if (!normalized_only) result.laws["secret_key"].add(sk, scaled, failed);
                 auto add = [&](const std::string& name, const std::string& feature) {
                     result.laws[name].add(feature, scaled, failed);
                 };
-                add("hist_u", feature_hist_u(c, 1 << p.du));
-                add("hist_v", feature_hist_v(c, 1 << p.dv));
-                add("extreme_symbols", feature_extreme_symbol_counts(c, 1 << p.du, 1 << p.dv));
-                add("entropy_1024", feature_entropy_1024(c, 1 << p.du, 1 << p.dv));
-                add("decompressed_norms", feature_decompressed_norms(c, p.du, p.dv, p.q));
-                if (track_joint) add("joint_uv_histogram", feature_joint_uv_histogram(c));
+                if (!normalized_only) {
+                    add("hist_u", feature_hist_u(c, 1 << p.du));
+                    add("hist_v", feature_hist_v(c, 1 << p.dv));
+                    add("extreme_symbols", feature_extreme_symbol_counts(c, 1 << p.du, 1 << p.dv));
+                    add("entropy_1024", feature_entropy_1024(c, 1 << p.du, 1 << p.dv));
+                    add("decompressed_norms", feature_decompressed_norms(c, p.du, p.dv, p.q));
+                    if (track_joint) add("joint_uv_histogram", feature_joint_uv_histogram(c));
+                }
+                NormalizedJointHistogram normalized{};
+                for (std::size_t bin = 0; bin < normalized.size(); ++bin)
+                    normalized[bin] = static_cast<int>((std::get<2>(state) >> (4 * bin)) & 0xFULL);
+                const std::string sufficient = encode_normalized_histogram(normalized) +
+                    "|M=" + std::to_string(minimum_margin);
+                add("normalized_uv_margin", sufficient);
+                add("normalized_uv_margin_by_key", "K=" + std::to_string(key_index) + "|" + sufficient);
             }
         }
 sampled_cipher_key_done:

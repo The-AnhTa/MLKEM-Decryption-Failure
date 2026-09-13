@@ -35,4 +35,8 @@ if(Python3_Interpreter_FOUND)
              COMMAND ${Python3_EXECUTABLE} -m unittest test_analyze.py -v)
     set_tests_properties(python-analysis-tests PROPERTIES
                          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/python)
+    add_test(NAME frozen-normalized-transfer-tests
+             COMMAND ${Python3_EXECUTABLE} -m unittest test_frozen_normalized_transfer.py -v)
+    set_tests_properties(frozen-normalized-transfer-tests PROPERTIES
+                         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/python)
 endif()

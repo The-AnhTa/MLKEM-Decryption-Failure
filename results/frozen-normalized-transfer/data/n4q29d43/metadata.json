@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "parameters": "n4-k1-q29-e1_1-d4_3",
+  "mode": "none",
+  "laws": {
+    "global": {"N": "34359738368", "E": "192751736", "cells": 1},
+    "normalized_uv_margin": {"N": "34359738368", "E": "192751736", "cells": 39797},
+    "normalized_uv_margin_by_key": {"N": "34359738368", "E": "192751736", "cells": 1426548}
+  },
+  "run": {
+    "conditional_enumeration": "exact",
+    "enumeration": "sampled-keys",
+    "key_count": "128",
+    "observable_scope": "frozen-normalized-transfer",
+    "seed": "20260913"
+  }
+}
