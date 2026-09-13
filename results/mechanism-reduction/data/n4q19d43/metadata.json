@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "parameters": "n4-k1-q19-e1_1-d4_3",
+  "mode": "none",
+  "laws": {
+    "global": {"N": "34359738368", "E": "1736726092", "cells": 1},
+    "mechanism_margin": {"N": "34359738368", "E": "1736726092", "cells": 7028614},
+    "mechanism_margin_by_key": {"N": "34359738368", "E": "1736726092", "cells": 48919946}
+  },
+  "run": {
+    "conditional_enumeration": "exact",
+    "enumeration": "sampled-keys",
+    "key_count": "128",
+    "observable_scope": "mechanism-reduction",
+    "seed": "20260913"
+  }
+}

@@ -39,4 +39,8 @@ if(Python3_Interpreter_FOUND)
              COMMAND ${Python3_EXECUTABLE} -m unittest test_frozen_normalized_transfer.py -v)
     set_tests_properties(frozen-normalized-transfer-tests PROPERTIES
                          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/python)
+    add_test(NAME mechanism-reduction-tests
+             COMMAND ${Python3_EXECUTABLE} -m unittest test_mechanism_reduction.py -v)
+    set_tests_properties(mechanism-reduction-tests PROPERTIES
+                         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/python)
 endif()

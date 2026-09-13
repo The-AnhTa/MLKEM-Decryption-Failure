@@ -37,5 +37,6 @@ std::array<int, 4> normalized_u_marginal(const NormalizedJointHistogram& histogr
 std::array<int, 4> normalized_v_marginal(const NormalizedJointHistogram& histogram);
 std::string encode_normalized_histogram(const NormalizedJointHistogram& histogram);
 std::string feature_normalized_uv_margin(const Ciphertext& c, int du, int dv, int q, int margin);
+std::string feature_symbol_histogram_margin(const Ciphertext& c, int du, int dv, int margin);
 
 } // namespace toy

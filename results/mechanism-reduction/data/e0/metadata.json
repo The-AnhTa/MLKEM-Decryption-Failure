@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "parameters": "n2-k1-q17-e1_1-d3_2",
+  "mode": "none",
+  "laws": {
+    "global": {"N": "1212153856", "E": "98640000", "cells": 1},
+    "mechanism_margin": {"N": "1212153856", "E": "98640000", "cells": 1960}
+  },
+  "run": {
+    "enumeration": "global-ciphertext-dp",
+    "observable_scope": "mechanism-reduction"
+  }
+}

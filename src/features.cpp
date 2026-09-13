@@ -260,4 +260,22 @@ std::string feature_normalized_uv_margin(const Ciphertext& c, int du, int dv, in
            std::to_string(margin);
 }
 
+std::string feature_symbol_histogram_margin(const Ciphertext& c, int du, int dv, int margin) {
+    if (c.u.size() != 1 || c.u.front().size() != c.v.size() || c.v.empty())
+        throw std::invalid_argument("symbol histogram currently requires k=1 and aligned nonempty u,v");
+    std::vector<int> u_counts(static_cast<std::size_t>(std::uint64_t{1} << du));
+    std::vector<int> v_counts(static_cast<std::size_t>(std::uint64_t{1} << dv));
+    for (int symbol : c.u[0]) ++u_counts.at(static_cast<std::size_t>(symbol));
+    for (int symbol : c.v) ++v_counts.at(static_cast<std::size_t>(symbol));
+    auto encode = [](const std::vector<int>& counts) {
+        std::ostringstream out;
+        for (std::size_t i = 0; i < counts.size(); ++i) {
+            if (i) out << '.';
+            out << counts[i];
+        }
+        return out.str();
+    };
+    return "U=" + encode(u_counts) + "|V=" + encode(v_counts) + "|M=" + std::to_string(margin);
+}
+
 } // namespace toy

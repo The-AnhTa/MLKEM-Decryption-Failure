@@ -121,6 +121,8 @@ void test_normalized_ciphertext_histogram() {
     require(std::accumulate(v.begin(), v.end(), 0) == static_cast<int>(p.n), "normalized v mass");
     require(toy::encode_normalized_histogram(joint) == "0.0.0.0.0.1.0.0.0.0.1.0.0.0.0.0",
             "normalized histogram encoding");
+    require(toy::feature_symbol_histogram_margin(c, p.du, p.dv, -2) ==
+            "U=1.0.0.0.0.0.0.1|V=1.0.0.1|M=-2", "mechanism histogram encoding");
 }
 
 void test_noise_support_certificates() {
@@ -158,7 +160,7 @@ void test_ciphertext_dp_matches_reference() {
     const auto brute = toy::enumerate_bruteforce(tiny, true);
     const auto dp = toy::enumerate_ciphertext_dp(tiny);
     for (const char* name : {"global", "ciphertext", "pk_ciphertext", "ciphertext_symbols",
-                             "normalized_uv_margin"}) {
+                             "normalized_uv_margin", "mechanism_margin"}) {
         require(brute.laws.at(name).total() == dp.laws.at(name).total(), "ciphertext DP total");
         require(brute.laws.at(name).failures() == dp.laws.at(name).failures(), "ciphertext DP failures");
         require(brute.laws.at(name).cells() == dp.laws.at(name).cells(), "ciphertext DP law");
@@ -214,6 +216,17 @@ void test_normalized_transfer_scope() {
             "normalized transfer global equality");
     require(focused.laws.at("normalized_uv_margin").cells() ==
             complete.laws.at("normalized_uv_margin").cells(), "normalized transfer law equality");
+}
+
+void test_mechanism_reduction_scope() {
+    const toy::Params tiny{1, 1, 5, 1, 1, 2, 1};
+    const auto complete = toy::enumerate_ciphertext_dp(tiny);
+    const auto focused = toy::enumerate_ciphertext_dp(tiny, toy::Ablation::None, 0, false, false, true);
+    require(focused.laws.size() == 2, "mechanism reduction scope law count");
+    require(focused.laws.at("global").cells() == complete.laws.at("global").cells(),
+            "mechanism reduction global equality");
+    require(focused.laws.at("mechanism_margin").cells() ==
+            complete.laws.at("mechanism_margin").cells(), "mechanism reduction law equality");
 }
 
 void test_sampled_ciphertext_reproducibility() {
@@ -273,6 +286,7 @@ int main() {
         test_frozen_public_matches_exact();
         test_scalable_ciphertext_scope();
         test_normalized_transfer_scope();
+        test_mechanism_reduction_scope();
         test_sampled_ciphertext_reproducibility();
         test_ablation_mass();
         test_universal_bound();

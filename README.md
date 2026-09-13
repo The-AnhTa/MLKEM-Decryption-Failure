@@ -127,3 +127,19 @@ committed exact sufficient statistics without rerunning the long enumerations:
 ```
 
 Results are in [`results/frozen-normalized-transfer/`](results/frozen-normalized-transfer/).
+
+## Strict mechanism reduction
+
+The follow-up experiment asks whether that frozen histogram score is explained
+by a predeclared normalized moment, extreme-symbol frequency, quantizer-boundary
+quantity, or concentration statistic. Its frozen rules are in
+[`docs/mechanism-reduction-protocol.md`](docs/mechanism-reduction-protocol.md).
+Run it with:
+
+```powershell
+./scripts/run-mechanism-reduction.ps1
+```
+
+Use `-ReuseData` to reproduce tables, figures, and the deterministic outer-key
+bootstrap from the committed sufficient statistics. Results are in
+[`results/mechanism-reduction/`](results/mechanism-reduction/).
