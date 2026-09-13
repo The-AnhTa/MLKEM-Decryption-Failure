@@ -278,4 +278,13 @@ std::string feature_symbol_histogram_margin(const Ciphertext& c, int du, int dv,
     return "U=" + encode(u_counts) + "|V=" + encode(v_counts) + "|M=" + std::to_string(margin);
 }
 
+std::string feature_su1_margin(const Ciphertext& c, int du, int q, int margin) {
+    if (c.u.size() != 1 || c.u.front().empty())
+        throw std::invalid_argument("S_u1 feature currently requires k=1 and nonempty u");
+    long long numerator = 0;
+    for (int symbol : c.u.front())
+        numerator += std::abs(centered(decompress_coeff(symbol, du, q), q));
+    return "A=" + std::to_string(numerator) + "|M=" + std::to_string(margin);
+}
+
 } // namespace toy

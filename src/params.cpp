@@ -50,6 +50,9 @@ Params Params::preset(const std::string& name) {
     if (name == "n4q29d32") return {4, 1, 29, 1, 1, 3, 2};
     if (name == "n4q29d42") return {4, 1, 29, 1, 1, 4, 2};
     if (name == "n4q29d43") return {4, 1, 29, 1, 1, 4, 3};
+    if (name == "n8q19d43") return {8, 1, 19, 1, 1, 4, 3};
+    if (name == "n8q23d43") return {8, 1, 23, 1, 1, 4, 3};
+    if (name == "n8q29d43") return {8, 1, 29, 1, 1, 4, 3};
     throw std::invalid_argument("unknown parameter preset: " + name);
 }
 

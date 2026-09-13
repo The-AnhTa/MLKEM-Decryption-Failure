@@ -14,6 +14,7 @@ int main(int argc, char** argv) {
         std::string output = "results/e0/none";
         std::size_t max_outer = 0;
         std::size_t sample_keys = 0;
+        std::size_t sample_y = 0;
         std::uint64_t seed = 1;
         bool brute_force = false;
         bool ciphertext_dp = false;
@@ -23,6 +24,7 @@ int main(int argc, char** argv) {
         bool screen_only = false;
         bool normalized_transfer = false;
         bool mechanism_reduction = false;
+        bool su1_confirmation = false;
 
         for (int i = 1; i < argc; ++i) {
             const std::string arg = argv[i];
@@ -35,6 +37,7 @@ int main(int argc, char** argv) {
             else if (arg == "--output") output = value("--output");
             else if (arg == "--max-outer") max_outer = std::stoull(value("--max-outer"));
             else if (arg == "--sample-keys") sample_keys = std::stoull(value("--sample-keys"));
+            else if (arg == "--sample-y") sample_y = std::stoull(value("--sample-y"));
             else if (arg == "--screen-keys") {
                 sample_keys = std::stoull(value("--screen-keys"));
                 screen_only = true;
@@ -47,16 +50,19 @@ int main(int argc, char** argv) {
             else if (arg == "--support-bound") support_bound = true;
             else if (arg == "--normalized-transfer") normalized_transfer = true;
             else if (arg == "--mechanism-reduction") mechanism_reduction = true;
+            else if (arg == "--su1-confirmation") su1_confirmation = true;
             else if (arg == "--list-presets") {
                 std::cout << "e0 e1 e1a e1b e1c e2 e3 e4 e5 "
                              "n4q17d32 n4q17d42 n4q17d43 n4q19d32 n4q19d42 n4q19d43 "
-                             "n4q23d32 n4q23d42 n4q23d43 n4q29d32 n4q29d42 n4q29d43\n";
+                             "n4q23d32 n4q23d42 n4q23d43 n4q29d32 n4q29d42 n4q29d43 "
+                             "n8q19d43 n8q23d43 n8q29d43\n";
                 return 0;
             } else if (arg == "--help") {
                 std::cout << "toy-mlkem [--preset e0] [--mode none|no-compression|independent-compression]\n"
                              "          [--output DIR] [--max-outer N] [--bruteforce|--ciphertext-dp]\n"
                              "          [--sample-keys N|--screen-keys N --seed N] [--scalable-only|--frozen-public]\n"
-                             "          [--support-bound] [--normalized-transfer|--mechanism-reduction]\n";
+                             "          [--support-bound] [--normalized-transfer|--mechanism-reduction]\n"
+                             "          [--su1-confirmation --sample-keys N --sample-y N]\n";
                 return 0;
             } else throw std::invalid_argument("unknown option: " + arg);
         }
@@ -96,13 +102,20 @@ int main(int argc, char** argv) {
             throw std::invalid_argument("--mechanism-reduction is defined only for the exact-compression mode");
         if (mechanism_reduction && normalized_transfer)
             throw std::invalid_argument("choose one focused ciphertext observer");
+        if (su1_confirmation && (!sample_keys || !sample_y))
+            throw std::invalid_argument("--su1-confirmation requires positive --sample-keys and --sample-y");
+        if (su1_confirmation && (mode != toy::Ablation::None || brute_force || ciphertext_dp ||
+                                 scalable_only || frozen_public || normalized_transfer || mechanism_reduction))
+            throw std::invalid_argument("--su1-confirmation is a separate exact-compression driver");
         if (static_cast<int>(brute_force) + static_cast<int>(ciphertext_dp) +
             static_cast<int>(sample_keys != 0) + static_cast<int>(frozen_public) > 1)
             throw std::invalid_argument("choose only one enumeration driver");
 
         const auto start = std::chrono::steady_clock::now();
         toy::ExperimentResult result;
-        if (brute_force) result = toy::enumerate_bruteforce(params, true);
+        if (su1_confirmation)
+            result = toy::enumerate_sampled_su1_confirmation(params, sample_keys, sample_y, seed);
+        else if (brute_force) result = toy::enumerate_bruteforce(params, true);
         else if (ciphertext_dp) result = toy::enumerate_ciphertext_dp(params, mode, max_outer, scalable_only,
                                                                      normalized_transfer, mechanism_reduction);
         else if (frozen_public) result = toy::enumerate_frozen_public(params, max_outer);

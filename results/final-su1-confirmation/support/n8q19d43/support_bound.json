@@ -1,0 +1,7 @@
+{
+  "parameters": "n8-k1-q19-e1_1-d4_3",
+  "terms": {"ey": 8, "se1": 8, "e2": 1, "scu": 8, "cv": 1},
+  "total_noise_bound": 26,
+  "decoding_margin": 5,
+  "failure_impossible": false
+}

@@ -43,4 +43,8 @@ if(Python3_Interpreter_FOUND)
              COMMAND ${Python3_EXECUTABLE} -m unittest test_mechanism_reduction.py -v)
     set_tests_properties(mechanism-reduction-tests PROPERTIES
                          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/python)
+    add_test(NAME final-su1-confirmation-tests
+             COMMAND ${Python3_EXECUTABLE} -m unittest test_final_su1_confirmation.py -v)
+    set_tests_properties(final-su1-confirmation-tests PROPERTIES
+                         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/python)
 endif()

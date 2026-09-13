@@ -1,0 +1,146 @@
+{
+  "analysis": {
+    "auc_null": "AUC <= 0.5",
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20260918,
+    "ci": "two-sided percentile 95%",
+    "success": "auc_ci_low > 0.5 and margin_corr_ci_high < 0",
+    "tail_zero_support_rule": "UNSUPPORTED iff r_zero > 0.10"
+  },
+  "candidate_order": [
+    "n8q29d43",
+    "n8q23d43",
+    "n8q19d43"
+  ],
+  "feasibility_cap": 4000000,
+  "points": [
+    {
+      "conditional_e1_work": 3359232,
+      "feasible": true,
+      "parameters": {
+        "du": 4,
+        "dv": 3,
+        "eta1": 1,
+        "eta2": 1,
+        "k": 1,
+        "n": 8,
+        "q": 29
+      },
+      "preset": "n8q29d43",
+      "support_certificate": {
+        "decoding_margin": 7,
+        "failure_impossible": false,
+        "parameters": "n8-k1-q29-e1_1-d4_3",
+        "terms": {
+          "cv": 2,
+          "e2": 1,
+          "ey": 8,
+          "scu": 8,
+          "se1": 8
+        },
+        "total_noise_bound": 27
+      },
+      "support_certificate_sha256": "aedd4a9067b18d170bc88a9a2048f0d65806843b129d9aa58591853a52573fb8",
+      "support_possible": true
+    },
+    {
+      "conditional_e1_work": 3359232,
+      "feasible": true,
+      "parameters": {
+        "du": 4,
+        "dv": 3,
+        "eta1": 1,
+        "eta2": 1,
+        "k": 1,
+        "n": 8,
+        "q": 23
+      },
+      "preset": "n8q23d43",
+      "support_certificate": {
+        "decoding_margin": 6,
+        "failure_impossible": false,
+        "parameters": "n8-k1-q23-e1_1-d4_3",
+        "terms": {
+          "cv": 1,
+          "e2": 1,
+          "ey": 8,
+          "scu": 8,
+          "se1": 8
+        },
+        "total_noise_bound": 26
+      },
+      "support_certificate_sha256": "ad87a70c8aa832c093ecfcaccce4c5e363e60f249d4f8c97582da86b2c858b11",
+      "support_possible": true
+    },
+    {
+      "conditional_e1_work": 3359232,
+      "feasible": true,
+      "parameters": {
+        "du": 4,
+        "dv": 3,
+        "eta1": 1,
+        "eta2": 1,
+        "k": 1,
+        "n": 8,
+        "q": 19
+      },
+      "preset": "n8q19d43",
+      "support_certificate": {
+        "decoding_margin": 5,
+        "failure_impossible": false,
+        "parameters": "n8-k1-q19-e1_1-d4_3",
+        "terms": {
+          "cv": 1,
+          "e2": 1,
+          "ey": 8,
+          "scu": 8,
+          "se1": 8
+        },
+        "total_noise_bound": 26
+      },
+      "support_certificate_sha256": "efea0bdc0f334cfa3c897aa0fa898001fa47243449a7b28cb5b548dc955bb633",
+      "support_possible": true
+    }
+  ],
+  "protocol": "docs/final-su1-confirmation-protocol.md",
+  "sampling": {
+    "bootstrap_cluster": "outer key",
+    "exact_conditional_randomness": [
+      "e1",
+      "e2",
+      "message"
+    ],
+    "key_count": 128,
+    "seed": 20260916,
+    "y_per_key": 4
+  },
+  "schema_version": 1,
+  "selected_parameters": {
+    "du": 4,
+    "dv": 3,
+    "eta1": 1,
+    "eta2": 1,
+    "k": 1,
+    "n": 8,
+    "q": 29
+  },
+  "selected_preset": "n8q29d43",
+  "selection_rule": "first ordered point with conditional_e1_work <= 4000000 and failure_impossible=false",
+  "source_sha256": {
+    "docs/final-su1-confirmation-protocol.md": "cd4c0b361d51e25c4972bae5fd7710c3042158dfe2bf9538639ddc2b0341fd36",
+    "include/toy_mlkem/enumerate.hpp": "80b6638271a947d1d89b3dbaf97e959a3ea0b2ba0771ceb31b8ffa648414b688",
+    "include/toy_mlkem/features.hpp": "44609dd2a08b8651e2f6bcd181e8952bfe47c181025610f2e052f07a5a2c27c2",
+    "python/final_su1_confirmation.py": "39eba049d1a9d8d63482e7bfc73756cf1b35247719949f7bb9b9ff8512bafd12",
+    "src/enumerate.cpp": "385b17b66457ff12b54944c80cb0e94158942288692372b37c12bad4d4880442",
+    "src/features.cpp": "3f93228663be2d2b7c4c1c5e3f01d97c15410083d56c57c40f29f7a00374cc16",
+    "src/main.cpp": "6a911dde5e332ece60a94d625620246ba64d2763bbdd7f5536761fc457c26e75",
+    "src/params.cpp": "cb03a912f70ecf32d4c60f07167715993716666fff7a8144afb8d162e96b34e0"
+  },
+  "statistic": {
+    "formula": "sum_i abs(center(Decompress_du(u_i))) / (n*q)",
+    "name": "S_u1",
+    "orientation": 1
+  },
+  "study": "final-independent-frozen-Su1-confirmation",
+  "zero_failure_rule": "stop without fallback if selected experiment observes E=0"
+}

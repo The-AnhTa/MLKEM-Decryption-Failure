@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "parameters": "n8-k1-q29-e1_1-d4_3",
+  "mode": "none",
+  "laws": {
+    "global": {"N": "562949953421312", "E": "40397677096448", "cells": 1},
+    "su1_margin": {"N": "562949953421312", "E": "40397677096448", "cells": 1010},
+    "su1_margin_by_key": {"N": "562949953421312", "E": "40397677096448", "cells": 35233}
+  },
+  "run": {
+    "conditional_enumeration": "exact-e1-e2-message-given-key-y",
+    "enumeration": "sampled-keys-and-y",
+    "key_count": "128",
+    "observable_scope": "frozen-su1-confirmation",
+    "seed": "20260916",
+    "y_per_key": "4"
+  }
+}

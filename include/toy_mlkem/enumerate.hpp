@@ -40,6 +40,8 @@ ExperimentResult enumerate_sampled_ciphertext_features(const Params& p, std::siz
                                                        std::size_t max_outer_per_key = 0,
                                                        bool normalized_only = false,
                                                        bool mechanism_only = false);
+ExperimentResult enumerate_sampled_su1_confirmation(const Params& p, std::size_t key_count,
+                                                     std::size_t y_per_key, std::uint64_t seed);
 void export_result(const ExperimentResult& result, const Params& p,
                    Ablation mode, const std::string& directory);
 

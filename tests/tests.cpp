@@ -123,6 +123,8 @@ void test_normalized_ciphertext_histogram() {
             "normalized histogram encoding");
     require(toy::feature_symbol_histogram_margin(c, p.du, p.dv, -2) ==
             "U=1.0.0.0.0.0.0.1|V=1.0.0.1|M=-2", "mechanism histogram encoding");
+    require(toy::feature_su1_margin(c, p.du, p.q, -2) == "A=2|M=-2",
+            "frozen S_u1 numerator encoding");
 }
 
 void test_noise_support_certificates() {
@@ -243,6 +245,19 @@ void test_sampled_ciphertext_reproducibility() {
     }
 }
 
+void test_su1_confirmation_reproducibility_and_mass() {
+    const toy::Params tiny{1, 1, 5, 1, 1, 2, 1};
+    const auto a = toy::enumerate_sampled_su1_confirmation(tiny, 2, 2, 73);
+    const auto b = toy::enumerate_sampled_su1_confirmation(tiny, 2, 2, 73);
+    require(a.laws.at("su1_margin_by_key").cells() == b.laws.at("su1_margin_by_key").cells(),
+            "S_u1 confirmation reproducibility");
+    require(a.laws.at("global").total() == toy::Weight{128}, "S_u1 confirmation exact mass");
+    for (const char* name : {"su1_margin", "su1_margin_by_key"}) {
+        require(a.laws.at(name).total() == a.laws.at("global").total(), "S_u1 law total mass");
+        require(a.laws.at(name).failures() == a.laws.at("global").failures(), "S_u1 law failure mass");
+    }
+}
+
 void test_ablation_mass() {
     const toy::Params tiny{1, 1, 5, 1, 1, 2, 1};
     const auto baseline = toy::enumerate_optimized_pk(tiny, toy::Ablation::None);
@@ -288,6 +303,7 @@ int main() {
         test_normalized_transfer_scope();
         test_mechanism_reduction_scope();
         test_sampled_ciphertext_reproducibility();
+        test_su1_confirmation_reproducibility_and_mass();
         test_ablation_mass();
         test_universal_bound();
         std::cout << "all tests passed\n";

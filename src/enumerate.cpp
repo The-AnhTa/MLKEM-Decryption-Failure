@@ -1,6 +1,7 @@
 #include "toy_mlkem/enumerate.hpp"
 
 #include <algorithm>
+#include <array>
 #include <filesystem>
 #include <fstream>
 #include <functional>
@@ -452,6 +453,96 @@ static Poly sample_cbd_poly(std::size_t n, int eta, int q, std::mt19937_64& rng)
         out[i] = mod_q(x, q);
     }
     return out;
+}
+
+ExperimentResult enumerate_sampled_su1_confirmation(const Params& p, std::size_t key_count,
+                                                     std::size_t y_per_key, std::uint64_t seed) {
+    p.validate();
+    if (p.k != 1 || p.eta1 != 1 || p.eta2 != 1)
+        throw std::invalid_argument("frozen S_u1 confirmation requires k=1 and eta1=eta2=1");
+    if (key_count == 0 || y_per_key == 0)
+        throw std::invalid_argument("frozen S_u1 confirmation requires positive key and y sample counts");
+    ExperimentResult result;
+    result.metadata["enumeration"] = "sampled-keys-and-y";
+    result.metadata["conditional_enumeration"] = "exact-e1-e2-message-given-key-y";
+    result.metadata["observable_scope"] = "frozen-su1-confirmation";
+    result.metadata["key_count"] = std::to_string(key_count);
+    result.metadata["y_per_key"] = std::to_string(y_per_key);
+    result.metadata["seed"] = std::to_string(seed);
+    std::mt19937_64 rng(seed);
+    std::uniform_int_distribution<int> uniform(0, p.q - 1);
+    const auto e1_support = module_support(cbd_polynomials(p.n, p.eta2, p.q), p.k);
+    const auto e2_support = cbd_coefficients(p.eta2);
+    std::vector<std::array<int, 2>> margin_lookup(static_cast<std::size_t>(p.q));
+    for (int w = 0; w < p.q; ++w)
+        for (int bit = 0; bit <= 1; ++bit)
+            margin_lookup[static_cast<std::size_t>(w)][static_cast<std::size_t>(bit)] =
+                signed_decoding_margin(w, bit, p.q);
+
+    for (std::size_t key_index = 0; key_index < key_count; ++key_index) {
+        Matrix a(p.k, std::vector<Poly>(p.k, Poly(p.n)));
+        for (auto& row : a) for (auto& poly : row) for (int& x : poly) x = uniform(rng);
+        ModuleVector s(p.k), e(p.k);
+        for (std::size_t i = 0; i < p.k; ++i) {
+            s[i] = sample_cbd_poly(p.n, p.eta1, p.q, rng);
+            e[i] = sample_cbd_poly(p.n, p.eta1, p.q, rng);
+        }
+        const auto t = keygen(p, a, s, e);
+        for (std::size_t y_index = 0; y_index < y_per_key; ++y_index) {
+            ModuleVector y{sample_cbd_poly(p.n, p.eta1, p.q, rng)};
+            ModuleVector zero(p.k, Poly(p.n, 0));
+            const ModuleVector ay = transpose_mat_vec(a, y, zero, p.q);
+            const Poly ty = dot(t, y, p.q);
+            for (const auto& [e1, e1_weight] : e1_support) {
+                ModuleVector raw_u = ay;
+                for (std::size_t i = 0; i < p.n; ++i)
+                    raw_u[0][i] = mod_q(raw_u[0][i] + e1[0][i], p.q);
+                Ciphertext c;
+                c.u.push_back(compress_poly(raw_u[0], p.du, p.q));
+                ModuleVector uhat{decompress_poly(c.u[0], p.du, p.q)};
+                const Poly h = dot(s, uhat, p.q);
+
+                const std::size_t width = static_cast<std::size_t>(2 * p.q + 1);
+                std::vector<std::uint64_t> dp(width), next(width), local(width);
+                dp[static_cast<std::size_t>(2 * p.q)] = 1; // sentinel minimum +q
+                for (std::size_t i = 0; i < p.n; ++i) {
+                    std::fill(local.begin(), local.end(), 0);
+                    for (const auto& [e2, _] : e2_support) for (int bit = 0; bit <= 1; ++bit) {
+                        const int raw_v = mod_q(ty[i] + e2 + decompress_coeff(bit, 1, p.q), p.q);
+                        const int vc = compress_coeff(raw_v, p.dv, p.q);
+                        const int w = mod_q(decompress_coeff(vc, p.dv, p.q) - h[i], p.q);
+                        const int margin = margin_lookup[static_cast<std::size_t>(w)][static_cast<std::size_t>(bit)];
+                        local[static_cast<std::size_t>(margin + p.q)] += e2 == 0 ? 2U : 1U;
+                    }
+                    std::fill(next.begin(), next.end(), 0);
+                    for (int old_margin = -p.q; old_margin <= p.q; ++old_margin) {
+                        const auto old_weight = dp[static_cast<std::size_t>(old_margin + p.q)];
+                        if (!old_weight) continue;
+                        for (int margin = -p.q; margin <= p.q; ++margin) {
+                            const auto local_weight = local[static_cast<std::size_t>(margin + p.q)];
+                            if (!local_weight) continue;
+                            const int minimum = std::min(old_margin, margin);
+                            next[static_cast<std::size_t>(minimum + p.q)] += old_weight * local_weight;
+                        }
+                    }
+                    dp.swap(next);
+                }
+                for (int margin = -p.q; margin < p.q; ++margin) {
+                    const auto inner_weight = dp[static_cast<std::size_t>(margin + p.q)];
+                    if (!inner_weight) continue;
+                    const Weight scaled = checked_mul(e1_weight, Weight{inner_weight});
+                    const Weight failed = margin <= 0 ? scaled : Weight{};
+                    const std::string feature = feature_su1_margin(c, p.du, p.q, margin);
+                    result.laws["global"].add("all", scaled, failed);
+                    result.laws["su1_margin"].add(feature, scaled, failed);
+                    result.laws["su1_margin_by_key"].add(
+                        "K=" + std::to_string(key_index) + "|" + feature, scaled, failed);
+                }
+            }
+        }
+    }
+    for (const auto& [_, law] : result.laws) law.validate();
+    return result;
 }
 
 ExperimentResult enumerate_sampled_ciphertext_features(const Params& p, std::size_t key_count,

@@ -143,3 +143,19 @@ Run it with:
 Use `-ReuseData` to reproduce tables, figures, and the deterministic outer-key
 bootstrap from the committed sufficient statistics. Results are in
 [`results/mechanism-reduction/`](results/mechanism-reduction/).
+
+## Final independent S_u1 confirmation
+
+The final confirmatory experiment uses only the already-selected normalized
+first absolute `u` moment, with no refitting, sign change, or alternate-feature
+comparison. Its n=8-first selection rule and formal success criterion are
+preregistered in
+[`docs/final-su1-confirmation-protocol.md`](docs/final-su1-confirmation-protocol.md).
+Run it with:
+
+```powershell
+./scripts/run-final-su1-confirmation.ps1
+```
+
+Results are in
+[`results/final-su1-confirmation/`](results/final-su1-confirmation/).
