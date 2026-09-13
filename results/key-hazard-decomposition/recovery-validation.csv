@@ -1,0 +1,4 @@
+dataset,global_su1_margin_match,key_margin_match,validation_strategy
+n4q29d43,True,True,committed global S_u1/margin plus committed key/margin projections
+n4q19d43,True,True,committed global S_u1/margin plus committed key/margin projections
+n8q29d43,True,True,full committed key/S_u1/margin cell equality

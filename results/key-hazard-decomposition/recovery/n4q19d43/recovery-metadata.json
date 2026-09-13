@@ -1,0 +1,7 @@
+{
+  "parameters": "n4-k1-q19-e1_1-d4_3",
+  "key_count": 128,
+  "seed": 20260913,
+  "y_mode": "exact",
+  "sample_y": 0
+}

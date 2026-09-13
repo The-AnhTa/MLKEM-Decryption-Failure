@@ -24,6 +24,11 @@ endif()
 add_executable(toy-mlkem src/main.cpp)
 target_link_libraries(toy-mlkem PRIVATE toy_mlkem_core)
 
+# Diagnostic recovery driver kept separate from the preregistered experiment
+# sources. It replays frozen datasets and exports coordinatewise margins.
+add_executable(key-hazard-recovery src/key_hazard_recovery.cpp)
+target_link_libraries(key-hazard-recovery PRIVATE toy_mlkem_core)
+
 enable_testing()
 add_executable(toy-mlkem-tests tests/tests.cpp)
 target_link_libraries(toy-mlkem-tests PRIVATE toy_mlkem_core)
@@ -46,5 +51,9 @@ if(Python3_Interpreter_FOUND)
     add_test(NAME final-su1-confirmation-tests
              COMMAND ${Python3_EXECUTABLE} -m unittest test_final_su1_confirmation.py -v)
     set_tests_properties(final-su1-confirmation-tests PROPERTIES
+                         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/python)
+    add_test(NAME key-hazard-decomposition-tests
+             COMMAND ${Python3_EXECUTABLE} -m unittest test_key_hazard_decomposition.py -v)
+    set_tests_properties(key-hazard-decomposition-tests PROPERTIES
                          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/python)
 endif()
